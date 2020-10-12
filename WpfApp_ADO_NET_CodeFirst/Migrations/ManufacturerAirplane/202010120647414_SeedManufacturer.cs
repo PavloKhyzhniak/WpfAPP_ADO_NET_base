@@ -1,0 +1,62 @@
+namespace WpfApp_ADO_NET_CodeFirst.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class SeedManufacturer : DbMigration
+    {
+        public override void Up()
+        {
+            Sql(@"
+SET IDENTITY_INSERT [dbo].[Manufacturers] ON
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (1, N'Aerospatiale/Alenia', N'Италия', N'(097) 123-45-11')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (2, N'Airbus S.A.S.', N'Европейский Союз', N'(097) 123-45-22')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (3, N'Bell/Agusta Aerospace Company', N'США', N'(097) 123-45-33')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (4, N'Boeing', N'США', N'(097) 123-45-44')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (5, N'Bombardier Aerospace', N'Канада', N'(097) 123-45-55')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (6, N'British Aerospace', N'Великобритания', N'(097) 123-45-66')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (7, N'British Aircraft Corporation
+', N'Великобритания', N'(097) 123-45-77')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (8, N'Britten-Norman', N'Великобритания', N'(097) 123-45-88')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (9, N'Cessna Aircraft', N'США', N'(097) 123-45-99')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (10, N'Czech Aircraft Works', N'Чехия', N'(097) 123-45-00')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (11, N'Dassault Aviation', N'Франция', N'(097) 123-45-01')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (12, N'De Havilland', N'Великобритания', N'(097) 123-45-02')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (13, N'De Havilland Canada', N'Канада', N'(097) 123-45-03')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (14, N'EADS Socata', N'Франция', N'(097) 123-45-04')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (15, N'Embraer (Empresa Brasileira de Aeronautica) S.A.', N'Бразилия', N'(097) 123-45-05')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (16, N'Fairchild-Dornier', N'США', N'(097) 123-45-06')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (17, N'Fokker', N'Нидерланды', N'(097) 123-45-07')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (18, N'GROB Aerospace', N'Германия', N'(097) 123-45-08')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (19, N'Gulf Aircraft Partnership (GAP)', N'ОАЭ', N'(097) 123-45-09')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (20, N'Gulfstream Aerospace Corporation', N'США', N'(097) 123-45-20')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (21, N'Harbin Aircraft Manufacturing Corporation', N'Китай', N'(097) 123-45-21')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (22, N'Israel Aircraft', N'Израиль', N'(097) 123-45-22')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (23, N'Kestrel Aircraft', N'США', N'(097) 123-45-23')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (24, N'Lancair', N'США', N'(097) 123-45-24')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (25, N'Let Aircraft Industries', N'Чехия', N'(097) 123-45-25')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (26, N'Lockheed Corporation
+', N'США', N'(097) 123-45-26')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (27, N'McDonnell Douglas', N'США', N'(097) 123-45-27')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (28, N'Saab', N'Швеция', N'(097) 123-45-28')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (29, N'Vickers', N'Великобритания', N'(097) 123-45-29')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (30, N'Xi''an Aircraft Industrial Corporation', N'Китай', N'(097) 123-45-30')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (31, N'Англо-французский консорциум BAC-SNIAS
+', N'Франция', N'(097) 123-45-31')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (32, N'Гражданские самолеты Сухого', N'Россия', N'(097) 123-45-32')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (33, N'Нижегородский авиационный завод', N'Россия', N'(097) 123-45-33')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (34, N'ОКБ А.Н.Туполева', N'Россия', N'(097) 123-45-34')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (35, N'ОКБ А.С. Яковлева
+', N'Россия', N'(097) 123-45-35')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (36, N'ОКБ Г.М. Бериева', N'Россия', N'(097) 123-45-36')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (37, N'ОКБ О.К.Антонова', N'Украина', N'(097) 123-45-37')
+INSERT INTO [dbo].[Manufacturers] ([VendorId], [BrandTitle], [Address], [Phone]) VALUES (38, N'ОКБ С.В. Ильюшина', N'Россия', N'(097) 123-45-38')
+SET IDENTITY_INSERT [dbo].[Manufacturers] OFF
+");
+        }
+        
+        public override void Down()
+        {
+        }
+    }
+}
