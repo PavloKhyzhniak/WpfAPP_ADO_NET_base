@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Airplanes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Speed" Type="int" Nullable="false" />
+          <Property Name="VendorId" Type="int" />
+        </EntityType>
+        <EntityType Name="Manufacturers">
+          <Key>
+            <PropertyRef Name="VendorId" />
+          </Key>
+          <Property Name="VendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrandTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_Airplanes_dbo_Manufacturers_VendorId">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="0..1" />
+          <End Role="Airplanes" Type="Self.Airplanes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="VendorId" />
+            </Principal>
+            <Dependent Role="Airplanes">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetAirplaineWithSpeedLess" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="st" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Id" Type="int" Nullable="false" />
+                <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="Price" Type="float" Nullable="false" />
+                <Property Name="Speed" Type="int" Nullable="false" />
+                <Property Name="BrandTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetManufacturerNameWithLengthLess" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="st" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="BrandTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetManufacturerWithAirplaneMore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="st" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="BrandTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <EntityContainer Name="Хранилище WpfApp_ADO_NET_CodeFirstModel_ManufacturerAirplaneModelContainer">
+          <EntitySet Name="Airplanes" EntityType="Self.Airplanes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Airplanes_dbo_Manufacturers_VendorId" Association="Self.FK_dbo_Airplanes_dbo_Manufacturers_VendorId">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Airplanes" EntitySet="Airplanes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Airplanes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Speed" Type="Int32" Nullable="false" />
+          <Property Name="VendorId" Type="Int32" />
+          <NavigationProperty Name="Manufacturers" Relationship="Self.FK_dbo_Airplanes_dbo_Manufacturers_VendorId" FromRole="Airplanes" ToRole="Manufacturers" />
+        </EntityType>
+        <EntityType Name="Manufacturers">
+          <Key>
+            <PropertyRef Name="VendorId" />
+          </Key>
+          <Property Name="VendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Airplanes" Relationship="Self.FK_dbo_Airplanes_dbo_Manufacturers_VendorId" FromRole="Manufacturers" ToRole="Airplanes" />
+        </EntityType>
+        <Association Name="FK_dbo_Airplanes_dbo_Manufacturers_VendorId">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="0..1" />
+          <End Role="Airplanes" Type="Self.Airplanes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="VendorId" />
+            </Principal>
+            <Dependent Role="Airplanes">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities_ManufacturerAirplane" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Airplanes" EntityType="Self.Airplanes" />
+          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" />
+          <AssociationSet Name="FK_dbo_Airplanes_dbo_Manufacturers_VendorId" Association="Self.FK_dbo_Airplanes_dbo_Manufacturers_VendorId">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Airplanes" EntitySet="Airplanes" />
+          </AssociationSet>
+          <FunctionImport Name="GetAirplaineWithSpeedLess" IsComposable="true" ReturnType="Collection(WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.GetAirplaineWithSpeedLess_Result)">
+            <Parameter Name="st" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetManufacturerNameWithLengthLess" IsComposable="true" ReturnType="Collection(String)">
+            <Parameter Name="st" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetManufacturerWithAirplaneMore" IsComposable="true" ReturnType="Collection(String)">
+            <Parameter Name="st" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAirplaineWithSpeedLess_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Model" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Price" Nullable="false" />
+          <Property Type="Int32" Name="Speed" Nullable="false" />
+          <Property Type="String" Name="BrandTitle" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище WpfApp_ADO_NET_CodeFirstModel_ManufacturerAirplaneModelContainer" CdmEntityContainer="Entities_ManufacturerAirplane">
+          <EntitySetMapping Name="Airplanes">
+            <EntityTypeMapping TypeName="WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.Airplanes">
+              <MappingFragment StoreEntitySet="Airplanes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufacturers">
+            <EntityTypeMapping TypeName="WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.Manufacturers">
+              <MappingFragment StoreEntitySet="Manufacturers">
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="BrandTitle" ColumnName="BrandTitle" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAirplaineWithSpeedLess" FunctionName="Хранилище WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.GetAirplaineWithSpeedLess">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.GetAirplaineWithSpeedLess_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="BrandTitle" ColumnName="BrandTitle" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetManufacturerNameWithLengthLess" FunctionName="Хранилище WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.GetManufacturerNameWithLengthLess" />
+          <FunctionImportMapping FunctionImportName="GetManufacturerWithAirplaneMore" FunctionName="Хранилище WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.GetManufacturerWithAirplaneMore" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

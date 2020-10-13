@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище WpfApp_ADO_NET_CodeFirstModel_ManufacturerAirplaneModelContainer" CdmEntityContainer="Entities_ManufacturerAirplane">
+    <EntitySetMapping Name="Airplanes">
+      <EntityTypeMapping TypeName="WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.Airplanes">
+        <MappingFragment StoreEntitySet="Airplanes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manufacturers">
+      <EntityTypeMapping TypeName="WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.Manufacturers">
+        <MappingFragment StoreEntitySet="Manufacturers">
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="BrandTitle" ColumnName="BrandTitle" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetAirplaineWithSpeedLess" FunctionName="Хранилище WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.GetAirplaineWithSpeedLess">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.GetAirplaineWithSpeedLess_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="BrandTitle" ColumnName="BrandTitle" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetManufacturerNameWithLengthLess" FunctionName="Хранилище WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.GetManufacturerNameWithLengthLess" />
+    <FunctionImportMapping FunctionImportName="GetManufacturerWithAirplaneMore" FunctionName="Хранилище WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.GetManufacturerWithAirplaneMore" />
+  </EntityContainerMapping>
+</Mapping>

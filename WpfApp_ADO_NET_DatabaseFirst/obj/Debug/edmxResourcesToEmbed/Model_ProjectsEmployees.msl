@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище WpfApp_ADO_NET_CodeFirstModel_ProjectsEmployeesModelContainer" CdmEntityContainer="Entities_ProjectsEmployees">
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel.Employees">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="FotoPath" ColumnName="FotoPath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel.Projects">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProjectEmployees" TypeName="WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel.ProjectEmployees" StoreEntitySet="ProjectEmployees">
+      <EndProperty Name="Employees">
+        <ScalarProperty Name="Id" ColumnName="EmployeeId" />
+      </EndProperty>
+      <EndProperty Name="Projects">
+        <ScalarProperty Name="Id" ColumnName="ProjectId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionName="Хранилище WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel.GetEmployeerWithAgeLess" FunctionImportName="GetEmployeerWithAgeLess">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel.GetEmployeerWithAgeLess_Result">
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="Хранилище WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel.GetEmployeerWithLastNameLengthMoreOrEqual" FunctionImportName="GetEmployeerWithLastNameLengthMoreOrEqual">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel.GetEmployeerWithLastNameLengthMoreOrEqual_Result">
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="Хранилище WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel.GetProjectWithMaxEmployees" FunctionImportName="GetProjectWithMaxEmployees">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel.GetProjectWithMaxEmployees_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

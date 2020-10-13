@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <ComplexType Name="GetEmployeerWithAgeLess_Result">
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </ComplexType>
+  <ComplexType Name="GetEmployeerWithLastNameLengthMoreOrEqual_Result">
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </ComplexType>
+  <ComplexType Name="GetProjectWithMaxEmployees_Result">
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </ComplexType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Projects" Relationship="Self.ProjectEmployees" FromRole="Employees" ToRole="Projects" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Employees" Relationship="Self.ProjectEmployees" FromRole="Projects" ToRole="Employees" />
+  </EntityType>
+  <Association Name="ProjectEmployees">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+    <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Entities_ProjectsEmployees" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Employees" EntityType="Self.Employees" />
+    <EntitySet Name="Projects" EntityType="Self.Projects" />
+    <AssociationSet Name="ProjectEmployees" Association="Self.ProjectEmployees">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Projects" EntitySet="Projects" />
+    </AssociationSet>
+    <FunctionImport Name="GetEmployeerWithAgeLess" IsComposable="true" ReturnType="Collection(WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel.GetEmployeerWithAgeLess_Result)">
+      <Parameter Name="st" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetEmployeerWithLastNameLengthMoreOrEqual" IsComposable="true" ReturnType="Collection(WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel.GetEmployeerWithLastNameLengthMoreOrEqual_Result)">
+      <Parameter Name="st" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetProjectWithMaxEmployees" IsComposable="true" ReturnType="Collection(WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployeesModel.GetProjectWithMaxEmployees_Result)" />
+  </EntityContainer>
+</Schema>

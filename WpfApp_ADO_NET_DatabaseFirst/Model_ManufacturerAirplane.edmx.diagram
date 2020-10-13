@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ea2785f05a244228b2a10011306eae3a" Name="Diagram1">
+        <EntityTypeShape EntityType="WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.Airplanes" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.Manufacturers" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplaneModel.FK_dbo_Airplanes_dbo_Manufacturers_VendorId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
