@@ -7,13 +7,13 @@ namespace WpfApp_ADO_NET_CodeFirst.Migrations.ProjectsEmployees
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class SeedProjects : IMigrationMetadata
+    public sealed partial class InitProjectsEmployees : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedProjects));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitProjectsEmployees));
         
         string IMigrationMetadata.Id
         {
-            get { return "202010120830451_SeedProjects"; }
+            get { return "202010131933392_InitProjectsEmployees"; }
         }
         
         string IMigrationMetadata.Source

@@ -25,16 +25,17 @@
 
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<ProjectEmployees> ProjectEmployees { get; set; }
+       // public virtual DbSet<ProjectEmployees> ProjectEmployees { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProjectEmployees>()
-                .HasKey(c => new { c.Project_ProjectId, c.Employee_EmployeeId });
-
-
+        //    base.OnModelCreating(modelBuilder);
+        //
+        //    modelBuilder.Entity<ProjectEmployees>()
+        //        .HasKey(c => new { c.Project_ProjectId, c.Employee_EmployeeId });
+                
             modelBuilder.Entity<Project>()
-                .HasMany(c => c.Employees)
+                .HasMany<Employee>(c => c.Employees)
                 .WithMany(r => r.Projects)
                           .Map(ru =>
                           {
@@ -42,6 +43,7 @@
                               ru.MapRightKey("EmployeeId");
                               ru.ToTable("ProjectEmployees");
                           });
+
 
 //            modelBuilder.Entity<Project>()
 //                .HasMany(c => c.Employees)
@@ -61,7 +63,11 @@
         [Column("Id")]
         public int ProjectId { get; set; }
         public string Title { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
         public string Description { get; set; }
 
@@ -82,9 +88,9 @@
         public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
     }
 
-    public class ProjectEmployees
-    {
-        public int? Project_ProjectId { get; set; }
-        public int? Employee_EmployeeId { get; set; }
-    }
+   // public class ProjectEmployees
+   // {
+   //     public int Project_ProjectId { get; set; }
+   //     public int Employee_EmployeeId { get; set; }
+   // }
 }

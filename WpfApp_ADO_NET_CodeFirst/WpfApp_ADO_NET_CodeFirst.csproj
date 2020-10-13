@@ -65,13 +65,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConverterEmployeesToString.cs" />
-    <Compile Include="Migrations\ProjectsEmployees\202010122102538_CorrectProjectsEmployees.cs" />
-    <Compile Include="Migrations\ProjectsEmployees\202010122102538_CorrectProjectsEmployees.Designer.cs">
-      <DependentUpon>202010122102538_CorrectProjectsEmployees.cs</DependentUpon>
+    <Compile Include="ConverterProjectsToString.cs" />
+    <Compile Include="Migrations\ProjectsEmployees\202010131933392_InitProjectsEmployees.cs" />
+    <Compile Include="Migrations\ProjectsEmployees\202010131933392_InitProjectsEmployees.Designer.cs">
+      <DependentUpon>202010131933392_InitProjectsEmployees.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\ProjectsEmployees\202010122103180_SeedProjectsEmployees.cs" />
-    <Compile Include="Migrations\ProjectsEmployees\202010122103180_SeedProjectsEmployees.Designer.cs">
-      <DependentUpon>202010122103180_SeedProjectsEmployees.cs</DependentUpon>
+    <Compile Include="Migrations\ProjectsEmployees\202010131934391_SeedProjectsEmployees.cs" />
+    <Compile Include="Migrations\ProjectsEmployees\202010131934391_SeedProjectsEmployees.Designer.cs">
+      <DependentUpon>202010131934391_SeedProjectsEmployees.cs</DependentUpon>
     </Compile>
     <Compile Include="RowToIndexConv.cs" />
     <Compile Include="Window_DataGrid.xaml.cs">
@@ -107,26 +108,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\ProjectsEmployees\202010120727145_InitProjectsEmployees.cs" />
-    <Compile Include="Migrations\ProjectsEmployees\202010120727145_InitProjectsEmployees.Designer.cs">
-      <DependentUpon>202010120727145_InitProjectsEmployees.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\ProjectsEmployees\202010120742432_CorrectProjects.cs" />
-    <Compile Include="Migrations\ProjectsEmployees\202010120742432_CorrectProjects.Designer.cs">
-      <DependentUpon>202010120742432_CorrectProjects.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\ProjectsEmployees\202010120755352_CorrectEmployees.cs" />
-    <Compile Include="Migrations\ProjectsEmployees\202010120755352_CorrectEmployees.Designer.cs">
-      <DependentUpon>202010120755352_CorrectEmployees.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\ProjectsEmployees\202010120821543_SeedEmployees.cs" />
-    <Compile Include="Migrations\ProjectsEmployees\202010120821543_SeedEmployees.Designer.cs">
-      <DependentUpon>202010120821543_SeedEmployees.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\ProjectsEmployees\202010120830451_SeedProjects.cs" />
-    <Compile Include="Migrations\ProjectsEmployees\202010120830451_SeedProjects.Designer.cs">
-      <DependentUpon>202010120830451_SeedProjects.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\ProjectsEmployees\Configuration.cs" />
     <Compile Include="Migrations\ManufacturerAirplane\202010120627489_InitManufacturerAirplane.cs" />
     <Compile Include="Migrations\ManufacturerAirplane\202010120627489_InitManufacturerAirplane.Designer.cs">
@@ -165,26 +146,11 @@
     <EmbeddedResource Include="Migrations\ManufacturerAirplane\202010120703421_SeedAirplanes.resx">
       <DependentUpon>202010120703421_SeedAirplanes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ProjectsEmployees\202010120727145_InitProjectsEmployees.resx">
-      <DependentUpon>202010120727145_InitProjectsEmployees.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ProjectsEmployees\202010131933392_InitProjectsEmployees.resx">
+      <DependentUpon>202010131933392_InitProjectsEmployees.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ProjectsEmployees\202010120742432_CorrectProjects.resx">
-      <DependentUpon>202010120742432_CorrectProjects.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ProjectsEmployees\202010120755352_CorrectEmployees.resx">
-      <DependentUpon>202010120755352_CorrectEmployees.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ProjectsEmployees\202010120821543_SeedEmployees.resx">
-      <DependentUpon>202010120821543_SeedEmployees.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ProjectsEmployees\202010120830451_SeedProjects.resx">
-      <DependentUpon>202010120830451_SeedProjects.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ProjectsEmployees\202010122102538_CorrectProjectsEmployees.resx">
-      <DependentUpon>202010122102538_CorrectProjectsEmployees.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ProjectsEmployees\202010122103180_SeedProjectsEmployees.resx">
-      <DependentUpon>202010122103180_SeedProjectsEmployees.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ProjectsEmployees\202010131934391_SeedProjectsEmployees.resx">
+      <DependentUpon>202010131934391_SeedProjectsEmployees.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

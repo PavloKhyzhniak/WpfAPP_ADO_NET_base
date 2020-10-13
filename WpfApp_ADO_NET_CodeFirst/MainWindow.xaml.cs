@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -102,8 +104,8 @@ namespace WpfApp_ADO_NET_CodeFirst
                 selectedId = selectedManufacturerRow.VendorId;
 
                 Manufacturer selectedManufacturerDB = (from t in contextManufacturerAirplane.Manufacturers
-                                           where t.VendorId == selectedId
-                                           select t)?.First();
+                                                       where t.VendorId == selectedId
+                                                       select t)?.First();
 
                 selectedManufacturerDB.VendorId = selectedManufacturerRow.VendorId;
                 selectedManufacturerDB.BrandTitle = selectedManufacturerRow.BrandTitle;
@@ -124,15 +126,15 @@ namespace WpfApp_ADO_NET_CodeFirst
                 selectedId = selectedAirplaneRow.Id;
 
                 Airplane selectedAirplaneDB = (from t in contextManufacturerAirplane.Airplanes
-                                           where t.Id == selectedId
-                                           select t)?.First();
+                                               where t.Id == selectedId
+                                               select t)?.First();
 
                 selectedAirplaneDB.Id = selectedAirplaneRow.Id;
                 selectedAirplaneDB.Model = selectedAirplaneRow.Model;
                 selectedAirplaneDB.Price = selectedAirplaneRow.Price;
                 selectedAirplaneDB.Speed = selectedAirplaneRow.Speed;
                 selectedAirplaneDB.VendorId = selectedAirplaneRow.VendorId;
-                
+
                 contextManufacturerAirplane.SaveChanges();
 
                 RefreshAirplane();
@@ -211,8 +213,8 @@ namespace WpfApp_ADO_NET_CodeFirst
                 int selectedId = selectedManufacturerRow.VendorId;
 
                 Manufacturer del_manufacturer = (from t in contextManufacturerAirplane.Manufacturers
-                                     where t.VendorId == selectedId
-                                     select t).First();
+                                                 where t.VendorId == selectedId
+                                                 select t).First();
 
                 // Удалить из БД автора с данным ID
                 contextManufacturerAirplane.Manufacturers.Remove(del_manufacturer);
@@ -234,10 +236,10 @@ namespace WpfApp_ADO_NET_CodeFirst
         {
             Airplane airplane = new Airplane
             {
-                Model= "Airbus A220-100",
-                Price =345000000,
+                Model = "Airbus A220-100",
+                Price = 345000000,
                 Speed = 670,
-                VendorId=2
+                VendorId = 2
             };
 
             contextManufacturerAirplane.Airplanes.Add(airplane);
@@ -258,8 +260,8 @@ namespace WpfApp_ADO_NET_CodeFirst
                 int selectedId = selectedAirplaneRow.Id;
 
                 Airplane del_airplane = (from t in contextManufacturerAirplane.Airplanes
-                                                 where t.Id == selectedId
-                                                 select t).First();
+                                         where t.Id == selectedId
+                                         select t).First();
 
                 // Удалить из БД автора с данным ID
                 contextManufacturerAirplane.Airplanes.Remove(del_airplane);
@@ -272,34 +274,275 @@ namespace WpfApp_ADO_NET_CodeFirst
             }
         }
 
+        /*
+
+select * from Airplanes
+select * from Manufacturers
+
+select a.Id,a.Model,a.Price,a.Speed,m.BrandTitle from Airplanes a, Manufacturers m
+where a.Speed<600 and a.VendorId=m.VendorId
+
+     */
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(
+"\tShow Airplane with Speed<600" +
+"\n\nselect a.Id,a.Model,a.Price,a.Speed,m.BrandTitle from Airplanes a, Manufacturers m" +
+"\nwhere a.Speed < 600 and a.VendorId = m.VendorId"
+                , "SQL Query");
 
+            //var result =
+            //    from a in contextManufacturerAirplane.Airplanes
+            //    join m in contextManufacturerAirplane.Manufacturers on a.VendorId equals m.VendorId
+            //    where a.Speed<600
+            //    select new
+            //    {
+            //        Id = a.Id,
+            //        Model = a.Model,
+            //        Price = a.Price,
+            //        Speed = a.Speed,
+            //        BrandTitle = m.BrandTitle
+            //    };
+
+            var result = contextManufacturerAirplane.Airplanes
+                .Where(a => a.Speed < 600)
+                .Join(contextManufacturerAirplane.Manufacturers
+                    , a => a.VendorId, m => m.VendorId,
+                    (a, m) => new
+                    {
+                        Id = a.Id,
+                        Model = a.Model,
+                        Price = a.Price,
+                        Speed = a.Speed,
+                        BrandTitle = m.BrandTitle
+                    });
+
+
+
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
+            //            dataGrid_Main.ItemsSource = result.ToList();
         }
 
+        /*
+
+select * from Airplanes
+select * from Manufacturers
+
+select DISTINCT m.BrandTitle from Airplanes a, Manufacturers m
+where a.VendorId=m.VendorId and (select COUNT(a.Id) cnt from Airplanes a where a.VendorId=m.VendorId group by a.VendorId)>3
+
+         */
         private void MenuItem_Click_4(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(
+"\tShow Manufacture BrandTitle with Count(Airplane)>3" +
+"\n\nselect DISTINCT m.BrandTitle from Airplanes a, Manufacturers m" +
+"\nwhere a.VendorId = m.VendorId and(select COUNT(a.Id) cnt from Airplanes a where a.VendorId = m.VendorId group by a.VendorId) > 3"
+             , "SQL Query");
 
+            var result =
+              from a in contextManufacturerAirplane.Airplanes
+              group a by a.VendorId into grp
+              where grp.Count() > 3
+              join m in contextManufacturerAirplane.Manufacturers on grp.Key equals m.VendorId
+              select new
+              {
+                  BrandTitle = m.BrandTitle
+              };
+
+
+            //var result =
+            //    contextManufacturerAirplane.Airplanes.GroupBy(a => a.VendorId).Select(g => new { g.Key, Count = g.Count() }).Where(d=>d.Count>3)
+            //    .Join(contextManufacturerAirplane.Manufacturers,
+            //    g => g.Key, m => m.VendorId,
+            //    (g, m) => new
+            //    {
+            //        BrandTitle = m.BrandTitle
+            //    }).Distinct();
+
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
+            //            dataGrid_Main.ItemsSource = result.ToList();
         }
 
+        /*
+
+select * from Airplanes
+select * from Manufacturers
+
+select m.BrandTitle from Manufacturers m
+where Len(m.BrandTitle)<7
+        */
         private void MenuItem_Click_5(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(
+"\tShow Manufacture BrandTitle with Len(BrandTitle)<7" +
+"\n\nselect m.BrandTitle from Manufacturers m" +
+"\nwhere Len(m.BrandTitle) < 7"
+           , "SQL Query");
 
+            var result =
+                from m in contextManufacturerAirplane.Manufacturers
+                where m.BrandTitle.Length < 7
+                select new
+                {
+                    BrandTitle = m.BrandTitle
+                };
+
+            //var result = contextManufacturerAirplane.Manufacturers
+            //    .Where(a => a.BrandTitle.Length<7)
+            //    .Select(a=> new
+            //        {
+            //            BrandTitle = a.BrandTitle
+            //        });
+
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
+            //            dataGrid_Main.ItemsSource = result.ToList();
         }
 
+        class MyData_GetAirplaineWithSpeedLess
+        {
+            public int Id { get; set; }
+            public string Model { get; set; }
+            public double Price { get; set; }
+            public int Speed { get; set; }
+            public string BrandTitle { get; set; }
+        }
+        /*
+
+create function GetAirplaineWithSpeedLess(@st int)
+returns table
+as
+return 
+select a.Id,a.Model,a.Price,a.Speed,m.BrandTitle from Airplanes a, Manufacturers m
+where a.Speed<@st and a.VendorId=m.VendorId
+GO
+
+    */
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
 
+            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            SqlParameter parameter = new SqlParameter("@speed", "600");
+            var result = from t in contextManufacturerAirplane.Database.SqlQuery<MyData_GetAirplaineWithSpeedLess>("select * from GetAirplaineWithSpeedLess(@speed)", parameter)
+                         select t;
+
+
+            //            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            //            SqlParameter parameter = new SqlParameter("@state", "CA");
+            //            var result = from t in context.Database.SqlQuery<author>("select * from GetAuthorsByState(@state)", parameter)
+            //                         select new MyAuthor
+            //                         {
+            //                             Au_id = t.au_id,
+            //                             FirstName = t.au_fname,
+            //                             LastName = t.au_lname,
+            //                             City = t.city,
+            //                             State = t.state,
+            //                             Phone = t.phone,
+            //                             Address = t.address,
+            //                             Zip = t.zip,
+            //                             Contract = t.contract
+            //                         };
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
+            //            dataGrid_Main.ItemsSource = result.ToList();
         }
 
+        class MyData_GetManufacturerWithAirplaneMore
+        {
+            public string BrandTitle { get; set; }
+        }
+        /*
+        
+create function GetManufacturerWithAirplaneMore(@st int)
+returns table
+as
+return 
+select DISTINCT m.BrandTitle from Airplanes a, Manufacturers m
+where a.VendorId=m.VendorId and (select COUNT(a.Id) cnt from Airplanes a where a.VendorId=m.VendorId group by a.VendorId)>@st
+GO
+        */
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
+            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            SqlParameter parameter = new SqlParameter("@cnt", "3");
+            var result = from t in contextManufacturerAirplane.Database.SqlQuery<MyData_GetManufacturerWithAirplaneMore>("select * from GetManufacturerWithAirplaneMore(@cnt)", parameter)
+                         select t;
 
+
+            //            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            //            SqlParameter parameter = new SqlParameter("@state", "CA");
+            //            var result = from t in context.Database.SqlQuery<author>("select * from GetAuthorsByState(@state)", parameter)
+            //                         select new MyAuthor
+            //                         {
+            //                             Au_id = t.au_id,
+            //                             FirstName = t.au_fname,
+            //                             LastName = t.au_lname,
+            //                             City = t.city,
+            //                             State = t.state,
+            //                             Phone = t.phone,
+            //                             Address = t.address,
+            //                             Zip = t.zip,
+            //                             Contract = t.contract
+            //                         };
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
+            //            dataGrid_Main.ItemsSource = result.ToList();
         }
-
+        class MyData_GetManufacturerNameWithLengthLess
+        {
+            public string BrandTitle { get; set; }
+        }
+        /*
+          
+create function GetManufacturerNameWithLengthLess(@st int)
+returns table
+as
+return 
+select m.BrandTitle from Manufacturers m
+where Len(m.BrandTitle)<@st
+GO
+         */
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
+            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            SqlParameter parameter = new SqlParameter("@cnt", "7");
+            var result = from t in contextManufacturerAirplane.Database.SqlQuery<MyData_GetManufacturerWithAirplaneMore>("select * from GetManufacturerNameWithLengthLess(@cnt)", parameter)
+                         select t;
 
+
+            //            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            //            SqlParameter parameter = new SqlParameter("@state", "CA");
+            //            var result = from t in context.Database.SqlQuery<author>("select * from GetAuthorsByState(@state)", parameter)
+            //                         select new MyAuthor
+            //                         {
+            //                             Au_id = t.au_id,
+            //                             FirstName = t.au_fname,
+            //                             LastName = t.au_lname,
+            //                             City = t.city,
+            //                             State = t.state,
+            //                             Phone = t.phone,
+            //                             Address = t.address,
+            //                             Zip = t.zip,
+            //                             Contract = t.contract
+            //                         };
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
+            //            dataGrid_Main.ItemsSource = result.ToList();
         }
 
 
@@ -344,8 +587,8 @@ namespace WpfApp_ADO_NET_CodeFirst
                 selectedId = selectedProjectsRow.ProjectId;
 
                 Project selectedProjectDB = (from t in contextProjectsEmployees.Projects
-                                               where t.ProjectId == selectedId
-                                               select t)?.First();
+                                             where t.ProjectId == selectedId
+                                             select t)?.First();
 
                 selectedProjectDB.ProjectId = selectedProjectsRow.ProjectId;
                 selectedProjectDB.Title = selectedProjectsRow.Title;
@@ -469,7 +712,7 @@ namespace WpfApp_ADO_NET_CodeFirst
             {
                 Title = "Creative System for Gratulation!!!",
                 StartDate = DateTime.Now,
-                EndDate = DateTime.MinValue,
+                EndDate = DateTime.Now,
                 Description = "New Funny Project"
             };
 
@@ -491,8 +734,8 @@ namespace WpfApp_ADO_NET_CodeFirst
                 int selectedId = selectedProjectRow.ProjectId;
 
                 Project del_project = (from t in contextProjectsEmployees.Projects
-                                         where t.ProjectId == selectedId
-                                         select t).First();
+                                       where t.ProjectId == selectedId
+                                       select t).First();
 
                 // Удалить из БД автора с данным ID
                 contextProjectsEmployees.Projects.Remove(del_project);
@@ -552,35 +795,295 @@ namespace WpfApp_ADO_NET_CodeFirst
                 RefreshEmployees();
             }
         }
+        /*
+         
+select * from Projects
+select * from Employees
+select * from ProjectEmployees
 
+SELECT p.Id,p.Title
+FROM Projects p 
+WHERE p.Id = (
+    SELECT pe.ProjectId
+    FROM ProjectEmployees pe GROUP BY pe.ProjectId
+    HAVING count(pe.ProjectId)=
+		(
+    SELECT MAX(g.cnt)
+    FROM (SELECT COUNT(ppe.ProjectId) cnt 
+	FROM ProjectEmployees ppe 
+	GROUP BY ppe.ProjectId) g
+	)
+	)
+
+         */
         private void MenuItem_Click_13(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(
+"\tShow Project with Max Employees" +
+"\n\nSELECT p.Id,p.Title" +
+"\nFROM Projects p" +
+"\nWHERE p.Id = (" +
+"\n\tSELECT pe.ProjectId" +
+"\n\tFROM ProjectEmployees pe GROUP BY pe.ProjectId" +
+"\n\tHAVING count(pe.ProjectId) =" +
+"\n\t(" +
+"\n\tSELECT MAX(g.cnt)" +
+"\n\tFROM(SELECT COUNT(ppe.ProjectId) cnt" +
+"\n\tFROM ProjectEmployees ppe" +
+"\n\tGROUP BY ppe.ProjectId) g" +
+"\n\t)" +
+"\n\t)"
+          , "SQL Query");
 
+        
+            var result =
+                from p in contextProjectsEmployees.Projects
+                where p.Employees.Count == (contextProjectsEmployees.Projects.Select(u1 => u1.Employees.Count).Max())
+                select new
+                {
+                    p.ProjectId,
+                    p.Title
+                };
+
+            //var result = contextProjectsEmployees.Projects
+            //    .Where(a => a== (contextProjectsEmployees.Projects.OrderByDescending(s=>s.Employees.Count).FirstOrDefault()))
+            //    .Select(p=> new
+            //        {
+            //        p.ProjectId,
+            //        p.Title
+            //        });
+
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
+            //            dataGrid_Main.ItemsSource = result.ToList();
         }
+        /*
+         
+select * from Projects
+select * from Employees
+select * from ProjectEmployees
 
+select e.FirstName,e.LastName from Employees e
+where e.Age<35
+
+        */
         private void MenuItem_Click_14(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(
+"\tShow Employees with Age<35" +
+"\n\nselect e.FirstName,e.LastName from Employees e" +
+"\nwhere e.Age < 35"
+          , "SQL Query");
 
+            //var result =
+            //    from emp in contextProjectsEmployees.Employees
+            //    where emp.Age < 35
+            //    select new
+            //    {
+            //        emp.FirstName,
+            //        emp.LastName
+            //    };
+
+            var result = contextProjectsEmployees.Employees
+                .Where(a => a.Age < 35)
+                .Select(a => new
+                {
+                    a.FirstName,
+                    a.LastName
+                });
+
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
+            //            dataGrid_Main.ItemsSource = result.ToList();
         }
 
+        /*
+        
+select * from Projects
+select * from Employees
+select * from ProjectEmployees
+
+select e.FirstName,e.LastName from Employees e
+where Len(e.LastName)>=5
+
+         */
         private void MenuItem_Click_15(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(
+"\tShow Employees with Len(LastName)>=5" +
+"\n\nselect e.FirstName,e.LastName from Employees e" +
+"\nwhere Len(e.LastName) >= 5"
+          , "SQL Query");
 
+            //var result =
+            //    from emp in contextProjectsEmployees.Employees
+            //    where emp.LastName.Length >= 5
+            //    select new
+            //    {
+            //        FirstName = emp.FirstName,
+            //        LastName = emp.LastName
+            //    };
+
+            var result = contextProjectsEmployees.Employees
+                .Where(a => a.LastName.Length >= 5)
+                .Select(a => new
+                {
+                    a.FirstName,
+                    a.LastName
+                });
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
+            //            dataGrid_Main.ItemsSource = result.ToList();
         }
 
+        class MyData_GetProjectWithMaxEmployees
+        {
+            public int? Id { get; set; }
+            public string Title { get; set; }
+        }
+        /*
+         
+create function GetProjectWithMaxEmployees()
+returns table
+as
+return 
+SELECT p.Id,p.Title
+FROM Projects p 
+WHERE p.Id = (
+    SELECT pe.ProjectId
+    FROM ProjectEmployees pe GROUP BY pe.ProjectId
+    HAVING count(pe.ProjectId)=
+		(
+    SELECT MAX(g.cnt)
+    FROM (SELECT COUNT(ppe.ProjectId) cnt 
+	FROM ProjectEmployees ppe 
+	GROUP BY ppe.ProjectId) g
+	)
+	)
+GO
+         */
         private void MenuItem_Click2(object sender, RoutedEventArgs e)
         {
+            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            var result = from t in contextProjectsEmployees.Database.SqlQuery<MyData_GetProjectWithMaxEmployees>("select * from GetProjectWithMaxEmployees()")
+                         select t;
 
+
+            //            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            //            SqlParameter parameter = new SqlParameter("@state", "CA");
+            //            var result = from t in context.Database.SqlQuery<author>("select * from GetAuthorsByState(@state)", parameter)
+            //                         select new MyAuthor
+            //                         {
+            //                             Au_id = t.au_id,
+            //                             FirstName = t.au_fname,
+            //                             LastName = t.au_lname,
+            //                             City = t.city,
+            //                             State = t.state,
+            //                             Phone = t.phone,
+            //                             Address = t.address,
+            //                             Zip = t.zip,
+            //                             Contract = t.contract
+            //                         };
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
+            //            dataGrid_Main.ItemsSource = result.ToList();
         }
+        class MyData_GetEmployeerWithAgeLess
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+        }
+        /*
 
+create function GetEmployeerWithAgeLess(@st int)
+returns table
+as
+return 
+select e.FirstName,e.LastName from Employees e
+where e.Age<@st
+GO
+*/
         private void MenuItem_Click_11(object sender, RoutedEventArgs e)
         {
+            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            SqlParameter parameter = new SqlParameter("@age", "35");
+            var result = from t in contextProjectsEmployees.Database.SqlQuery<MyData_GetEmployeerWithAgeLess>("select * from GetEmployeerWithAgeLess(@age)", parameter)
+                         select t;
 
+
+            //            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            //            SqlParameter parameter = new SqlParameter("@state", "CA");
+            //            var result = from t in context.Database.SqlQuery<author>("select * from GetAuthorsByState(@state)", parameter)
+            //                         select new MyAuthor
+            //                         {
+            //                             Au_id = t.au_id,
+            //                             FirstName = t.au_fname,
+            //                             LastName = t.au_lname,
+            //                             City = t.city,
+            //                             State = t.state,
+            //                             Phone = t.phone,
+            //                             Address = t.address,
+            //                             Zip = t.zip,
+            //                             Contract = t.contract
+            //                         };
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
+            //            dataGrid_Main.ItemsSource = result.ToList();
         }
 
+        class MyData_GetEmployeerWithLastNameLengthMoreOrEqual
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+        }
+        /*
+
+        create function GetEmployeerWithLastNameLengthMoreOrEqual(@st int)
+        returns table
+        as
+        return 
+        select e.FirstName,e.LastName from Employees e
+        where Len(e.LastName)>=@st
+        GO
+        */
         private void MenuItem_Click_12(object sender, RoutedEventArgs e)
         {
+            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            SqlParameter parameter = new SqlParameter("@cnt", "5");
+            var result = from t in contextProjectsEmployees.Database.SqlQuery<MyData_GetEmployeerWithLastNameLengthMoreOrEqual>("select * from GetEmployeerWithLastNameLengthMoreOrEqual(@cnt)", parameter)
+                         select t;
 
+
+            //            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            //            SqlParameter parameter = new SqlParameter("@state", "CA");
+            //            var result = from t in context.Database.SqlQuery<author>("select * from GetAuthorsByState(@state)", parameter)
+            //                         select new MyAuthor
+            //                         {
+            //                             Au_id = t.au_id,
+            //                             FirstName = t.au_fname,
+            //                             LastName = t.au_lname,
+            //                             City = t.city,
+            //                             State = t.state,
+            //                             Phone = t.phone,
+            //                             Address = t.address,
+            //                             Zip = t.zip,
+            //                             Contract = t.contract
+            //                         };
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
+            //            dataGrid_Main.ItemsSource = result.ToList();
         }
     }
 }
