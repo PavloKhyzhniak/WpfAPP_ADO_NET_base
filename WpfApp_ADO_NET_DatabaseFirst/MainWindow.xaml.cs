@@ -46,7 +46,7 @@ namespace WpfApp_ADO_NET_DatabaseFirst
             ObservableCollection<Manufacturer> observableCollection = new ObservableCollection<Manufacturer>(result);
 
             CollectionViewSource collection = new CollectionViewSource() { Source = observableCollection };
-            collection.GroupDescriptions.Add(new PropertyGroupDescription("BrandTitle"));
+            collection.GroupDescriptions.Add(new PropertyGroupDescription("Address"));
             //collection.GroupDescriptions.Add(new PropertyGroupDescription("City"));
             //collection.SortDescriptions.Add(new SortDescription("City", ListSortDirection.Ascending));
             //collection.Filter += Collection_Filter;
