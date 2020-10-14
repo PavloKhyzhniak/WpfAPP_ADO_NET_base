@@ -32,8 +32,8 @@ namespace WpfApp_ADO_NET_CodeFirst
             InitializeComponent();
         }
 
-        EventHandler<DataGridCellEditEndingEventArgs> eventCellEditEnding;
-        EventHandler<DataGridAutoGeneratingColumnEventArgs> eventAutoGeneratingColumn;
+    //    EventHandler<DataGridCellEditEndingEventArgs> eventCellEditEnding;
+    //    EventHandler<DataGridAutoGeneratingColumnEventArgs> eventAutoGeneratingColumn;
         public void RefreshManufacturer()
         {
             var result = from t in contextManufacturerAirplane.Manufacturers
@@ -48,13 +48,15 @@ namespace WpfApp_ADO_NET_CodeFirst
             //collection.Filter += Collection_Filter;
 
             dataGrid_Main.Style = (Style)FindResource("dataGridManufacturer");
-            dataGrid_Main.CellEditEnding += dataGrid_Manufacturer_CellEditEnding;
-            dataGrid_Main.AutoGeneratingColumn += dataGrid_Manufacturer_AutoGeneratingColumn;
 
-            dataGrid_Main.CellEditEnding -= eventCellEditEnding;
-            dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
-            eventCellEditEnding = dataGrid_Manufacturer_CellEditEnding;
-            eventAutoGeneratingColumn = dataGrid_Manufacturer_AutoGeneratingColumn;
+        //    dataGrid_Main.CellEditEnding -= eventCellEditEnding;
+        //    dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
+        //
+        //    dataGrid_Main.CellEditEnding += dataGrid_Manufacturer_CellEditEnding;
+        //    dataGrid_Main.AutoGeneratingColumn += dataGrid_Manufacturer_AutoGeneratingColumn;
+        //
+        //    eventCellEditEnding = dataGrid_Manufacturer_CellEditEnding;
+        //    eventAutoGeneratingColumn = dataGrid_Manufacturer_AutoGeneratingColumn;
 
             dataGrid_Main.ItemsSource = collection.View;
 
@@ -79,13 +81,15 @@ namespace WpfApp_ADO_NET_CodeFirst
             //collection.Filter += Collection_Filter;
 
             dataGrid_Main.Style = (Style)FindResource("dataGridAirplane");
-            dataGrid_Main.CellEditEnding += dataGrid_Airplane_CellEditEnding;
-            dataGrid_Main.AutoGeneratingColumn += dataGrid_Airplane_AutoGeneratingColumn;
 
-            dataGrid_Main.CellEditEnding -= eventCellEditEnding;
-            dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
-            eventCellEditEnding = dataGrid_Airplane_CellEditEnding;
-            eventAutoGeneratingColumn = dataGrid_Airplane_AutoGeneratingColumn;
+        //    dataGrid_Main.CellEditEnding -= eventCellEditEnding;
+        //    dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
+        //
+        //    dataGrid_Main.CellEditEnding += dataGrid_Airplane_CellEditEnding;
+        //    dataGrid_Main.AutoGeneratingColumn += dataGrid_Airplane_AutoGeneratingColumn;
+        //
+        //    eventCellEditEnding = dataGrid_Airplane_CellEditEnding;
+        //    eventAutoGeneratingColumn = dataGrid_Airplane_AutoGeneratingColumn;
 
             dataGrid_Main.ItemsSource = collection.View;
 
@@ -562,13 +566,15 @@ GO
             //collection.Filter += Collection_Filter;
 
             dataGrid_Main.Style = (Style)FindResource("dataGridProjects");
-            dataGrid_Main.CellEditEnding += dataGrid_Projects_CellEditEnding;
-            dataGrid_Main.AutoGeneratingColumn += dataGrid_Projects_AutoGeneratingColumn;
 
-            dataGrid_Main.CellEditEnding -= eventCellEditEnding;
-            dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
-            eventCellEditEnding = dataGrid_Projects_CellEditEnding;
-            eventAutoGeneratingColumn = dataGrid_Projects_AutoGeneratingColumn;
+        //    dataGrid_Main.CellEditEnding -= eventCellEditEnding;
+        //    dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
+        //
+        //    dataGrid_Main.CellEditEnding += dataGrid_Projects_CellEditEnding;
+        //    dataGrid_Main.AutoGeneratingColumn += dataGrid_Projects_AutoGeneratingColumn;
+        //
+        //    eventCellEditEnding = dataGrid_Projects_CellEditEnding;
+        //    eventAutoGeneratingColumn = dataGrid_Projects_AutoGeneratingColumn;
 
             dataGrid_Main.ItemsSource = collection.View;
 
@@ -638,13 +644,15 @@ GO
             //collection.Filter += Collection_Filter;
 
             dataGrid_Main.Style = (Style)FindResource("dataGridEmployees");
-            dataGrid_Main.CellEditEnding += dataGrid_Employees_CellEditEnding;
-            dataGrid_Main.AutoGeneratingColumn += dataGrid_Employees_AutoGeneratingColumn;
 
-            dataGrid_Main.CellEditEnding -= eventCellEditEnding;
-            dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
-            eventCellEditEnding = dataGrid_Employees_CellEditEnding;
-            eventAutoGeneratingColumn = dataGrid_Employees_AutoGeneratingColumn;
+        //    dataGrid_Main.CellEditEnding -= eventCellEditEnding;
+        //    dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
+        //
+        //    dataGrid_Main.CellEditEnding += dataGrid_Employees_CellEditEnding;
+        //    dataGrid_Main.AutoGeneratingColumn += dataGrid_Employees_AutoGeneratingColumn;
+        //
+        //    eventCellEditEnding = dataGrid_Employees_CellEditEnding;
+        //    eventAutoGeneratingColumn = dataGrid_Employees_AutoGeneratingColumn;
 
             dataGrid_Main.ItemsSource = collection.View;
 

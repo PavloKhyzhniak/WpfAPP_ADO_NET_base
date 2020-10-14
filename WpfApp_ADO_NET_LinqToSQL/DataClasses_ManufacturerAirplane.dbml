@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplane" Class="DataClasses_ManufacturerAirplaneDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-5BEVEKH\SQLEXPRESS;Initial Catalog=WpfApp_ADO_NET_CodeFirst.Model_ManufacturerAirplane;Integrated Security=True" SettingsObjectName="WpfApp_ADO_NET_LinqToSQL.Properties.Settings" SettingsPropertyName="WpfApp_ADO_NET_CodeFirst_Model_ManufacturerAirplaneConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Airplanes" Member="Airplanes">
+    <Type Name="Airplanes">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Model" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Speed" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VendorId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Manufacturers_Airplanes" Member="Manufacturers" ThisKey="VendorId" OtherKey="VendorId" Type="Manufacturers" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Manufacturers" Member="Manufacturers">
+    <Type Name="Manufacturers">
+      <Column Name="VendorId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BrandTitle" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Manufacturers_Airplanes" Member="Airplanes" ThisKey="VendorId" OtherKey="VendorId" Type="Airplanes" />
+    </Type>
+  </Table>
+  <Function Name="dbo.GetAirplaineWithSpeedLess" Method="GetAirplaineWithSpeedLess" IsComposable="true">
+    <Parameter Name="st" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetAirplaineWithSpeedLessResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Model" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Speed" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BrandTitle" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetManufacturerWithAirplaneMore" Method="GetManufacturerWithAirplaneMore" IsComposable="true">
+    <Parameter Name="st" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetManufacturerWithAirplaneMoreResult">
+      <Column Name="BrandTitle" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetManufacturerNameWithLengthLess" Method="GetManufacturerNameWithLengthLess" IsComposable="true">
+    <Parameter Name="st" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetManufacturerNameWithLengthLessResult">
+      <Column Name="BrandTitle" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

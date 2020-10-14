@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DataClasses_ManufacturerAirplane">
+  <DataContextMoniker Name="/DataClasses_ManufacturerAirplaneDataContext" />
+  <nestedChildShapes>
+    <classShape Id="51a7ecee-2c75-49f3-b54a-c989e30363ec" absoluteBounds="1.5, 2.375, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DataClasses_ManufacturerAirplaneDataContext/Airplanes" />
+      <nestedChildShapes>
+        <elementListCompartment Id="113e941f-85ba-4e1a-b674-e5c34f67bc7b" absoluteBounds="1.5150000000000001, 2.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b536109b-e5f5-414e-aa7d-0d0cd83119b4" absoluteBounds="4.625, 2.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DataClasses_ManufacturerAirplaneDataContext/Manufacturers" />
+      <nestedChildShapes>
+        <elementListCompartment Id="da575482-b512-42c2-826a-e830033514ff" absoluteBounds="4.64, 3.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.625 : 3.38544840494792); (3.5 : 3.38544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataClasses_ManufacturerAirplaneDataContext/Manufacturers/Manufacturers_Airplanes" />
+      <nodes>
+        <classShapeMoniker Id="b536109b-e5f5-414e-aa7d-0d0cd83119b4" />
+        <classShapeMoniker Id="51a7ecee-2c75-49f3-b54a-c989e30363ec" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

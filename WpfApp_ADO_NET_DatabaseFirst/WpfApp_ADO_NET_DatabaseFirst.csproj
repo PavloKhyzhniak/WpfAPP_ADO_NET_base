@@ -222,6 +222,19 @@
       <DependentUpon>Model_ProjectsEmployees.edmx</DependentUpon>
       <LastGenOutput>Model_ProjectsEmployees.cs</LastGenOutput>
     </Content>
+    <Resource Include="resources\tom.jpg" />
+    <Resource Include="resources\shrek.jpg" />
+    <Resource Include="resources\scrudjMacDuck.jpg" />
+    <Resource Include="resources\pikachu.jpg" />
+    <Resource Include="resources\mikkiMaus.jpg" />
+    <Resource Include="resources\jerry.jpg" />
+    <Resource Include="resources\catRed.jpg" />
+    <Resource Include="resources\catOrange.jpg" />
+    <Resource Include="resources\catGreen.jpg" />
+    <Resource Include="resources\catBlue.jpg" />
+    <Resource Include="resources\catBlack.jpg" />
+    <Resource Include="resources\bob.jpg" />
+    <Resource Include="resources\bambi.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

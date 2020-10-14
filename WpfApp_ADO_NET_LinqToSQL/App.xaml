@@ -4,6 +4,16 @@
              xmlns:local="clr-namespace:WpfApp_ADO_NET_LinqToSQL"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="Styles\DataGrid_Base.xaml"/>
+                <ResourceDictionary Source="Styles\DataGrid_ManufacturerAirplane.xaml"/>
+                <ResourceDictionary Source="Styles\DataGrid_ProjectsEmployees.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

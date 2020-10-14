@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployees" Class="DataClasses_ProjectsEmployeesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=WpfApp_ADO_NET_CodeFirst.Model_ProjectsEmployees;Integrated Security=True" SettingsObjectName="WpfApp_ADO_NET_LinqToSQL.Properties.Settings" SettingsPropertyName="WpfApp_ADO_NET_CodeFirst_Model_ProjectsEmployeesConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Employees" Member="Employees">
+    <Type Name="Employees">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Age" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="FotoPath" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Employees_ProjectEmployees" Member="ProjectEmployees" ThisKey="Id" OtherKey="EmployeeId" Type="ProjectEmployees" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProjectEmployees" Member="ProjectEmployees">
+    <Type Name="ProjectEmployees">
+      <Column Name="ProjectId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Employees_ProjectEmployees" Member="Employees" ThisKey="EmployeeId" OtherKey="Id" Type="Employees" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Projects_ProjectEmployees" Member="Projects" ThisKey="ProjectId" OtherKey="Id" Type="Projects" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Projects" Member="Projects">
+    <Type Name="Projects">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Projects_ProjectEmployees" Member="ProjectEmployees" ThisKey="Id" OtherKey="ProjectId" Type="ProjectEmployees" />
+    </Type>
+  </Table>
+  <Function Name="dbo.GetEmployeerWithAgeLess" Method="GetEmployeerWithAgeLess" IsComposable="true">
+    <Parameter Name="st" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetEmployeerWithAgeLessResult">
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetProjectWithMaxEmployees" Method="GetProjectWithMaxEmployees" IsComposable="true">
+    <ElementType Name="GetProjectWithMaxEmployeesResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetEmployeerWithLastNameLengthMoreOrEqual" Method="GetEmployeerWithLastNameLengthMoreOrEqual" IsComposable="true">
+    <Parameter Name="st" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetEmployeerWithLastNameLengthMoreOrEqualResult">
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

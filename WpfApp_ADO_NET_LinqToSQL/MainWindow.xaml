@@ -5,8 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp_ADO_NET_LinqToSQL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Ekzam C# WPF ADO.NET - LinqToSQL - Pavlo Khyzhniak 17.10.2020" Height="450" Width="800">
+    <Window.Resources>
+
+        <local:RowToIndexConv x:Key="RowToIndexConv"/>
+
+    </Window.Resources>
+
+    <DockPanel Height="Auto" Width="Auto" Name="dockPanel">
+        <Menu Height="22" Name="menuManufacturerAirplane" Width="Auto" DockPanel.Dock="Top" Margin="3">
+            <MenuItem Header="Manufacturer">
+                <MenuItem Header="Show data" Click="ShowManufacturer_Click" />
+                <MenuItem Header="Add" Click="AddManufacturer_Click" />
+                <MenuItem Header="Delete selected" Click="DeleteManufacturer_Click" />
+            </MenuItem>
+
+            <MenuItem Header="Airplane">
+                <MenuItem Header="Show data" Click="ShowAirplane_Click" />
+                <MenuItem Header="Add" Click="AddAirplane_Click" />
+                <MenuItem Header="Delete selected" Click="DeleteAirplane_Click" />
+            </MenuItem>
+
+            <MenuItem Header="LinqToSQL ManufacturerAirplane">
+                <MenuItem Header="AirplaineWithSpeedLess 600" Click="MenuItem_Click_3" />
+                <MenuItem Header="ManufacturerWithAirplaneMore 3 airplane" Click="MenuItem_Click_4" />
+                <MenuItem Header="ManufacturerNameWithLengthLess 7 symbols " Click="MenuItem_Click_5" />
+            </MenuItem>
+
+            <MenuItem Header="StoredFunction ManufacturerAirplane">
+                <MenuItem Header="GetAirplaineWithSpeedLess (600)" Click="MenuItem_Click"  />
+                <MenuItem Header="GetManufacturerWithAirplaneMore (3)" Click="MenuItem_Click_1"  />
+                <MenuItem Header="GetManufacturerNameWithLengthLess (7)" Click="MenuItem_Click_2" />
+            </MenuItem>
+        </Menu>
+        <Menu Height="22" Name="menuProjectsEmployees" Width="Auto" DockPanel.Dock="Top" Margin="3">
+
+            <MenuItem Header="Projects">
+                <MenuItem Header="Show data" Click="ShowProjects_Click" />
+                <MenuItem Header="Add" Click="AddProjects_Click" />
+                <MenuItem Header="Delete selected" Click="DeleteProjects_Click" />
+            </MenuItem>
+
+            <MenuItem Header="Employees">
+                <MenuItem Header="Show data" Click="ShowEmployees_Click" />
+                <MenuItem Header="Add" Click="AddEmployees_Click" />
+                <MenuItem Header="Delete selected" Click="DeleteEmployees_Click" />
+            </MenuItem>
+
+            <MenuItem Header="LinqToSQL ProjectsEmployees">
+                <MenuItem Header="ProjectWithMaxEmployees" Click="MenuItem_Click_13" />
+                <MenuItem Header="EmployeerWithAgeLess 35" Click="MenuItem_Click_14" />
+                <MenuItem Header="EmployeerWithLastNameLengthMoreOrEqual 5" Click="MenuItem_Click_15" />
+            </MenuItem>
+
+            <MenuItem Header="StoredFunction ProjectsEmployees">
+                <MenuItem Header="GetProjectWithMaxEmployees" Click="MenuItem_Click2"  />
+                <MenuItem Header="GetEmployeerWithAgeLess (35)" Click="MenuItem_Click_11"  />
+                <MenuItem Header="GetEmployeerWithLastNameLengthMoreOrEqual (5)" Click="MenuItem_Click_12" />
+            </MenuItem>
+        </Menu>
+
+        <Grid Height="Auto" Name="grid_main" Width="Auto">
+            <DataGrid x:Name="dataGrid_Main"/>
+        </Grid>
+    </DockPanel>
 </Window>

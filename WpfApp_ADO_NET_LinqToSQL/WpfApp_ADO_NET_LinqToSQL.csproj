@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,7 +54,19 @@
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Airplane.cs" />
+    <Compile Include="ConverterEmployeesToString.cs" />
+    <Compile Include="ConverterProjectsToString.cs" />
+    <Compile Include="DataGridExtension.cs" />
+    <Compile Include="Employee.cs" />
+    <Compile Include="Manufacturer.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="RowToIndexConv.cs" />
+    <Compile Include="Window_DataGrid.xaml.cs">
+      <DependentUpon>Window_DataGrid.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -62,10 +75,36 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DataClasses_ManufacturerAirplane.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClasses_ManufacturerAirplane.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClasses_ProjectsEmployees.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClasses_ProjectsEmployees.dbml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Styles\DataGrid_Base.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\DataGrid_ManufacturerAirplane.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\DataGrid_ProjectsEmployees.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Window_DataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -85,6 +124,22 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="DataClasses_ManufacturerAirplane.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClasses_ManufacturerAirplane.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataClasses_ManufacturerAirplane.dbml.layout">
+      <DependentUpon>DataClasses_ManufacturerAirplane.dbml</DependentUpon>
+    </None>
+    <None Include="DataClasses_ProjectsEmployees.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClasses_ProjectsEmployees.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataClasses_ProjectsEmployees.dbml.layout">
+      <DependentUpon>DataClasses_ProjectsEmployees.dbml</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +147,48 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\bambi.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\bob.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\catBlack.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\catBlue.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\catGreen.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\catOrange.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\catRed.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\jerry.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\mikkiMaus.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\pikachu.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\scrudjMacDuck.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\shrek.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\tom.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
