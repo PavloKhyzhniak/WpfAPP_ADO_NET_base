@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp_ADO_NET_LinqToSQL", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp_ADO_NET_SQLDataReader", "WpfApp_ADO_NET_SQLDataReader\WpfApp_ADO_NET_SQLDataReader.csproj", "{29878502-7654-4D0D-83E9-551CFFC3A13B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp_ADO_NET_SQLDataAdapter", "WpfApp_ADO_NET_SQLDataAdapter\WpfApp_ADO_NET_SQLDataAdapter.csproj", "{C2F05DA3-7B80-4245-BD4C-9EDC4BF6FABB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{29878502-7654-4D0D-83E9-551CFFC3A13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29878502-7654-4D0D-83E9-551CFFC3A13B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29878502-7654-4D0D-83E9-551CFFC3A13B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2F05DA3-7B80-4245-BD4C-9EDC4BF6FABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2F05DA3-7B80-4245-BD4C-9EDC4BF6FABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2F05DA3-7B80-4245-BD4C-9EDC4BF6FABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2F05DA3-7B80-4245-BD4C-9EDC4BF6FABB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
