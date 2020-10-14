@@ -296,186 +296,39 @@ GO
 
         public void RefreshProjects()
         {
-//            var result = from t in contextProjectsEmployees.Projects
-//                         select new Project
-//                         {
-//                             Id = t.Id,
-//                             Title = t.Title,
-//                             StartDate = t.StartDate,
-//                             EndDate = t.EndDate,
-//                             Description = t.Description,
-//                             Employees = ((ICollection<Employee>)(from e in contextProjectsEmployees.Employees
-//                                                                   from pe in contextProjectsEmployees.ProjectEmployees
-//                                                                   where e.Id == pe.EmployeeId
-//                                                                   where pe.ProjectId == t.Id
-//                                                                   select e))
-//                         };
-//
-//            ObservableCollection<Project> observableCollection = new ObservableCollection<Project>(result);
-//
-//            CollectionViewSource collection = new CollectionViewSource() { Source = observableCollection };
-//            collection.GroupDescriptions.Add(new PropertyGroupDescription("StartDate"));
-//            //collection.GroupDescriptions.Add(new PropertyGroupDescription("City"));
-//            //collection.SortDescriptions.Add(new SortDescription("City", ListSortDirection.Ascending));
-//            //collection.Filter += Collection_Filter;
-//
-//            dataGrid_Main.Style = (Style)FindResource("dataGridProjects");
-//
-//            //    dataGrid_Main.CellEditEnding -= eventCellEditEnding;
-//            //    dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
-//            // 
-//            //    dataGrid_Main.CellEditEnding += dataGrid_Projects_CellEditEnding;
-//            //    dataGrid_Main.AutoGeneratingColumn += dataGrid_Projects_AutoGeneratingColumn;
-//            // 
-//            //    eventCellEditEnding = dataGrid_Projects_CellEditEnding;
-//            //    eventAutoGeneratingColumn = dataGrid_Projects_AutoGeneratingColumn;
-//
-//            dataGrid_Main.ItemsSource = collection.View;
-//
-//            //            var statesList = (from t in context.authors
-//            //                              select t.state).Distinct();
-//            //            StateColumn.ItemsSource = statesList.ToList();
-//
-//            //dataGrid1.Columns[0].Visibility = Visibility.Hidden;
-        }
+            List<Project> result = new List<Project>();
+            SqlDatabase.Select(connectionProjectsEmployees, ref result);
 
+            ObservableCollection<Project> observableCollection = new ObservableCollection<Project>(result);
 
-        public void dataGrid_Projects_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-//            int selectedId = 0;
-//            if (dataGrid_Main.SelectedItem is Project selectedProjectsRow)
-//            {
-//                selectedId = selectedProjectsRow.Id;
-//
-//                Project selectedProjectDB = (from t in contextProjectsEmployees.Projects
-//                                              where t.Id == selectedId
-//                                              select t)?.First();
-//
-//                selectedProjectDB.Id = selectedProjectsRow.Id;
-//                selectedProjectDB.Title = selectedProjectsRow.Title;
-//                selectedProjectDB.StartDate = selectedProjectsRow.StartDate;
-//                selectedProjectDB.EndDate = selectedProjectsRow.EndDate;
-//                selectedProjectDB.Description = selectedProjectsRow.Description;
-//
-//                contextProjectsEmployees.SubmitChanges();
-//
-//                RefreshProjects();
-//            }
-        }
+            CollectionViewSource collection = new CollectionViewSource() { Source = observableCollection };
+            collection.GroupDescriptions.Add(new PropertyGroupDescription("StartDate"));
+            //collection.GroupDescriptions.Add(new PropertyGroupDescription("City"));
+            //collection.SortDescriptions.Add(new SortDescription("City", ListSortDirection.Ascending));
+            //collection.Filter += Collection_Filter;
 
-        private void dataGrid_Projects_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "Id":
-                case "FirstName":
-                case "LastName":
-                case "Age":
-                case "Address":
-                case "FotoPath":
+            dataGrid_Main.Style = (Style)FindResource("dataGridProjects");
 
-                case "Title":
-                case "StartDate":
-                case "EndDate":
-                case "Description":
-                    e.Cancel = true;
-                    break;
-                default:
-                    break;
-            }
-        }
+            dataGrid_Main.ItemsSource = collection.View;
+        }             
 
         public void RefreshEmployees()
         {
-//            var result = from t in contextProjectsEmployees.Employees
-//                         select new Employee
-//                         {
-//                             Id = t.Id,
-//                             FirstName = t.FirstName,
-//                             LastName = t.LastName,
-//                             Age = t.Age,
-//                             Address = t.Address,
-//                             FotoPath = t.FotoPath,
-//                             Projects = ((ICollection<Project>)(from p in contextProjectsEmployees.Projects
-//                                                                 from pe in contextProjectsEmployees.ProjectEmployees
-//                                                                 where p.Id == pe.ProjectId
-//                                                                 where pe.EmployeeId == t.Id
-//                                                                 select p))
-//                         };
-//
-//            ObservableCollection<Employee> observableCollection = new ObservableCollection<Employee>(result);
-//
-//            CollectionViewSource collection = new CollectionViewSource() { Source = observableCollection };
-//            collection.GroupDescriptions.Add(new PropertyGroupDescription("Age"));
-//            //collection.GroupDescriptions.Add(new PropertyGroupDescription("City"));
-//            //collection.SortDescriptions.Add(new SortDescription("City", ListSortDirection.Ascending));
-//            //collection.Filter += Collection_Filter;
-//
-//            dataGrid_Main.Style = (Style)FindResource("dataGridEmployees");
-//
-//            //    dataGrid_Main.CellEditEnding -= eventCellEditEnding;
-//            //    dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
-//            //    
-//            //    dataGrid_Main.CellEditEnding += dataGrid_Employees_CellEditEnding;
-//            //    dataGrid_Main.AutoGeneratingColumn += dataGrid_Employees_AutoGeneratingColumn;
-//            //
-//            //    eventCellEditEnding = dataGrid_Employees_CellEditEnding;
-//            //    eventAutoGeneratingColumn = dataGrid_Employees_AutoGeneratingColumn;
-//
-//            dataGrid_Main.ItemsSource = collection.View;
-//
-//            //            var statesList = (from t in context.authors
-//            //                              select t.state).Distinct();
-//            //            StateColumn.ItemsSource = statesList.ToList();
-//
-//            //dataGrid1.Columns[0].Visibility = Visibility.Hidden;
-        }
+            List<Employee> result = new List<Employee>();
+            SqlDatabase.Select(connectionProjectsEmployees, ref result);
 
-        public void dataGrid_Employees_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-//            int selectedId = 0;
-//            if (dataGrid_Main.SelectedItem is Employee selectedEmployeeRow)
-//            {
-//                selectedId = selectedEmployeeRow.Id;
-//
-//                Employees selectedEmployeeDB = (from t in contextProjectsEmployees.Employees
-//                                                where t.Id == selectedId
-//                                                select t)?.First();
-//
-//                selectedEmployeeDB.Id = selectedEmployeeRow.Id;
-//                selectedEmployeeDB.FirstName = selectedEmployeeRow.FirstName;
-//                selectedEmployeeDB.LastName = selectedEmployeeRow.LastName;
-//                selectedEmployeeDB.Age = selectedEmployeeRow.Age;
-//                selectedEmployeeDB.Address = selectedEmployeeRow.Address;
-//                selectedEmployeeDB.FotoPath = selectedEmployeeRow.FotoPath;
-//
-//                contextManufacturerAirplane.SubmitChanges();
-//
-//                RefreshEmployees();
-//            }
-        }
+            ObservableCollection<Employee> observableCollection = new ObservableCollection<Employee>(result);
 
-        private void dataGrid_Employees_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "Id":
-                case "FirstName":
-                case "LastName":
-                case "Age":
-                case "Address":
-                case "FotoPath":
+            CollectionViewSource collection = new CollectionViewSource() { Source = observableCollection };
+            collection.GroupDescriptions.Add(new PropertyGroupDescription("Age"));
+            //collection.GroupDescriptions.Add(new PropertyGroupDescription("City"));
+            //collection.SortDescriptions.Add(new SortDescription("City", ListSortDirection.Ascending));
+            //collection.Filter += Collection_Filter;
 
-                case "Title":
-                case "StartDate":
-                case "EndDate":
-                case "Description":
-                    e.Cancel = true;
-                    break;
-                default:
-                    break;
-            }
-        }
+            dataGrid_Main.Style = (Style)FindResource("dataGridEmployees");
+
+            dataGrid_Main.ItemsSource = collection.View;
+        }              
 
         private void ShowProjects_Click(object sender, RoutedEventArgs e)
         {
@@ -483,45 +336,40 @@ GO
         }
 
         private void AddProjects_Click(object sender, RoutedEventArgs e)
-        {
-//            Projects project = new Projects
-//            {
-//                Title = "Creative System for Gratulation!!!",
-//                StartDate = DateTime.Now,
-//                EndDate = DateTime.Now,
-//                Description = "New Funny Project"
-//            };
-//
-//            contextProjectsEmployees.Projects.InsertOnSubmit(project);
-//
-//            contextProjectsEmployees.SubmitChanges();
-//
-//            RefreshProjects();
+        {            
+            Project project = new Project
+            {
+                Title = "Creative System for Gratulation!!!",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                Description = "New Funny Project"
+            };
+
+            SqlDatabase.Insert(connectionProjectsEmployees, project);
+
+            RefreshProjects();
         }
 
         private void DeleteProjects_Click(object sender, RoutedEventArgs e)
         {
-//            if (dataGrid_Main.SelectedItem != null)
-//            {
-//                // Получить выделенного автора
-//                Project selectedProjectRow = dataGrid_Main.SelectedItem as Project;
-//
-//                // Получить ID выделенного автора
-//                int selectedId = selectedProjectRow.Id;
-//
-//                Projects del_project = (from t in contextProjectsEmployees.Projects
-//                                        where t.Id == selectedId
-//                                        select t).First();
-//
-//                // Удалить из БД автора с данным ID
-//                contextProjectsEmployees.Projects.DeleteOnSubmit(del_project);
-//
-//                // Синхронизировать изменения
-//                contextProjectsEmployees.SubmitChanges();
-//
-//                // Обновить таблицу
-//                RefreshProjects();
-//            }
+            if (dataGrid_Main.SelectedItem != null)
+            {
+                // Получить выделенного автора
+                Project selectedProjectRow = dataGrid_Main.SelectedItem as Project;
+            
+                // Получить ID выделенного автора
+                int selectedId = selectedProjectRow.Id;
+
+                Project project = new Project
+                {
+                    Id = selectedId
+                };
+
+                SqlDatabase.Delete(connectionProjectsEmployees, project);
+
+                // Обновить таблицу
+                RefreshProjects();
+            }
         }
 
         private void ShowEmployees_Click(object sender, RoutedEventArgs e)
@@ -531,45 +379,40 @@ GO
 
         private void AddEmployees_Click(object sender, RoutedEventArgs e)
         {
-//            Employees employee = new Employees
-//            {
-//                FirstName = "Petr",
-//                LastName = "Lionesku",
-//                Age = 32,
-//                Address = "Большевитская улица, дом 14",
-//                FotoPath = "\\resources\\catBlue.jpg"
-//            };
-//
-//            contextProjectsEmployees.Employees.InsertOnSubmit(employee);
-//
-//            contextProjectsEmployees.SubmitChanges();
-//
-//            RefreshEmployees();
+            Employee employee = new Employee
+            {
+                FirstName = "Petr",
+                LastName = "Lionesku",
+                Age = 32,
+                Address = "Большевитская улица, дом 14",
+                FotoPath = "\\resources\\catBlue.jpg"
+            };
+
+            SqlDatabase.Insert(connectionProjectsEmployees, employee);
+
+            RefreshEmployees();
         }
 
         private void DeleteEmployees_Click(object sender, RoutedEventArgs e)
         {
-//            if (dataGrid_Main.SelectedItem != null)
-//            {
-//                // Получить выделенного автора
-//                Employee selectedEmployeeRow = dataGrid_Main.SelectedItem as Employee;
-//
-//                // Получить ID выделенного автора
-//                int selectedId = selectedEmployeeRow.Id;
-//
-//                Employees del_employee = (from t in contextProjectsEmployees.Employees
-//                                          where t.Id == selectedId
-//                                          select t).First();
-//
-//                // Удалить из БД автора с данным ID
-//                contextProjectsEmployees.Employees.DeleteOnSubmit(del_employee);
-//
-//                // Синхронизировать изменения
-//                contextProjectsEmployees.SubmitChanges();
-//
-//                // Обновить таблицу
-//                RefreshEmployees();
-//            }
+            if (dataGrid_Main.SelectedItem != null)
+            {
+                // Получить выделенного автора
+                Employee selectedEmployeeRow = dataGrid_Main.SelectedItem as Employee;
+
+                // Получить ID выделенного автора
+                int selectedId = selectedEmployeeRow.Id;
+
+                Employee employee = new Employee
+                {
+                    Id = selectedId
+                };
+
+                SqlDatabase.Delete(connectionProjectsEmployees, employee);
+
+                // Обновить таблицу
+                RefreshEmployees();
+            }
         }
         /*
          
@@ -611,30 +454,13 @@ WHERE p.Id = (
 "\n\t)"
           , "SQL Query");
 
+            var result = SqlDatabase.Select_ProjectWithMaxEmployees(connectionProjectsEmployees);
 
-//            var result =
-//                from p in contextProjectsEmployees.Projects
-//                where p.Id == (contextProjectsEmployees.ProjectEmployees.GroupBy(g => g.ProjectId).Select(s => new { s.Key, Count = s.Count() }).OrderByDescending(a => a.Count).FirstOrDefault().Key)
-//                select new
-//                {
-//                    p.Id,
-//                    p.Title
-//                };
-//
-//            //var result = contextProjectsEmployees.Projects
-//            //    .Where(a => a== (contextProjectsEmployees.Projects.OrderByDescending(s=>s.Employees.Count).FirstOrDefault()))
-//            //    .Select(p=> new
-//            //        {
-//            //        p.Id,
-//            //        p.Title
-//            //        });
-//
-//
-//            Window DataGridPresent = new Window_DataGrid(result.ToList());
-//
-//            DataGridPresent.Show();
-//            //            dataGrid_Main.ItemsSource = result.ToList();
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
         }
+
         /*
          
 select * from Projects
@@ -653,28 +479,11 @@ where e.Age<35
 "\nwhere e.Age < 35"
           , "SQL Query");
 
-//            //var result =
-//            //    from emp in contextProjectsEmployees.Employees
-//            //    where emp.Age < 35
-//            //    select new
-//            //    {
-//            //        emp.FirstName,
-//            //        emp.LastName
-//            //    };
-//
-//            var result = contextProjectsEmployees.Employees
-//                .Where(a => a.Age < 35)
-//                .Select(a => new
-//                {
-//                    a.FirstName,
-//                    a.LastName
-//                });
-//
-//
-//            Window DataGridPresent = new Window_DataGrid(result.ToList());
-//
-//            DataGridPresent.Show();
-//            //            dataGrid_Main.ItemsSource = result.ToList();
+            var result = SqlDatabase.Select_EmployeerWithAgeLess(connectionProjectsEmployees, 35);
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
         }
 
         /*
@@ -695,34 +504,14 @@ where Len(e.LastName)>=5
 "\nwhere Len(e.LastName) >= 5"
           , "SQL Query");
 
-//            //var result =
-//            //    from emp in contextProjectsEmployees.Employees
-//            //    where emp.LastName.Length >= 5
-//            //    select new
-//            //    {
-//            //        FirstName = emp.FirstName,
-//            //        LastName = emp.LastName
-//            //    };
-//
-//            var result = contextProjectsEmployees.Employees
-//                .Where(a => a.LastName.Length >= 5)
-//                .Select(a => new
-//                {
-//                    a.FirstName,
-//                    a.LastName
-//                });
-//
-//            Window DataGridPresent = new Window_DataGrid(result.ToList());
-//
-//            DataGridPresent.Show();
-//            //            dataGrid_Main.ItemsSource = result.ToList();
+            var result = SqlDatabase.Select_EmployeerWithLastNameLengthMoreOrEqual(connectionProjectsEmployees, 5);
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
         }
 
-        class MyData_GetProjectWithMaxEmployees
-        {
-            public int? Id { get; set; }
-            public string Title { get; set; }
-        }
+      
         /*
          
 create function GetProjectWithMaxEmployees()
@@ -746,36 +535,14 @@ GO
          */
         private void MenuItem_Click2(object sender, RoutedEventArgs e)
         {
-//            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
-//            var result = contextProjectsEmployees.GetProjectWithMaxEmployees();
-//
-//
-//            //            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
-//            //            SqlParameter parameter = new SqlParameter("@state", "CA");
-//            //            var result = from t in context.Database.SqlQuery<author>("select * from GetAuthorsByState(@state)", parameter)
-//            //                         select new MyAuthor
-//            //                         {
-//            //                             Au_id = t.au_id,
-//            //                             FirstName = t.au_fname,
-//            //                             LastName = t.au_lname,
-//            //                             City = t.city,
-//            //                             State = t.state,
-//            //                             Phone = t.phone,
-//            //                             Address = t.address,
-//            //                             Zip = t.zip,
-//            //                             Contract = t.contract
-//            //                         };
-//
-//            Window DataGridPresent = new Window_DataGrid(result.ToList());
-//
-//            DataGridPresent.Show();
-//            //            dataGrid_Main.ItemsSource = result.ToList();
+            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            var result = SqlDatabase.SP_GetProjectWithMaxEmployees(connectionProjectsEmployees);
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
         }
-        class MyData_GetEmployeerWithAgeLess
-        {
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-        }
+
         /*
 
 create function GetEmployeerWithAgeLess(@st int)
@@ -788,37 +555,15 @@ GO
 */
         private void MenuItem_Click_11(object sender, RoutedEventArgs e)
         {
-//            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
-//            var result = contextProjectsEmployees.GetEmployeerWithAgeLess(35);
-//
-//
-//            //            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
-//            //            SqlParameter parameter = new SqlParameter("@state", "CA");
-//            //            var result = from t in context.Database.SqlQuery<author>("select * from GetAuthorsByState(@state)", parameter)
-//            //                         select new MyAuthor
-//            //                         {
-//            //                             Au_id = t.au_id,
-//            //                             FirstName = t.au_fname,
-//            //                             LastName = t.au_lname,
-//            //                             City = t.city,
-//            //                             State = t.state,
-//            //                             Phone = t.phone,
-//            //                             Address = t.address,
-//            //                             Zip = t.zip,
-//            //                             Contract = t.contract
-//            //                         };
-//
-//            Window DataGridPresent = new Window_DataGrid(result.ToList());
-//
-//            DataGridPresent.Show();
-//            //            dataGrid_Main.ItemsSource = result.ToList();
+            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            var result = SqlDatabase.SP_GetEmployeerWithAgeLess(connectionProjectsEmployees, 35);
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
         }
 
-        class MyData_GetEmployeerWithLastNameLengthMoreOrEqual
-        {
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-        }
+        
         /*
 
         create function GetEmployeerWithLastNameLengthMoreOrEqual(@st int)
@@ -831,30 +576,12 @@ GO
         */
         private void MenuItem_Click_12(object sender, RoutedEventArgs e)
         {
-//            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
-//            var result = contextProjectsEmployees.GetEmployeerWithLastNameLengthMoreOrEqual(5);
-//
-//
-//            //            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
-//            //            SqlParameter parameter = new SqlParameter("@state", "CA");
-//            //            var result = from t in context.Database.SqlQuery<author>("select * from GetAuthorsByState(@state)", parameter)
-//            //                         select new MyAuthor
-//            //                         {
-//            //                             Au_id = t.au_id,
-//            //                             FirstName = t.au_fname,
-//            //                             LastName = t.au_lname,
-//            //                             City = t.city,
-//            //                             State = t.state,
-//            //                             Phone = t.phone,
-//            //                             Address = t.address,
-//            //                             Zip = t.zip,
-//            //                             Contract = t.contract
-//            //                         };
-//
-//            Window DataGridPresent = new Window_DataGrid(result.ToList());
-//
-//            DataGridPresent.Show();
-//            //            dataGrid_Main.ItemsSource = result.ToList();
+            // Параметризированный запрос, состоящий из LINQ и SQL, вызывающий хранимую функцию
+            var result = SqlDatabase.SP_GetEmployeerWithLastNameLengthMoreOrEqual(connectionProjectsEmployees, 5);
+
+            Window DataGridPresent = new Window_DataGrid(result.ToList());
+
+            DataGridPresent.Show();
         }
     }
 }

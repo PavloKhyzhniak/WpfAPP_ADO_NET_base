@@ -190,9 +190,9 @@ namespace WpfApp_ADO_NET_SQLDataReader.Classes_SqlDataReader
 
 
 
-        public static List<Manufacturer> Select_ManufacturerWithAiplaneCountMore(SqlConnection connection, int Count)
+        public static List<object> Select_ManufacturerWithAiplaneCountMore(SqlConnection connection, int Count)
         {
-            List<Manufacturer> collection = new List<Manufacturer>();
+            List<object> collection = new List<object>();
 
             try
             {
@@ -220,8 +220,8 @@ namespace WpfApp_ADO_NET_SQLDataReader.Classes_SqlDataReader
                     if (dr.HasRows)
                         while (dr.Read())
                     {
-                        Manufacturer manufacturer =
-                       new Manufacturer
+                        var manufacturer =
+                       new 
                        {
                            VendorId = (int)dr["VendorId"],
                            BrandTitle = (string)dr["BrandTitle"],
@@ -245,9 +245,9 @@ namespace WpfApp_ADO_NET_SQLDataReader.Classes_SqlDataReader
             return collection;
         }
 
-        public static List<Manufacturer> Select_ManufacturerWithLengthBrandTitleLess(SqlConnection connection, int Count)
+        public static List<object> Select_ManufacturerWithLengthBrandTitleLess(SqlConnection connection, int Count)
         {
-            List<Manufacturer> collection = new List<Manufacturer>();
+            List<object> collection = new List<object>();
 
             try
             {
@@ -275,8 +275,8 @@ namespace WpfApp_ADO_NET_SQLDataReader.Classes_SqlDataReader
                     if (dr.HasRows)
                         while (dr.Read())
                     {
-                        Manufacturer manufacturer =
-                       new Manufacturer
+                        var manufacturer =
+                       new 
                        {
                            VendorId = (int)dr["VendorId"],
                            BrandTitle = (string)dr["BrandTitle"],

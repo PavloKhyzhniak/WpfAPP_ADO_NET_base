@@ -260,9 +260,9 @@ namespace WpfApp_ADO_NET_SQLDataReader.Classes_SqlDataReader
 
 
 
-        public static List<Airplane> Select_AiplaneWithSpeedLess(SqlConnection connection, int Speed)
+        public static List<object> Select_AiplaneWithSpeedLess(SqlConnection connection, int Speed)
         {
-            List<Airplane> collection = new List<Airplane>();
+            List<object> collection = new List<object>();
 
             try
             {
@@ -289,8 +289,8 @@ namespace WpfApp_ADO_NET_SQLDataReader.Classes_SqlDataReader
                     if (dr.HasRows)
                         while (dr.Read())
                         {
-                            Airplane airplane =
-                            new Airplane
+                            var airplane =
+                            new 
                             {
                                 Id = (int)dr["Id"],
                                 Model = (string)dr["Model"],
