@@ -48,7 +48,7 @@ select * from ProjectEmployees
 
 SELECT p.Id,p.Title
 FROM Projects p 
-WHERE p.Id = (
+WHERE p.Id in (
     SELECT pe.ProjectId
     FROM ProjectEmployees pe GROUP BY pe.ProjectId
     HAVING count(pe.ProjectId)=
@@ -72,7 +72,7 @@ as
 return 
 SELECT p.Id,p.Title
 FROM Projects p 
-WHERE p.Id = (
+WHERE p.Id IN (
     SELECT pe.ProjectId
     FROM ProjectEmployees pe GROUP BY pe.ProjectId
     HAVING count(pe.ProjectId)=
@@ -105,3 +105,60 @@ GO
 SELECT * 
 INTO [dbo].[ProjectEmployees1]
 FROM  [dbo].[ProjectEmployees]
+
+
+--SQLDataReader
+GO
+select a.Id,a.Model,a.Price,a.Speed,a.VendorId,m.BrandTitle from Airplanes a, Manufacturers m
+where a.VendorId=m.VendorId
+Go
+
+select Airplanes.Id,Airplanes.Model,Airplanes.Price,Airplanes.Speed,Airplanes.VendorId,Manufacturers.BrandTitle
+from Airplanes, Manufacturers
+where Airplanes.VendorId = Manufacturers.VendorId
+
+
+
+
+select p.*,p.Description from Projects p, Employees e, ProjectEmployees pe
+where e.id=pe.EmployeeId and pe.ProjectId=p.id
+
+select p.* from ProjectEmployees pe, Projects p
+where pe.EmployeeId=2 and p.Id=pe.ProjectId
+
+
+select e.* from ProjectEmployees pe, Employees e
+where pe.ProjectId=2 and e.Id=pe.EmployeeId
+
+
+--SQLDataAdapter
+
+select * from Manufacturers
+select a.*, m.BrandTitle Vendor from Airplanes a, Manufacturers m where a.VendorId = m.VendorId
+
+select * from Manufacturers
+
+
+select p.*,(select e.* from ProjectEmployees pe, Employees e
+where pe.EmployeeId=e.Id and pe.ProjectId = p.Id
+) AS Employees from Projects p
+
+
+select p.*,a.* from Projects p
+Join
+(select e.*, pe.ProjectId from ProjectEmployees pe, Employees e
+where pe.EmployeeId=e.Id) a on a.ProjectId = p.Id
+
+
+delete Employees where Id=1
+
+delete Projects where Id=1
+
+select * from Projects
+select * from ProjectEmployees
+select * from Employees
+
+
+
+
+

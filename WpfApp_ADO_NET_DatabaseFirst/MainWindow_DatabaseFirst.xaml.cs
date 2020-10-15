@@ -839,7 +839,7 @@ select * from ProjectEmployees
 
 SELECT p.Id,p.Title
 FROM Projects p 
-WHERE p.Id = (
+WHERE p.Id IN (
     SELECT pe.ProjectId
     FROM ProjectEmployees pe GROUP BY pe.ProjectId
     HAVING count(pe.ProjectId)=
@@ -858,7 +858,7 @@ WHERE p.Id = (
 "\tShow Project with Max Employees" +
 "\n\nSELECT p.Id,p.Title" +
 "\nFROM Projects p" +
-"\nWHERE p.Id = (" +
+"\nWHERE p.Id IN (" +
 "\n\tSELECT pe.ProjectId" +
 "\n\tFROM ProjectEmployees pe GROUP BY pe.ProjectId" +
 "\n\tHAVING count(pe.ProjectId) =" +
@@ -991,7 +991,7 @@ as
 return 
 SELECT p.Id,p.Title
 FROM Projects p 
-WHERE p.Id = (
+WHERE p.Id IN (
     SELECT pe.ProjectId
     FROM ProjectEmployees pe GROUP BY pe.ProjectId
     HAVING count(pe.ProjectId)=
