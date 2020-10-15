@@ -67,7 +67,7 @@
     <Compile Include="Window_DataGrid.xaml.cs">
       <DependentUpon>Window_DataGrid.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="MainWindow_LinqToSQL.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -85,8 +85,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses_ProjectsEmployees.dbml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="MainWindow_LinqToSQL.xaml.cs">
+      <DependentUpon>MainWindow_LinqToSQL.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Styles\DataGrid_Base.xaml">

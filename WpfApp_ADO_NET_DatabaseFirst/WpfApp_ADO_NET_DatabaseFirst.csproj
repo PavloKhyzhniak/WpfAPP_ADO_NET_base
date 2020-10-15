@@ -107,7 +107,7 @@
     <Compile Include="Window_DataGrid.xaml.cs">
       <DependentUpon>Window_DataGrid.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="MainWindow_DatabaseFirst.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -118,8 +118,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="MainWindow_DatabaseFirst.xaml.cs">
+      <DependentUpon>MainWindow_DatabaseFirst.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Styles\DataGrid_Base.xaml">

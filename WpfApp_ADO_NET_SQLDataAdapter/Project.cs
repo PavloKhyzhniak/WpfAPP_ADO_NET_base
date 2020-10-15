@@ -12,6 +12,6 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
         public DateTime EndDate { get; set; }
         public string Description { get; set; }
 
-        public ICollection<Employee> Employees { get; set; }
+        public IEnumerable<Employee> Employees { get; set; }
     }
 }

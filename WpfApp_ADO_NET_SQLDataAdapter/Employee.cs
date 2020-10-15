@@ -11,6 +11,6 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
         public string Address { get; set; }
         public string FotoPath { get; set; }
 
-        public ICollection<Project> Projects { get; set; }
+        public IEnumerable<Project> Projects { get; set; }
     }
 }

@@ -56,17 +56,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Airplane.cs" />
     <Compile Include="Classes_SqlDataAdapter\SqlDatabase.cs" />
     <Compile Include="Classes_SqlDataAdapter\SqlDatabase.Static.cs" />
     <Compile Include="ConverterEmployeesToString.cs" />
     <Compile Include="ConverterProjectsToString.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="Manufacturer.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="RowToIndexConv.cs" />
     <Compile Include="Window_DataGrid.xaml.cs">
       <DependentUpon>Window_DataGrid.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="MainWindow_SQLDataAdapter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -74,8 +76,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="MainWindow_SQLDataAdapter.xaml.cs">
+      <DependentUpon>MainWindow_SQLDataAdapter.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Styles\DataGrid_Base.xaml">
