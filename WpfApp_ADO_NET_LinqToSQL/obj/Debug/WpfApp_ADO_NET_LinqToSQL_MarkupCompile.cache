@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_LinqToSQL\App.xaml
-51662262993
+51355248056
 
-161062032529
+16-35659299
 141151737347
-MainWindow.xaml;Styles\DataGrid_Base.xaml;Styles\DataGrid_ManufacturerAirplane.xaml;Styles\DataGrid_ProjectsEmployees.xaml;Window_DataGrid.xaml;
+MainWindow_LinqToSQL.xaml;Styles\DataGrid_Base.xaml;Styles\DataGrid_ManufacturerAirplane.xaml;Styles\DataGrid_ProjectsEmployees.xaml;Window_DataGrid.xaml;
 
 False
 

@@ -7,7 +7,7 @@ c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\Wp
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\bin\Debug\EntityFramework.SqlServer.xml
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\bin\Debug\ru\EntityFramework.resources.dll
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\WpfApp_ADO_NET_DatabaseFirst.csprojAssemblyReference.cache
-c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\MainWindow.g.cs
+c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\MainWindow_DatabaseFirst.g.cs
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\Window_DataGrid.g.cs
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\App.g.cs
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\WpfApp_ADO_NET_DatabaseFirst_Content.g.cs
@@ -15,7 +15,7 @@ c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\Wp
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\WpfApp_ADO_NET_DatabaseFirst_MarkupCompile.cache
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\WpfApp_ADO_NET_DatabaseFirst_MarkupCompile.lref
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\App.baml
-c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\MainWindow.baml
+c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\MainWindow_DatabaseFirst.baml
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\Styles\DataGrid_Base.baml
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\Styles\DataGrid_ManufacturerAirplane.baml
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\obj\Debug\Styles\DataGrid_ProjectsEmployees.baml
