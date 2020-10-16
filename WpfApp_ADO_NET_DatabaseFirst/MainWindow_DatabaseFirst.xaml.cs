@@ -33,15 +33,9 @@ namespace WpfApp_ADO_NET_DatabaseFirst
         public void RefreshManufacturer()
         {
             var result = from t in contextManufacturerAirplane.Manufacturers
-                         select new Manufacturer
-                         {
-                             VendorId = t.VendorId,
-                             BrandTitle = t.BrandTitle,
-                             Address = t.Address,
-                             Phone = t.Phone
-                         };
+                         select t;
 
-            ObservableCollection<Manufacturer> observableCollection = new ObservableCollection<Manufacturer>(result);
+            ObservableCollection<Manufacturers> observableCollection = new ObservableCollection<Manufacturers>(result);
 
             CollectionViewSource collection = new CollectionViewSource() { Source = observableCollection };
             collection.GroupDescriptions.Add(new PropertyGroupDescription("Address"));
@@ -63,19 +57,12 @@ namespace WpfApp_ADO_NET_DatabaseFirst
         public void RefreshAirplane()
         {
             var result = from t in contextManufacturerAirplane.Airplanes
-                         select new Airplane
-                         {
-                            Id = t.Id,
-                            Model = t.Model,
-                            Price = t.Price,
-                            Speed = t.Speed,
-                            VendorId = t.VendorId
-                         };
+                         select t;
 
-            ObservableCollection<Airplane> observableCollection = new ObservableCollection<Airplane>(result);
+            ObservableCollection<Airplanes> observableCollection = new ObservableCollection<Airplanes>(result);
 
             CollectionViewSource collection = new CollectionViewSource() { Source = observableCollection };
-            collection.GroupDescriptions.Add(new PropertyGroupDescription("Manufacturer.BrandTitle"));
+            collection.GroupDescriptions.Add(new PropertyGroupDescription("Manufacturers.BrandTitle"));
             //collection.GroupDescriptions.Add(new PropertyGroupDescription("City"));
             //collection.SortDescriptions.Add(new SortDescription("City", ListSortDirection.Ascending));
             //collection.Filter += Collection_Filter;
@@ -94,7 +81,7 @@ namespace WpfApp_ADO_NET_DatabaseFirst
         public void dataGrid_Manufacturer_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             int selectedId = 0;
-            if (dataGrid_Main.SelectedItem is Manufacturer selectedManufacturerRow)
+            if (dataGrid_Main.SelectedItem is Manufacturers selectedManufacturerRow)
             {
                 selectedId = selectedManufacturerRow.VendorId;
 
@@ -116,7 +103,7 @@ namespace WpfApp_ADO_NET_DatabaseFirst
         public void dataGrid_Airplane_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             int selectedId = 0;
-            if (dataGrid_Main.SelectedItem is Airplane selectedAirplaneRow)
+            if (dataGrid_Main.SelectedItem is Airplanes selectedAirplaneRow)
             {
                 selectedId = selectedAirplaneRow.Id;
 
@@ -202,7 +189,7 @@ namespace WpfApp_ADO_NET_DatabaseFirst
             if (dataGrid_Main.SelectedItem != null)
             {
                 // Получить выделенного автора
-                Manufacturer selectedManufacturerRow = dataGrid_Main.SelectedItem as Manufacturer;
+                Manufacturers selectedManufacturerRow = dataGrid_Main.SelectedItem as Manufacturers;
 
                 // Получить ID выделенного автора
                 int selectedId = selectedManufacturerRow.VendorId;
@@ -249,7 +236,7 @@ namespace WpfApp_ADO_NET_DatabaseFirst
             if (dataGrid_Main.SelectedItem != null)
             {
                 // Получить выделенного автора
-                Airplane selectedAirplaneRow = dataGrid_Main.SelectedItem as Airplane;
+                Airplanes selectedAirplaneRow = dataGrid_Main.SelectedItem as Airplanes;
 
                 // Получить ID выделенного автора
                 int selectedId = selectedAirplaneRow.Id;
@@ -546,17 +533,9 @@ GO
         public void RefreshProjects()
         {
             var result = from t in contextProjectsEmployees.Projects
-                         select new Project
-                         {
-                             Id = t.Id,
-                             Title = t.Title,
-                             StartDate = t.StartDate,
-                             EndDate = t.EndDate,
-                             Description = t.Description,
-                             Employees = t.Employees
-                         };
+                         select t;
 
-            ObservableCollection<Project> observableCollection = new ObservableCollection<Project>(result);
+            ObservableCollection<Projects> observableCollection = new ObservableCollection<Projects>(result);
 
             CollectionViewSource collection = new CollectionViewSource() { Source = observableCollection };
             collection.GroupDescriptions.Add(new PropertyGroupDescription("StartDate"));
@@ -578,7 +557,7 @@ GO
         public void dataGrid_Projects_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             int selectedId = 0;
-            if (dataGrid_Main.SelectedItem is Project selectedProjectsRow)
+            if (dataGrid_Main.SelectedItem is Projects selectedProjectsRow)
             {
                 selectedId = selectedProjectsRow.Id;
 
@@ -623,18 +602,9 @@ GO
         public void RefreshEmployees()
         {
             var result = from t in contextProjectsEmployees.Employees
-                         select new Employee
-                         {
-                             Id = t.Id,
-                             FirstName = t.FirstName,
-                             LastName = t.LastName,
-                             Age = t.Age,
-                             Address = t.Address,
-                             FotoPath = t.FotoPath,
-                             Projects = t.Projects
-                         };
+                         select t;
 
-            ObservableCollection<Employee> observableCollection = new ObservableCollection<Employee>(result);
+            ObservableCollection<Employees> observableCollection = new ObservableCollection<Employees>(result);
 
             CollectionViewSource collection = new CollectionViewSource() { Source = observableCollection };
             collection.GroupDescriptions.Add(new PropertyGroupDescription("Age"));
@@ -656,7 +626,7 @@ GO
         public void dataGrid_Employees_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             int selectedId = 0;
-            if (dataGrid_Main.SelectedItem is Employee selectedEmployeeRow)
+            if (dataGrid_Main.SelectedItem is Employees selectedEmployeeRow)
             {
                 selectedId = selectedEmployeeRow.Id;
 
@@ -726,7 +696,7 @@ GO
             if (dataGrid_Main.SelectedItem != null)
             {
                 // Получить выделенного автора
-                Project selectedProjectRow = dataGrid_Main.SelectedItem as Project;
+                Projects selectedProjectRow = dataGrid_Main.SelectedItem as Projects;
 
                 // Получить ID выделенного автора
                 int selectedId = selectedProjectRow.Id;
@@ -774,7 +744,7 @@ GO
             if (dataGrid_Main.SelectedItem != null)
             {
                 // Получить выделенного автора
-                Employee selectedEmployeeRow = dataGrid_Main.SelectedItem as Employee;
+                Employees selectedEmployeeRow = dataGrid_Main.SelectedItem as Employees;
 
                 // Получить ID выделенного автора
                 int selectedId = selectedEmployeeRow.Id;
@@ -1087,7 +1057,7 @@ GO
         {
             if (dataGrid_Main.SelectedItem != null)
             {
-                if (dataGrid_Main.SelectedItem is Manufacturer manufacturer)
+                if (dataGrid_Main.SelectedItem is Manufacturers manufacturer)
                 {
                     // Получить выделенного автора
 
@@ -1124,7 +1094,7 @@ GO
                     }
                 }
 
-                if (dataGrid_Main.SelectedItem is Airplane airplane)
+                if (dataGrid_Main.SelectedItem is Airplanes airplane)
                 {
                     // Получить выделенного автора
 
@@ -1167,7 +1137,7 @@ GO
                     }
                 }
 
-                if (dataGrid_Main.SelectedItem is Project project)
+                if (dataGrid_Main.SelectedItem is Projects project)
                 {
                     // Получить выделенного автора
 
@@ -1205,7 +1175,7 @@ GO
                     }
                 }
 
-                if (dataGrid_Main.SelectedItem is Employee employee)
+                if (dataGrid_Main.SelectedItem is Employees employee)
                 {
                     // Получить выделенного автора
 

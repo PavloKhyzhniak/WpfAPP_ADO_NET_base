@@ -64,10 +64,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\Airplane.cs" />
     <Compile Include="Styles\ConverterEmployeesToString.cs" />
     <Compile Include="Styles\ConverterProjectsToString.cs" />
-    <Compile Include="Classes\Employee.cs" />
     <Compile Include="Employees.cs">
       <DependentUpon>Model_ProjectsEmployees.tt</DependentUpon>
     </Compile>
@@ -83,7 +81,6 @@
     <Compile Include="GetProjectWithMaxEmployees_Result.cs">
       <DependentUpon>Model_ProjectsEmployees.tt</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Manufacturer.cs" />
     <Compile Include="Model_ProjectsEmployees.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -99,7 +96,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_ProjectsEmployees.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Project.cs" />
     <Compile Include="Projects.cs">
       <DependentUpon>Model_ProjectsEmployees.tt</DependentUpon>
     </Compile>

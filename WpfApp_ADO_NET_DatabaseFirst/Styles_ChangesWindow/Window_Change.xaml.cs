@@ -23,10 +23,10 @@ namespace WpfApp_ADO_NET_DatabaseFirst
 
         public object CurrentObject { get; set; }
 
-        public Manufacturer Manufacturer { get; set; }
-        public Airplane Airplane { get; set; }
-        public Project Project { get; set; }
-        public Employee Employee { get; set; }
+        public Manufacturers Manufacturer { get; set; }
+        public Airplanes Airplane { get; set; }
+        public Projects Project { get; set; }
+        public Employees Employee { get; set; }
 
         public Dictionary<int,string> DictionaryVendorIdBrandTitle { get; set; }
 
@@ -50,9 +50,9 @@ namespace WpfApp_ADO_NET_DatabaseFirst
             : this()
         {
 
-            if (change_object is Manufacturer manufacturer)
+            if (change_object is Manufacturers manufacturer)
             {
-                Manufacturer = new Manufacturer
+                Manufacturer = new Manufacturers
                 {
                     VendorId = manufacturer.VendorId,
                     BrandTitle = manufacturer.BrandTitle,
@@ -63,9 +63,9 @@ namespace WpfApp_ADO_NET_DatabaseFirst
                 selectedClass = SelectedClass.Manufacturer;
                 CurrentObject = Manufacturer;
             }
-            else if (change_object is Airplane airplane)
+            else if (change_object is Airplanes airplane)
             {
-                Airplane = new Airplane
+                Airplane = new Airplanes
                 {
                     Id = airplane.Id,
                     Model = airplane.Model,
@@ -77,9 +77,9 @@ namespace WpfApp_ADO_NET_DatabaseFirst
                 selectedClass = SelectedClass.Airplane;
                 CurrentObject = Airplane;
             }
-            else if (change_object is Project project)
+            else if (change_object is Projects project)
             {
-                Project = new Project
+                Project = new Projects
                 {
                     Id = project.Id,
                     Title = project.Title,
@@ -91,9 +91,9 @@ namespace WpfApp_ADO_NET_DatabaseFirst
                 selectedClass = SelectedClass.Projects;
                 CurrentObject = Project;               
             }
-            else if (change_object is Employee employee)
+            else if (change_object is Employees employee)
             {
-                Employee = new Employee
+                Employee = new Employees
                 {
                     Id = employee.Id,
                     FirstName = employee.FirstName,

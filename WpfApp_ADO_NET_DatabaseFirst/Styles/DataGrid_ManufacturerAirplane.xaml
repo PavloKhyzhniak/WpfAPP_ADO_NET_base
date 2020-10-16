@@ -100,7 +100,7 @@
                             <DataGridTemplateColumn Header="Vendor">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Manufacturer.BrandTitle, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                                        <TextBlock Text="{Binding Path=Manufacturers.BrandTitle, UpdateSourceTrigger=PropertyChanged}" Width="150" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
