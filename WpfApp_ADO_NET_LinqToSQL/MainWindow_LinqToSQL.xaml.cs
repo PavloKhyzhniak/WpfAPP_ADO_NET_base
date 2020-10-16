@@ -72,13 +72,16 @@ namespace WpfApp_ADO_NET_LinqToSQL
                              Model = t.Model,
                              Price = t.Price,
                              Speed = t.Speed,
-                             VendorId = t.VendorId
+                             VendorId = t.VendorId,
+                             Vendor = (from m in contextManufacturerAirplane.Manufacturers
+                                       where m.VendorId == t.VendorId
+                                       select m.BrandTitle).SingleOrDefault()
                          };
 
             ObservableCollection<Airplane> observableCollection = new ObservableCollection<Airplane>(result);
 
             CollectionViewSource collection = new CollectionViewSource() { Source = observableCollection };
-            collection.GroupDescriptions.Add(new PropertyGroupDescription("Manufacturer.BrandTitle"));
+            collection.GroupDescriptions.Add(new PropertyGroupDescription("Vendor"));
             //collection.GroupDescriptions.Add(new PropertyGroupDescription("City"));
             //collection.SortDescriptions.Add(new SortDescription("City", ListSortDirection.Ascending));
             //collection.Filter += Collection_Filter;
@@ -96,170 +99,170 @@ namespace WpfApp_ADO_NET_LinqToSQL
         }
 
 
-        public void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            int selectedId = 0;
-
-            if (dataGrid_Main.SelectedItem is Airplane selectedAirplaneRow)
-            {
-                selectedId = selectedAirplaneRow.Id;
-
-                Airplanes selectedAirplaneDB = (from t in contextManufacturerAirplane.Airplanes
-                                                where t.Id == selectedId
-                                                select t)?.First();
-
-                selectedAirplaneDB.Id = selectedAirplaneRow.Id;
-                selectedAirplaneDB.Model = selectedAirplaneRow.Model;
-                selectedAirplaneDB.Price = selectedAirplaneRow.Price;
-                selectedAirplaneDB.Speed = selectedAirplaneRow.Speed;
-                selectedAirplaneDB.VendorId = selectedAirplaneRow.VendorId;
-
-                contextManufacturerAirplane.SubmitChanges();
-
-                RefreshAirplane();
-            }
-
-            if (dataGrid_Main.SelectedItem is Manufacturer selectedManufacturerRow)
-            {
-                selectedId = selectedManufacturerRow.VendorId;
-
-                Manufacturers selectedManufacturerDB = (from t in contextManufacturerAirplane.Manufacturers
-                                                        where t.VendorId == selectedId
-                                                        select t)?.First();
-
-                selectedManufacturerDB.VendorId = selectedManufacturerRow.VendorId;
-                selectedManufacturerDB.BrandTitle = selectedManufacturerRow.BrandTitle;
-                selectedManufacturerDB.Address = selectedManufacturerRow.Address;
-                selectedManufacturerDB.Phone = selectedManufacturerRow.Phone;
-
-                contextManufacturerAirplane.SubmitChanges();
-
-                RefreshManufacturer();
-            }
-
-            if (dataGrid_Main.SelectedItem is Project selectedProjectsRow)
-            {
-                selectedId = selectedProjectsRow.Id;
-
-                Projects selectedProjectDB = (from t in contextProjectsEmployees.Projects
-                                              where t.Id == selectedId
-                                              select t)?.First();
-
-                selectedProjectDB.Id = selectedProjectsRow.Id;
-                selectedProjectDB.Title = selectedProjectsRow.Title;
-                selectedProjectDB.StartDate = selectedProjectsRow.StartDate;
-                selectedProjectDB.EndDate = selectedProjectsRow.EndDate;
-                selectedProjectDB.Description = selectedProjectsRow.Description;
-
-                contextProjectsEmployees.SubmitChanges();
-
-                RefreshProjects();
-            }
-
-            if (dataGrid_Main.SelectedItem is Employee selectedEmployeeRow)
-            {
-                selectedId = selectedEmployeeRow.Id;
-
-                Employees selectedEmployeeDB = (from t in contextProjectsEmployees.Employees
-                                                where t.Id == selectedId
-                                                select t)?.First();
-
-                selectedEmployeeDB.Id = selectedEmployeeRow.Id;
-                selectedEmployeeDB.FirstName = selectedEmployeeRow.FirstName;
-                selectedEmployeeDB.LastName = selectedEmployeeRow.LastName;
-                selectedEmployeeDB.Age = selectedEmployeeRow.Age;
-                selectedEmployeeDB.Address = selectedEmployeeRow.Address;
-                selectedEmployeeDB.FotoPath = selectedEmployeeRow.FotoPath;
-
-                contextManufacturerAirplane.SubmitChanges();
-
-                RefreshEmployees();
-            }
-        }
-        public void dataGrid_Manufacturer_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            int selectedId = 0;
-            if (dataGrid_Main.SelectedItem is Manufacturer selectedManufacturerRow)
-            {
-                selectedId = selectedManufacturerRow.VendorId;
-
-                Manufacturers selectedManufacturerDB = (from t in contextManufacturerAirplane.Manufacturers
-                                                        where t.VendorId == selectedId
-                                                        select t)?.First();
-
-                selectedManufacturerDB.VendorId = selectedManufacturerRow.VendorId;
-                selectedManufacturerDB.BrandTitle = selectedManufacturerRow.BrandTitle;
-                selectedManufacturerDB.Address = selectedManufacturerRow.Address;
-                selectedManufacturerDB.Phone = selectedManufacturerRow.Phone;
-
-                contextManufacturerAirplane.SubmitChanges();
-
-                RefreshManufacturer();
-            }
-        }
-
-        public void dataGrid_Airplane_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            int selectedId = 0;
-            if (dataGrid_Main.SelectedItem is Airplane selectedAirplaneRow)
-            {
-                selectedId = selectedAirplaneRow.Id;
-
-                Airplanes selectedAirplaneDB = (from t in contextManufacturerAirplane.Airplanes
-                                                where t.Id == selectedId
-                                                select t)?.First();
-
-                selectedAirplaneDB.Id = selectedAirplaneRow.Id;
-                selectedAirplaneDB.Model = selectedAirplaneRow.Model;
-                selectedAirplaneDB.Price = selectedAirplaneRow.Price;
-                selectedAirplaneDB.Speed = selectedAirplaneRow.Speed;
-                selectedAirplaneDB.VendorId = selectedAirplaneRow.VendorId;
-
-                contextManufacturerAirplane.SubmitChanges();
-
-                RefreshAirplane();
-            }
-        }
-
-        private void dataGrid_Manufacturer_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "VendorId":
-                case "BrandTitle":
-                case "Address":
-                case "Phone":
-
-                case "Id":
-                case "Model":
-                case "Price":
-                case "Speed":
-                    e.Cancel = true;
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void dataGrid_Airplane_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "VendorId":
-                case "BrandTitle":
-                case "Address":
-                case "Phone":
-
-                case "Id":
-                case "Model":
-                case "Price":
-                case "Speed":
-                    e.Cancel = true;
-                    break;
-                default:
-                    break;
-            }
-        }
+//       public void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+//       {
+//           int selectedId = 0;
+//
+//           if (dataGrid_Main.SelectedItem is Airplane selectedAirplaneRow)
+//           {
+//               selectedId = selectedAirplaneRow.Id;
+//
+//               Airplanes selectedAirplaneDB = (from t in contextManufacturerAirplane.Airplanes
+//                                               where t.Id == selectedId
+//                                               select t)?.First();
+//
+//               selectedAirplaneDB.Id = selectedAirplaneRow.Id;
+//               selectedAirplaneDB.Model = selectedAirplaneRow.Model;
+//               selectedAirplaneDB.Price = selectedAirplaneRow.Price;
+//               selectedAirplaneDB.Speed = selectedAirplaneRow.Speed;
+//               selectedAirplaneDB.VendorId = selectedAirplaneRow.VendorId;
+//
+//               contextManufacturerAirplane.SubmitChanges();
+//
+//               RefreshAirplane();
+//           }
+//
+//           if (dataGrid_Main.SelectedItem is Manufacturer selectedManufacturerRow)
+//           {
+//               selectedId = selectedManufacturerRow.VendorId;
+//
+//               Manufacturers selectedManufacturerDB = (from t in contextManufacturerAirplane.Manufacturers
+//                                                       where t.VendorId == selectedId
+//                                                       select t)?.First();
+//
+//               selectedManufacturerDB.VendorId = selectedManufacturerRow.VendorId;
+//               selectedManufacturerDB.BrandTitle = selectedManufacturerRow.BrandTitle;
+//               selectedManufacturerDB.Address = selectedManufacturerRow.Address;
+//               selectedManufacturerDB.Phone = selectedManufacturerRow.Phone;
+//
+//               contextManufacturerAirplane.SubmitChanges();
+//
+//               RefreshManufacturer();
+//           }
+//
+//           if (dataGrid_Main.SelectedItem is Project selectedProjectsRow)
+//           {
+//               selectedId = selectedProjectsRow.Id;
+//
+//               Projects selectedProjectDB = (from t in contextProjectsEmployees.Projects
+//                                             where t.Id == selectedId
+//                                             select t)?.First();
+//
+//               selectedProjectDB.Id = selectedProjectsRow.Id;
+//               selectedProjectDB.Title = selectedProjectsRow.Title;
+//               selectedProjectDB.StartDate = selectedProjectsRow.StartDate;
+//               selectedProjectDB.EndDate = selectedProjectsRow.EndDate;
+//               selectedProjectDB.Description = selectedProjectsRow.Description;
+//
+//               contextProjectsEmployees.SubmitChanges();
+//
+//               RefreshProjects();
+//           }
+//
+//           if (dataGrid_Main.SelectedItem is Employee selectedEmployeeRow)
+//           {
+//               selectedId = selectedEmployeeRow.Id;
+//
+//               Employees selectedEmployeeDB = (from t in contextProjectsEmployees.Employees
+//                                               where t.Id == selectedId
+//                                               select t)?.First();
+//
+//               selectedEmployeeDB.Id = selectedEmployeeRow.Id;
+//               selectedEmployeeDB.FirstName = selectedEmployeeRow.FirstName;
+//               selectedEmployeeDB.LastName = selectedEmployeeRow.LastName;
+//               selectedEmployeeDB.Age = selectedEmployeeRow.Age;
+//               selectedEmployeeDB.Address = selectedEmployeeRow.Address;
+//               selectedEmployeeDB.FotoPath = selectedEmployeeRow.FotoPath;
+//
+//               contextManufacturerAirplane.SubmitChanges();
+//
+//               RefreshEmployees();
+//           }
+//       }
+//       public void dataGrid_Manufacturer_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+//       {
+//           int selectedId = 0;
+//           if (dataGrid_Main.SelectedItem is Manufacturer selectedManufacturerRow)
+//           {
+//               selectedId = selectedManufacturerRow.VendorId;
+//
+//               Manufacturers selectedManufacturerDB = (from t in contextManufacturerAirplane.Manufacturers
+//                                                       where t.VendorId == selectedId
+//                                                       select t)?.First();
+//
+//               selectedManufacturerDB.VendorId = selectedManufacturerRow.VendorId;
+//               selectedManufacturerDB.BrandTitle = selectedManufacturerRow.BrandTitle;
+//               selectedManufacturerDB.Address = selectedManufacturerRow.Address;
+//               selectedManufacturerDB.Phone = selectedManufacturerRow.Phone;
+//
+//               contextManufacturerAirplane.SubmitChanges();
+//
+//               RefreshManufacturer();
+//           }
+//       }
+//
+//       public void dataGrid_Airplane_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+//       {
+//           int selectedId = 0;
+//           if (dataGrid_Main.SelectedItem is Airplane selectedAirplaneRow)
+//           {
+//               selectedId = selectedAirplaneRow.Id;
+//
+//               Airplanes selectedAirplaneDB = (from t in contextManufacturerAirplane.Airplanes
+//                                               where t.Id == selectedId
+//                                               select t)?.First();
+//
+//               selectedAirplaneDB.Id = selectedAirplaneRow.Id;
+//               selectedAirplaneDB.Model = selectedAirplaneRow.Model;
+//               selectedAirplaneDB.Price = selectedAirplaneRow.Price;
+//               selectedAirplaneDB.Speed = selectedAirplaneRow.Speed;
+//               selectedAirplaneDB.VendorId = selectedAirplaneRow.VendorId;
+//
+//               contextManufacturerAirplane.SubmitChanges();
+//
+//               RefreshAirplane();
+//           }
+//       }
+//
+//        private void dataGrid_Manufacturer_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+//        {
+//            switch (e.PropertyName)
+//            {
+//                case "VendorId":
+//                case "BrandTitle":
+//                case "Address":
+//                case "Phone":
+//
+//                case "Id":
+//                case "Model":
+//                case "Price":
+//                case "Speed":
+//                    e.Cancel = true;
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//
+//        private void dataGrid_Airplane_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+//        {
+//            switch (e.PropertyName)
+//            {
+//                case "VendorId":
+//                case "BrandTitle":
+//                case "Address":
+//                case "Phone":
+//
+//                case "Id":
+//                case "Model":
+//                case "Price":
+//                case "Speed":
+//                    e.Cancel = true;
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
 
         private void ShowManufacturer_Click(object sender, RoutedEventArgs e)
         {
