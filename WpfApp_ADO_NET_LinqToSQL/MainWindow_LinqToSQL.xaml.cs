@@ -662,50 +662,50 @@ GO
         }
 
 
-        public void dataGrid_Projects_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            int selectedId = 0;
-            if (dataGrid_Main.SelectedItem is Project selectedProjectsRow)
-            {
-                selectedId = selectedProjectsRow.Id;
-
-                Projects selectedProjectDB = (from t in contextProjectsEmployees.Projects
-                                              where t.Id == selectedId
-                                              select t)?.First();
-
-                selectedProjectDB.Id = selectedProjectsRow.Id;
-                selectedProjectDB.Title = selectedProjectsRow.Title;
-                selectedProjectDB.StartDate = selectedProjectsRow.StartDate;
-                selectedProjectDB.EndDate = selectedProjectsRow.EndDate;
-                selectedProjectDB.Description = selectedProjectsRow.Description;
-
-                contextProjectsEmployees.SubmitChanges();
-
-                RefreshProjects();
-            }
-        }
-
-        private void dataGrid_Projects_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "Id":
-                case "FirstName":
-                case "LastName":
-                case "Age":
-                case "Address":
-                case "FotoPath":
-
-                case "Title":
-                case "StartDate":
-                case "EndDate":
-                case "Description":
-                    e.Cancel = true;
-                    break;
-                default:
-                    break;
-            }
-        }
+//        public void dataGrid_Projects_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+//        {
+//            int selectedId = 0;
+//            if (dataGrid_Main.SelectedItem is Project selectedProjectsRow)
+//            {
+//                selectedId = selectedProjectsRow.Id;
+//
+//                Projects selectedProjectDB = (from t in contextProjectsEmployees.Projects
+//                                              where t.Id == selectedId
+//                                              select t)?.First();
+//
+//                selectedProjectDB.Id = selectedProjectsRow.Id;
+//                selectedProjectDB.Title = selectedProjectsRow.Title;
+//                selectedProjectDB.StartDate = selectedProjectsRow.StartDate;
+//                selectedProjectDB.EndDate = selectedProjectsRow.EndDate;
+//                selectedProjectDB.Description = selectedProjectsRow.Description;
+//
+//                contextProjectsEmployees.SubmitChanges();
+//
+//                RefreshProjects();
+//            }
+//        }
+//
+//        private void dataGrid_Projects_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+//        {
+//            switch (e.PropertyName)
+//            {
+//                case "Id":
+//                case "FirstName":
+//                case "LastName":
+//                case "Age":
+//                case "Address":
+//                case "FotoPath":
+//
+//                case "Title":
+//                case "StartDate":
+//                case "EndDate":
+//                case "Description":
+//                    e.Cancel = true;
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
 
         public void RefreshEmployees()
         {
@@ -745,51 +745,51 @@ GO
             //dataGrid1.Columns[0].Visibility = Visibility.Hidden;
         }
 
-        public void dataGrid_Employees_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            int selectedId = 0;
-            if (dataGrid_Main.SelectedItem is Employee selectedEmployeeRow)
-            {
-                selectedId = selectedEmployeeRow.Id;
-
-                Employees selectedEmployeeDB = (from t in contextProjectsEmployees.Employees
-                                                where t.Id == selectedId
-                                                select t)?.First();
-
-                selectedEmployeeDB.Id = selectedEmployeeRow.Id;
-                selectedEmployeeDB.FirstName = selectedEmployeeRow.FirstName;
-                selectedEmployeeDB.LastName = selectedEmployeeRow.LastName;
-                selectedEmployeeDB.Age = selectedEmployeeRow.Age;
-                selectedEmployeeDB.Address = selectedEmployeeRow.Address;
-                selectedEmployeeDB.FotoPath = selectedEmployeeRow.FotoPath;
-
-                contextManufacturerAirplane.SubmitChanges();
-
-                RefreshEmployees();
-            }
-        }
-
-        private void dataGrid_Employees_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "Id":
-                case "FirstName":
-                case "LastName":
-                case "Age":
-                case "Address":
-                case "FotoPath":
-
-                case "Title":
-                case "StartDate":
-                case "EndDate":
-                case "Description":
-                    e.Cancel = true;
-                    break;
-                default:
-                    break;
-            }
-        }
+//        public void dataGrid_Employees_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+//        {
+//            int selectedId = 0;
+//            if (dataGrid_Main.SelectedItem is Employee selectedEmployeeRow)
+//            {
+//                selectedId = selectedEmployeeRow.Id;
+//
+//                Employees selectedEmployeeDB = (from t in contextProjectsEmployees.Employees
+//                                                where t.Id == selectedId
+//                                                select t)?.First();
+//
+//                selectedEmployeeDB.Id = selectedEmployeeRow.Id;
+//                selectedEmployeeDB.FirstName = selectedEmployeeRow.FirstName;
+//                selectedEmployeeDB.LastName = selectedEmployeeRow.LastName;
+//                selectedEmployeeDB.Age = selectedEmployeeRow.Age;
+//                selectedEmployeeDB.Address = selectedEmployeeRow.Address;
+//                selectedEmployeeDB.FotoPath = selectedEmployeeRow.FotoPath;
+//
+//                contextManufacturerAirplane.SubmitChanges();
+//
+//                RefreshEmployees();
+//            }
+//        }
+//
+//        private void dataGrid_Employees_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+//        {
+//            switch (e.PropertyName)
+//            {
+//                case "Id":
+//                case "FirstName":
+//                case "LastName":
+//                case "Age":
+//                case "Address":
+//                case "FotoPath":
+//
+//                case "Title":
+//                case "StartDate":
+//                case "EndDate":
+//                case "Description":
+//                    e.Cancel = true;
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
 
         private void ShowProjects_Click(object sender, RoutedEventArgs e)
         {
@@ -1177,12 +1177,15 @@ GO
             {
                 if (dataGrid_Main.SelectedItem is Manufacturer manufacturer)
                 {
-                    // Получить выделенного автора
-
                     // Получить ID выделенного автора
                     int selectedId = manufacturer.VendorId;
 
-                    Window_Change window_change = new Window_Change(manufacturer);
+                    // Получить выделенного автора
+                    Manufacturers selectedManufacturerDB = (from t in contextManufacturerAirplane.Manufacturers
+                                                            where t.VendorId == selectedId
+                                                            select t)?.First();
+
+                    Window_Change window_change = new Window_Change(selectedManufacturerDB);
 
                     Manufacturers changedManufacturer = null;//ожидаем изминенный обьект
                     window_change.ReturnObject += res => changedManufacturer = res as Manufacturers;//по событию забираем изминенный объект
@@ -1195,10 +1198,6 @@ GO
                         }
                         else
                         {
-                            Manufacturers selectedManufacturerDB = (from t in contextManufacturerAirplane.Manufacturers
-                                                                   where t.VendorId == selectedId
-                                                                   select t)?.First();
-
                             selectedManufacturerDB.VendorId = changedManufacturer.VendorId;
                             selectedManufacturerDB.BrandTitle = changedManufacturer.BrandTitle;
                             selectedManufacturerDB.Address = changedManufacturer.Address;
@@ -1214,12 +1213,15 @@ GO
 
                 if (dataGrid_Main.SelectedItem is Airplane airplane)
                 {
-                    // Получить выделенного автора
-
                     // Получить ID выделенного автора
                     int selectedId = airplane.Id;
 
-                    Window_Change window_change = new Window_Change(airplane);
+                    // Получить выделенного автора
+                    Airplanes selectedAirplaneDB = (from t in contextManufacturerAirplane.Airplanes
+                                                    where t.Id == selectedId
+                                                    select t)?.First();
+
+                    Window_Change window_change = new Window_Change(selectedAirplaneDB);
 
                     var dictVendorIdBrandTitle =
                     contextManufacturerAirplane.Manufacturers.Select(m => new { Key = m.VendorId, Value = m.BrandTitle }).AsEnumerable().ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
@@ -1236,11 +1238,7 @@ GO
                             contextManufacturerAirplane.Airplanes.InsertOnSubmit(changedAirplane);
                         }
                         else
-                        {
-                            Airplanes selectedAirplaneDB = (from t in contextManufacturerAirplane.Airplanes
-                                                           where t.Id == selectedId
-                                                           select t)?.First();
-
+                        {                        
                             selectedAirplaneDB.Id = changedAirplane.Id;
                             selectedAirplaneDB.Model = changedAirplane.Model;
                             selectedAirplaneDB.Price = changedAirplane.Price;
@@ -1257,12 +1255,15 @@ GO
 
                 if (dataGrid_Main.SelectedItem is Project project)
                 {
-                    // Получить выделенного автора
-
                     // Получить ID выделенного автора
                     int selectedId = project.Id;
 
-                    Window_Change window_change = new Window_Change(project);
+                    // Получить выделенного автора
+                    Projects selectedProjectDB = (from t in contextProjectsEmployees.Projects
+                                                  where t.Id == selectedId
+                                                  select t)?.First();
+
+                    Window_Change window_change = new Window_Change(selectedProjectDB);
 
                     Projects changedProject = null;//ожидаем изминенный обьект
                     window_change.ReturnObject += res => changedProject = res as Projects;//по событию забираем изминенный объект
@@ -1275,10 +1276,6 @@ GO
                         }
                         else
                         {
-                            Projects selectedProjectDB = (from t in contextProjectsEmployees.Projects
-                                                         where t.Id == selectedId
-                                                         select t)?.First();
-
                             selectedProjectDB.Id = changedProject.Id;
                             selectedProjectDB.Title = changedProject.Title;
                             selectedProjectDB.StartDate = changedProject.StartDate;
@@ -1295,12 +1292,15 @@ GO
 
                 if (dataGrid_Main.SelectedItem is Employee employee)
                 {
-                    // Получить выделенного автора
-
                     // Получить ID выделенного автора
                     int selectedId = employee.Id;
 
-                    Window_Change window_change = new Window_Change(employee);
+                    // Получить выделенного автора
+                    Employees selectedEmployeeDB = (from t in contextProjectsEmployees.Employees
+                                                    where t.Id == selectedId
+                                                    select t)?.First();
+
+                    Window_Change window_change = new Window_Change(selectedEmployeeDB);
 
                     Employees changedEmployee = null;//ожидаем изминенный обьект
                     window_change.ReturnObject += res => changedEmployee = res as Employees;//по событию забираем изминенный объект
@@ -1312,11 +1312,7 @@ GO
                             contextProjectsEmployees.Employees.InsertOnSubmit(changedEmployee);
                         }
                         else
-                        {
-                            Employees selectedEmployeeDB = (from t in contextProjectsEmployees.Employees
-                                                           where t.Id == selectedId
-                                                           select t)?.First();
-
+                        {                           
                             selectedEmployeeDB.Id = changedEmployee.Id;
                             selectedEmployeeDB.FirstName = changedEmployee.FirstName;
                             selectedEmployeeDB.LastName = changedEmployee.LastName;

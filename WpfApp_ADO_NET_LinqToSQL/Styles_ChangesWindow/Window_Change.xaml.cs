@@ -50,7 +50,7 @@ namespace WpfApp_ADO_NET_LinqToSQL
             : this()
         {
 
-            if (change_object is Manufacturer manufacturer)
+            if (change_object is Manufacturers manufacturer)
             {
                 Manufacturer = new Manufacturers
                 {
@@ -63,7 +63,7 @@ namespace WpfApp_ADO_NET_LinqToSQL
                 selectedClass = SelectedClass.Manufacturer;
                 CurrentObject = Manufacturer;
             }
-            else if (change_object is Airplane airplane)
+            else if (change_object is Airplanes airplane)
             {
                 Airplane = new Airplanes
                 {
@@ -77,7 +77,7 @@ namespace WpfApp_ADO_NET_LinqToSQL
                 selectedClass = SelectedClass.Airplane;
                 CurrentObject = Airplane;
             }
-            else if (change_object is Project project)
+            else if (change_object is Projects project)
             {
                 Project = new Projects
                 {
@@ -91,7 +91,7 @@ namespace WpfApp_ADO_NET_LinqToSQL
                 selectedClass = SelectedClass.Projects;
                 CurrentObject = Project;               
             }
-            else if (change_object is Employee employee)
+            else if (change_object is Employees employee)
             {
                 Employee = new Employees
                 {
