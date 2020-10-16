@@ -12,6 +12,8 @@
                 <ResourceDictionary Source="Styles\DataGrid_ManufacturerAirplane.xaml"/>
                 <ResourceDictionary Source="Styles\DataGrid_ProjectsEmployees.xaml"/>
 
+                <ResourceDictionary Source="Styles_ChangesWindow\Change_Style.xaml"/>
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

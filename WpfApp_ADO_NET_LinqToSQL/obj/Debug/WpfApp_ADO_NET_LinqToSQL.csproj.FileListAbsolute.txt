@@ -20,3 +20,6 @@ C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\Wp
 C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_LinqToSQL\obj\Debug\WpfApp_ADO_NET_LinqToSQL.csproj.CoreCompileInputs.cache
 C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_LinqToSQL\obj\Debug\WpfApp_ADO_NET_LinqToSQL.exe
 C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_LinqToSQL\obj\Debug\WpfApp_ADO_NET_LinqToSQL.pdb
+C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_LinqToSQL\obj\Debug\Styles_ChangesWindow\Window_Change.g.cs
+C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_LinqToSQL\obj\Debug\Styles_ChangesWindow\Change_Style.baml
+C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_LinqToSQL\obj\Debug\Styles_ChangesWindow\Window_Change.baml

@@ -59,15 +59,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Airplane.cs" />
+    <Compile Include="Classes\Airplane.cs" />
     <Compile Include="Classes_SqlDataAdapter\SqlDatabase.cs" />
     <Compile Include="Classes_SqlDataAdapter\SqlDatabase.Static.cs" />
-    <Compile Include="ConverterEmployeesToString.cs" />
-    <Compile Include="ConverterProjectsToString.cs" />
-    <Compile Include="Employee.cs" />
-    <Compile Include="Manufacturer.cs" />
-    <Compile Include="Project.cs" />
-    <Compile Include="RowToIndexConv.cs" />
+    <Compile Include="Styles\ConverterEmployeesToString.cs" />
+    <Compile Include="Styles\ConverterProjectsToString.cs" />
+    <Compile Include="Classes\Employee.cs" />
+    <Compile Include="Classes\Manufacturer.cs" />
+    <Compile Include="Classes\Project.cs" />
+    <Compile Include="Styles\RowToIndexConv.cs" />
+    <Compile Include="Styles_ChangesWindow\Window_Change.xaml.cs">
+      <DependentUpon>Window_Change.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window_DataGrid.xaml.cs">
       <DependentUpon>Window_DataGrid.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\DataGrid_ProjectsEmployees.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles_ChangesWindow\Change_Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles_ChangesWindow\Window_Change.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

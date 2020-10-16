@@ -581,5 +581,224 @@ GO
 
             DataGridPresent.Show();
         }
+
+
+        private void dataGrid_Main_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dataGrid_Main.SelectedItem != null)
+            {
+                if (dataGrid_Main.SelectedItem is Manufacturer manufacturer)
+                {
+                    // Получить выделенного автора
+
+                    // Получить ID выделенного автора
+                    int selectedId = manufacturer.VendorId;
+
+                    Window_Change window_change = new Window_Change(manufacturer);
+
+                    Manufacturer changedManufacturer = null;//ожидаем изминенный обьект
+                    window_change.ReturnObject += res => changedManufacturer = res as Manufacturer;//по событию забираем изминенный объект
+
+                    if (window_change.ShowDialog() == true)
+                    {
+                        if (changedManufacturer.VendorId == -1)//создание новой записи
+                        {
+                            // добавление нового поля
+                            SqlDatabase.Insert(connectionManufacturerAirplane, changedManufacturer);
+                        }
+                        else
+                        {
+                            List<Manufacturer> list = new List<Manufacturer>();
+                            SqlDatabase.Select(connectionManufacturerAirplane, ref list);
+                            
+                            Manufacturer selectedManufacturerDB = (from m in list
+                                                                   where m.VendorId == selectedId
+                                                                   select new Manufacturer
+                                                                   {
+                                                                       VendorId = m.VendorId,
+                                                                       BrandTitle = m.BrandTitle,
+                                                                       Address = m.Address,
+                                                                       Phone = m.Phone
+                                                                   })?.First();
+
+                            selectedManufacturerDB.VendorId = changedManufacturer.VendorId;
+                            selectedManufacturerDB.BrandTitle = changedManufacturer.BrandTitle;
+                            selectedManufacturerDB.Address = changedManufacturer.Address;
+                            selectedManufacturerDB.Phone = changedManufacturer.Phone;
+
+                            SqlDatabase.UpdateQuery(connectionManufacturerAirplane, selectedManufacturerDB);
+                        }
+
+                        // Обновить таблицу
+                        RefreshManufacturer();
+                    }
+                }
+
+                if (dataGrid_Main.SelectedItem is Airplane airplane)
+                {
+                    // Получить выделенного автора
+
+                    // Получить ID выделенного автора
+                    int selectedId = airplane.Id;
+
+                    Window_Change window_change = new Window_Change(airplane);
+
+                    List<Manufacturer> listM = new List<Manufacturer>();
+                    SqlDatabase.Select(connectionManufacturerAirplane, ref listM);
+
+                    var dictVendorIdBrandTitle =
+                    (from m in listM
+                     select new
+                     {
+                         Key = m.VendorId,
+                         Value = m.BrandTitle
+                     }).AsEnumerable().ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+                    window_change.DictionaryVendorIdBrandTitle = dictVendorIdBrandTitle;
+
+                    Airplane changedAirplane = null;//ожидаем изминенный обьект
+                    window_change.ReturnObject += res => changedAirplane = res as Airplane;//по событию забираем изминенный объект
+
+                    if (window_change.ShowDialog() == true)
+                    {
+                        if (changedAirplane.Id == -1)//создание новой записи
+                        {
+                            // добавление нового поля
+                            SqlDatabase.Insert(connectionManufacturerAirplane, changedAirplane);
+                        }
+                        else
+                        {
+                            List<Airplane> list = new List<Airplane>();
+                            SqlDatabase.Select(connectionManufacturerAirplane, ref list);
+                        
+                            Airplane selectedAirplaneDB = (from a in list
+                                                           where a.Id == selectedId
+                                                           select new Airplane
+                                                           {
+                                                               Id = a.Id,
+                                                               Model = a.Model,
+                                                               Price = a.Price,
+                                                               Speed = a.Speed,
+                                                               VendorId = a.VendorId,
+                                                               Vendor = a.Vendor
+                                                           })?.First();
+
+                            selectedAirplaneDB.Id = changedAirplane.Id;
+                            selectedAirplaneDB.Model = changedAirplane.Model;
+                            selectedAirplaneDB.Price = changedAirplane.Price;
+                            selectedAirplaneDB.Speed = changedAirplane.Speed;
+                            selectedAirplaneDB.VendorId = changedAirplane.VendorId;
+
+                            SqlDatabase.UpdateQuery(connectionManufacturerAirplane, selectedAirplaneDB);
+                        }                                               
+
+                        // Обновить таблицу
+                        RefreshAirplane();
+                    }
+                }
+
+                if (dataGrid_Main.SelectedItem is Project project)
+                {
+                    // Получить выделенного автора
+
+                    // Получить ID выделенного автора
+                    int selectedId = project.Id;
+
+                    Window_Change window_change = new Window_Change(project);
+
+                    Project changedProject = null;//ожидаем изминенный обьект
+                    window_change.ReturnObject += res => changedProject = res as Project;//по событию забираем изминенный объект
+
+                    if (window_change.ShowDialog() == true)
+                    {
+                        if (changedProject.Id == -1)//создание новой записи
+                        {
+                            // добавление нового поля
+                            SqlDatabase.Insert(connectionProjectsEmployees, changedProject);
+                        }
+                        else
+                        {
+                            List<Project> list = new List<Project>();
+                            SqlDatabase.Select(connectionProjectsEmployees, ref list);
+                       
+                            Project selectedProjectDB = (from p in list
+                                                         where p.Id == selectedId
+                                                         select new Project
+                                                         {
+                                                             Id = p.Id,
+                                                             Title = p.Title,
+                                                             StartDate = p.StartDate,
+                                                             EndDate = p.EndDate,
+                                                             Description = p.Description
+                                                         })?.First();
+
+                            selectedProjectDB.Id = changedProject.Id;
+                            selectedProjectDB.Title = changedProject.Title;
+                            selectedProjectDB.StartDate = changedProject.StartDate;
+                            selectedProjectDB.EndDate = changedProject.EndDate;
+                            selectedProjectDB.Description = changedProject.Description;
+
+                            SqlDatabase.UpdateQuery(connectionProjectsEmployees, selectedProjectDB);
+                        }
+
+                        // Обновить таблицу
+                        RefreshProjects();
+                    }
+                }
+
+                if (dataGrid_Main.SelectedItem is Employee employee)
+                {
+                    // Получить выделенного автора
+
+                    // Получить ID выделенного автора
+                    int selectedId = employee.Id;
+
+                    Window_Change window_change = new Window_Change(employee);
+
+                    Employee changedEmployee = null;//ожидаем изминенный обьект
+                    window_change.ReturnObject += res => changedEmployee = res as Employee;//по событию забираем изминенный объект
+
+                    if (window_change.ShowDialog() == true)
+                    {
+                        if (changedEmployee.Id == -1)//создание новой записи
+                        {
+                            // добавление нового поля
+                            SqlDatabase.Insert(connectionProjectsEmployees, changedEmployee);
+                        }
+                        else
+                        {
+                            List<Employee> list = new List<Employee>();
+                            SqlDatabase.Select(connectionProjectsEmployees, ref list);
+                   
+                            Employee selectedEmployeeDB = (from emp in list
+                                                           where emp.Id == selectedId
+                                                           select new Employee
+                                                           {
+                                                               Id = emp.Id,
+                                                               FirstName = emp.FirstName,
+                                                               LastName = emp.LastName,
+                                                               Age = emp.Age,
+                                                               Address = emp.Address,
+                                                               FotoPath = emp.FotoPath
+                                                           })?.First();
+
+                            selectedEmployeeDB.Id = changedEmployee.Id;
+                            selectedEmployeeDB.FirstName = changedEmployee.FirstName;
+                            selectedEmployeeDB.LastName = changedEmployee.LastName;
+                            selectedEmployeeDB.Age = changedEmployee.Age;
+                            selectedEmployeeDB.Address = changedEmployee.Address;
+                            selectedEmployeeDB.FotoPath = changedEmployee.FotoPath;
+
+                            SqlDatabase.UpdateQuery(connectionProjectsEmployees, selectedEmployeeDB);
+                        }
+
+                        // Обновить таблицу
+                        RefreshEmployees();
+                    }
+                }
+
+            }
+        }
+
     }
 }

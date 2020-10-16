@@ -43,7 +43,7 @@
 
                         <DataGrid.Columns>
                             <DataGridTextColumn IsReadOnly="True" Header="Id" Binding="{Binding Path=ProjectId}"/>
-                            <DataGridTextColumn Header="Title" Binding="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Title" Binding="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
 
                             <DataGridTextColumn IsReadOnly="True" Header="Employees" Binding="{Binding Employees,Converter={StaticResource ConverterEmployeesToString}, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
 
@@ -62,9 +62,9 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>-->
 
-                            <DataGridTextColumn Header="Start Date" Binding="{Binding Path=StartDate,StringFormat=\{0:yyyy-MM-dd HH:mm:ss.fff\}, UpdateSourceTrigger=PropertyChanged}" Width="150" />
-                            <DataGridTextColumn Header="End Date" Binding="{Binding Path=EndDate,StringFormat=\{0:yyyy-MM-dd HH:mm:ss.fff\}, UpdateSourceTrigger=PropertyChanged}" Width="150" />
-                            <DataGridTextColumn Header="Description" Binding="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Start Date" Binding="{Binding Path=StartDate,StringFormat=\{0:yyyy-MM-dd HH:mm:ss.fff\}, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                            <DataGridTextColumn IsReadOnly="True" Header="End Date" Binding="{Binding Path=EndDate,StringFormat=\{0:yyyy-MM-dd HH:mm:ss.fff\}, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Description" Binding="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Width="150" />
                             
                             
                             <!--<DataGridComboBoxColumn x:Name="StateColumn" Header="Штат" SelectedItemBinding="{Binding Path=State, UpdateSourceTrigger=PropertyChanged}">
@@ -110,13 +110,13 @@
 
                         <DataGrid.Columns>
                             <DataGridTextColumn IsReadOnly="True" Header="Id" Binding="{Binding Path=EmployeeId}" />
-                            <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
-                            <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                            <DataGridTextColumn IsReadOnly="True" Header="First Name" Binding="{Binding Path=FirstName, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Last Name" Binding="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged}" Width="150" />
 
                             <DataGridTextColumn IsReadOnly="True" Header="Projects" Binding="{Binding Projects,Converter={StaticResource ConverterProjectsToString}, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
 
-                            <DataGridTextColumn Header="Age" Binding="{Binding Path=Age, UpdateSourceTrigger=PropertyChanged}" Width="50" />
-                            <DataGridTextColumn Header="Address" Binding="{Binding Path=Address, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Age" Binding="{Binding Path=Age, UpdateSourceTrigger=PropertyChanged}" Width="50" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Address" Binding="{Binding Path=Address, UpdateSourceTrigger=PropertyChanged}" Width="150" />
 
                             <!--<DataGridComboBoxColumn x:Name="StateColumn" Header="Штат" SelectedItemBinding="{Binding Path=State, UpdateSourceTrigger=PropertyChanged}">
                             </DataGridComboBoxColumn>

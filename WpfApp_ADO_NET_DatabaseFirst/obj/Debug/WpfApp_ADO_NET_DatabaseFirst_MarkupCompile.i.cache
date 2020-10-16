@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 c:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\WpfApp_ADO_NET_DatabaseFirst\App.xaml
-5-2047025679
+71891866300
 4-1415075194
-28993069507
+29-1095530356
 18-200724983
-MainWindow_DatabaseFirst.xaml;Styles\DataGrid_Base.xaml;Styles\DataGrid_ManufacturerAirplane.xaml;Styles\DataGrid_ProjectsEmployees.xaml;Window_DataGrid.xaml;
+MainWindow_DatabaseFirst.xaml;Styles\DataGrid_Base.xaml;Styles\DataGrid_ManufacturerAirplane.xaml;Styles\DataGrid_ProjectsEmployees.xaml;Styles_ChangesWindow\Change_Style.xaml;Styles_ChangesWindow\Window_Change.xaml;Window_DataGrid.xaml;
 
-True
+False
 

@@ -67,7 +67,7 @@
         </Menu>
 
         <Grid Height="Auto" Name="grid_main" Width="Auto">
-            <DataGrid x:Name="dataGrid_Main"/>
+            <DataGrid x:Name="dataGrid_Main" MouseDoubleClick="dataGrid_Main_MouseDoubleClick"  />
         </Grid>
     </DockPanel>
 </Window>

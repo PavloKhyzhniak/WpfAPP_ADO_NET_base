@@ -1186,5 +1186,247 @@ GO
 
             DataGridPresent.Show();
         }
+
+        private void dataGrid_Main_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dataGrid_Main.SelectedItem != null)
+            {
+                if (dataGrid_Main.SelectedItem is Manufacturer manufacturer)
+                {
+                    // Получить выделенного автора
+
+                    // Получить ID выделенного автора
+                    int selectedId = manufacturer.VendorId;
+
+                    Window_Change window_change = new Window_Change(manufacturer);
+
+                    Manufacturer changedManufacturer = null;//ожидаем изминенный обьект
+                    window_change.ReturnObject += res => changedManufacturer = res as Manufacturer;//по событию забираем изминенный объект
+
+                    if (window_change.ShowDialog() == true)
+                    {
+                        DataTable current_table = dsProjectsEmployees.Tables["Manufacturer"];
+
+                        if (changedManufacturer.VendorId == -1)//создание новой записи
+                        {
+                            // добавление нового поля
+                            DataRow dr = current_table.NewRow();
+                            dr["BrandTitle"] = manufacturer.BrandTitle;
+                            dr["Phone"] = manufacturer.Phone;
+                            dr["Address"] = manufacturer.Address;
+                            current_table.Rows.Add(dr);
+                        }
+                        else
+                        {
+                            Manufacturer selectedManufacturerDB = (from m in dsManufacturerAirplane.Tables["Manufacturers"].AsEnumerable()
+                                                                    where (int)(m["VendorId"]) == selectedId
+                                                                   select new Manufacturer
+                                                                   {
+                                                                       VendorId = (int)(m["VendorId"]),
+                                                                       BrandTitle = (string)(m["BrandTitle"]),
+                                                                       Address = (string)(m["Address"]),
+                                                                       Phone = (string)(m["Phone"])
+                                                                   })?.First();
+
+                            selectedManufacturerDB.VendorId = changedManufacturer.VendorId;
+                            selectedManufacturerDB.BrandTitle = changedManufacturer.BrandTitle;
+                            selectedManufacturerDB.Address = changedManufacturer.Address;
+                            selectedManufacturerDB.Phone = changedManufacturer.Phone;
+                        }
+
+                        // синхронизация данных с сервером
+                        adapterManufacturer.Update(dsManufacturerAirplane, "Manufacturer");
+
+                        current_table.AcceptChanges();
+
+                        // Обновить таблицу
+                        RefreshManufacturer();
+                    }
+                }
+
+                if (dataGrid_Main.SelectedItem is Airplane airplane)
+                {
+                    // Получить выделенного автора
+
+                    // Получить ID выделенного автора
+                    int selectedId = airplane.Id;
+
+                    Window_Change window_change = new Window_Change(airplane);
+
+                    var dictVendorIdBrandTitle =
+                    (from m in dsManufacturerAirplane.Tables["Manufacturers"].AsEnumerable()
+                    select new 
+                    { 
+                        Key = (int)(m["VendorId"]),
+                        Value = (string)(m["BrandTitle"])
+                    }).AsEnumerable().ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+                    window_change.DictionaryVendorIdBrandTitle = dictVendorIdBrandTitle;
+
+                    Airplane changedAirplane = null;//ожидаем изминенный обьект
+                    window_change.ReturnObject += res => changedAirplane = res as Airplane;//по событию забираем изминенный объект
+
+                    if (window_change.ShowDialog() == true)
+                    {
+                        DataTable current_table = dsProjectsEmployees.Tables["Projects"];
+
+                        if (changedAirplane.Id == -1)//создание новой записи
+                        {
+                            DataRow dr = current_table.NewRow();
+                            dr["Model"] = airplane.Model;
+                            dr["Price"] = airplane.Price;
+                            dr["Speed"] = airplane.Speed;
+                            dr["VendorId"] = airplane.VendorId;
+                            dr["Vendor"] = "";//must be not NULL
+                            current_table.Rows.Add(dr);
+                        }
+                        else
+                        {
+                            Airplane selectedAirplaneDB = (from a in dsManufacturerAirplane.Tables["Airplanes"].AsEnumerable()
+                                                            where (int)(a["Id"]) == selectedId
+                                                            select new Airplane
+                                                            {
+                                                                Id = (int)(a["Id"]),
+                                                                Model = (string)(a["Model"]),
+                                                                Price = (double)(a["Price"]),
+                                                                Speed = (int)(a["Speed"]),
+                                                                VendorId = (int)(a["VendorId"]),
+                                                                Vendor = (string)(a["Vendor"])
+                                                            })?.First();
+
+                            selectedAirplaneDB.Id = changedAirplane.Id;
+                            selectedAirplaneDB.Model = changedAirplane.Model;
+                            selectedAirplaneDB.Price = changedAirplane.Price;
+                            selectedAirplaneDB.Speed = changedAirplane.Speed;
+                            selectedAirplaneDB.VendorId = changedAirplane.VendorId;
+                        }
+
+                        // синхронизация данных с сервером
+                        adapterAirplane.Update(dsManufacturerAirplane, "Airplane");
+
+                        current_table.AcceptChanges();
+
+                        // Обновить таблицу
+                        RefreshAirplane();
+                    }
+                }
+
+                if (dataGrid_Main.SelectedItem is Project project)
+                {
+                    // Получить выделенного автора
+
+                    // Получить ID выделенного автора
+                    int selectedId = project.Id;
+
+                    Window_Change window_change = new Window_Change(project);
+
+                    Project changedProject = null;//ожидаем изминенный обьект
+                    window_change.ReturnObject += res => changedProject = res as Project;//по событию забираем изминенный объект
+
+                    if (window_change.ShowDialog() == true)
+                    {
+                        DataTable current_table = dsProjectsEmployees.Tables["Projects"];
+
+                        if (changedProject.Id == -1)//создание новой записи
+                        {
+                            // добавление нового поля
+                            DataRow dr = current_table.NewRow();
+                            dr["Title"] = changedProject.Title;
+                            dr["StartDate"] = changedProject.StartDate;
+                            dr["EndDate"] = changedProject.EndDate;
+                            dr["Description"] = changedProject.Description;
+                            current_table.Rows.Add(dr);
+                        }
+                        else
+                        {
+                            Project selectedProjectDB = (from p in dsProjectsEmployees.Tables["Projects"].AsEnumerable()
+                                                         where (int)p["ProjectId"] == selectedId
+                                                         select new Project
+                                                         {
+                                                             Id = (int)(p["Id"]),
+                                                             Title = (string)(p["Title"]),
+                                                             StartDate = (DateTime)(p["StartDate"]),
+                                                             EndDate = (DateTime)(p["EndDate"]),
+                                                             Description = (string)(p["Description"])
+                                                         })?.First();
+
+                            selectedProjectDB.Id = changedProject.Id;
+                            selectedProjectDB.Title = changedProject.Title;
+                            selectedProjectDB.StartDate = changedProject.StartDate;
+                            selectedProjectDB.EndDate = changedProject.EndDate;
+                            selectedProjectDB.Description = changedProject.Description;
+                        }
+
+                        // синхронизация данных с сервером
+                        adapterProjects.Update(dsProjectsEmployees, "Projects");
+
+                        current_table.AcceptChanges();
+
+                        // Обновить таблицу
+                        RefreshProjects();
+                    }
+                }
+
+                if (dataGrid_Main.SelectedItem is Employee employee)
+                {
+                    // Получить выделенного автора
+
+                    // Получить ID выделенного автора
+                    int selectedId = employee.Id;
+
+                    Window_Change window_change = new Window_Change(employee);
+
+                    Employee changedEmployee = null;//ожидаем изминенный обьект
+                    window_change.ReturnObject += res => changedEmployee = res as Employee;//по событию забираем изминенный объект
+
+                    if (window_change.ShowDialog() == true)
+                    {
+                        DataTable current_table = dsProjectsEmployees.Tables["Employees"];
+
+                        if (changedEmployee.Id == -1)//создание новой записи
+                        {
+                            // добавление нового поля
+                            DataRow dr = current_table.NewRow();
+                            dr["FirstName"] = employee.FirstName;
+                            dr["LastName"] = employee.LastName;
+                            dr["Age"] = employee.Age;
+                            dr["Address"] = employee.Address;
+                            dr["FotoPath"] = employee.FotoPath;
+                            current_table.Rows.Add(dr);
+                        }
+                        else
+                        {
+                            Employee selectedEmployeeDB = (from emp in dsProjectsEmployees.Tables["Employees"].AsEnumerable()
+                                                           where (int)emp["Id"] == selectedId
+                                                           select new Employee
+                                                           {
+                                                               Id = (int)(emp["Id"]),
+                                                               FirstName = (string)(emp["FirstName"]),
+                                                               LastName = (string)(emp["LastName"]),
+                                                               Age = (int)(emp["Age"]),
+                                                               Address = (string)(emp["Address"]),
+                                                               FotoPath = (string)(emp["FotoPath"])
+                                                           })?.First();
+
+                            selectedEmployeeDB.Id = changedEmployee.Id;
+                            selectedEmployeeDB.FirstName = changedEmployee.FirstName;
+                            selectedEmployeeDB.LastName = changedEmployee.LastName;
+                            selectedEmployeeDB.Age = changedEmployee.Age;
+                            selectedEmployeeDB.Address = changedEmployee.Address;
+                            selectedEmployeeDB.FotoPath = changedEmployee.FotoPath;
+                        }
+
+                        // синхронизация данных с сервером
+                        adapterEmployees.Update(dsProjectsEmployees, "Employees");
+
+                        current_table.AcceptChanges();
+
+                        // Обновить таблицу
+                        RefreshEmployees();
+                    }
+                }
+
+            }
+        }
     }
 }

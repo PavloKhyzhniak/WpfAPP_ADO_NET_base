@@ -46,6 +46,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,8 +65,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ConverterEmployeesToString.cs" />
-    <Compile Include="ConverterProjectsToString.cs" />
+    <Compile Include="Styles\ConverterEmployeesToString.cs" />
+    <Compile Include="Styles\ConverterProjectsToString.cs" />
     <Compile Include="Migrations\ProjectsEmployees\202010131933392_InitProjectsEmployees.cs" />
     <Compile Include="Migrations\ProjectsEmployees\202010131933392_InitProjectsEmployees.Designer.cs">
       <DependentUpon>202010131933392_InitProjectsEmployees.cs</DependentUpon>
@@ -74,7 +75,10 @@
     <Compile Include="Migrations\ProjectsEmployees\202010131934391_SeedProjectsEmployees.Designer.cs">
       <DependentUpon>202010131934391_SeedProjectsEmployees.cs</DependentUpon>
     </Compile>
-    <Compile Include="RowToIndexConv.cs" />
+    <Compile Include="Styles\RowToIndexConv.cs" />
+    <Compile Include="Styles_ChangesWindow\Window_Change.xaml.cs">
+      <DependentUpon>Window_Change.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window_DataGrid.xaml.cs">
       <DependentUpon>Window_DataGrid.xaml</DependentUpon>
     </Compile>
@@ -99,6 +103,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\DataGrid_ManufacturerAirplane.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles_ChangesWindow\Change_Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles_ChangesWindow\Window_Change.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

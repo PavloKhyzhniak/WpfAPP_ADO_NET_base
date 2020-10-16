@@ -30,8 +30,6 @@ namespace WpfApp_ADO_NET_DatabaseFirst
             InitializeComponent();
         }
 
-    //    EventHandler<DataGridCellEditEndingEventArgs> eventCellEditEnding;
-    //    EventHandler<DataGridAutoGeneratingColumnEventArgs> eventAutoGeneratingColumn;
         public void RefreshManufacturer()
         {
             var result = from t in contextManufacturerAirplane.Manufacturers
@@ -52,16 +50,7 @@ namespace WpfApp_ADO_NET_DatabaseFirst
             //collection.Filter += Collection_Filter;
 
             dataGrid_Main.Style = (Style)FindResource("dataGridManufacturer");
-
-        //    dataGrid_Main.CellEditEnding -= eventCellEditEnding;
-        //    dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
-        //    
-        //    dataGrid_Main.CellEditEnding += dataGrid_Manufacturer_CellEditEnding;
-        //    dataGrid_Main.AutoGeneratingColumn += dataGrid_Manufacturer_AutoGeneratingColumn;
-        //
-        //    eventCellEditEnding = dataGrid_Manufacturer_CellEditEnding;
-        //    eventAutoGeneratingColumn = dataGrid_Manufacturer_AutoGeneratingColumn;
-
+   
             dataGrid_Main.ItemsSource = collection.View;
 
             //            var statesList = (from t in context.authors
@@ -92,16 +81,7 @@ namespace WpfApp_ADO_NET_DatabaseFirst
             //collection.Filter += Collection_Filter;
 
             dataGrid_Main.Style = (Style)FindResource("dataGridAirplane");
-
-        //    dataGrid_Main.CellEditEnding -= eventCellEditEnding;
-        //    dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
-        //
-        //    dataGrid_Main.CellEditEnding += dataGrid_Airplane_CellEditEnding;
-        //    dataGrid_Main.AutoGeneratingColumn += dataGrid_Airplane_AutoGeneratingColumn;
-        //
-        //    eventCellEditEnding = dataGrid_Airplane_CellEditEnding;
-        //    eventAutoGeneratingColumn = dataGrid_Airplane_AutoGeneratingColumn;
-
+ 
             dataGrid_Main.ItemsSource = collection.View;
 
             //            var statesList = (from t in context.authors
@@ -585,16 +565,7 @@ GO
             //collection.Filter += Collection_Filter;
 
             dataGrid_Main.Style = (Style)FindResource("dataGridProjects");
-
-        //    dataGrid_Main.CellEditEnding -= eventCellEditEnding;
-        //    dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
-        //
-        //    dataGrid_Main.CellEditEnding += dataGrid_Projects_CellEditEnding;
-        //    dataGrid_Main.AutoGeneratingColumn += dataGrid_Projects_AutoGeneratingColumn;
-        //
-        //    eventCellEditEnding = dataGrid_Projects_CellEditEnding;
-        //    eventAutoGeneratingColumn = dataGrid_Projects_AutoGeneratingColumn;
-
+    
             dataGrid_Main.ItemsSource = collection.View;
 
             //            var statesList = (from t in context.authors
@@ -673,16 +644,7 @@ GO
 
             dataGrid_Main.Style = (Style)FindResource("dataGridEmployees");
 
-        //    dataGrid_Main.CellEditEnding -= eventCellEditEnding;
-        //    dataGrid_Main.AutoGeneratingColumn -= eventAutoGeneratingColumn;
-        //    
-        //    dataGrid_Main.CellEditEnding += dataGrid_Employees_CellEditEnding;
-        //    dataGrid_Main.AutoGeneratingColumn += dataGrid_Employees_AutoGeneratingColumn;
-        //
-        //    eventCellEditEnding = dataGrid_Employees_CellEditEnding;
-        //    eventAutoGeneratingColumn = dataGrid_Employees_AutoGeneratingColumn;
-
-            dataGrid_Main.ItemsSource = collection.View;
+             dataGrid_Main.ItemsSource = collection.View;
 
             //            var statesList = (from t in context.authors
             //                              select t.state).Distinct();
@@ -1120,6 +1082,169 @@ GO
 
             DataGridPresent.Show();
             //            dataGrid_Main.ItemsSource = result.ToList();
+        }
+        private void dataGrid_Main_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dataGrid_Main.SelectedItem != null)
+            {
+                if (dataGrid_Main.SelectedItem is Manufacturer manufacturer)
+                {
+                    // Получить выделенного автора
+
+                    // Получить ID выделенного автора
+                    int selectedId = manufacturer.VendorId;
+
+                    Window_Change window_change = new Window_Change(manufacturer);
+
+                    Manufacturers changedManufacturer = null;//ожидаем изминенный обьект
+                    window_change.ReturnObject += res => changedManufacturer = res as Manufacturers;//по событию забираем изминенный объект
+
+                    if (window_change.ShowDialog() == true)
+                    {
+                        if (changedManufacturer.VendorId == -1)//создание новой записи
+                        {
+                            contextManufacturerAirplane.Manufacturers.Add(changedManufacturer);
+                        }
+                        else
+                        {
+                            Manufacturers selectedManufacturerDB = (from t in contextManufacturerAirplane.Manufacturers
+                                                                   where t.VendorId == selectedId
+                                                                   select t)?.First();
+
+                            selectedManufacturerDB.VendorId = changedManufacturer.VendorId;
+                            selectedManufacturerDB.BrandTitle = changedManufacturer.BrandTitle;
+                            selectedManufacturerDB.Address = changedManufacturer.Address;
+                            selectedManufacturerDB.Phone = changedManufacturer.Phone;
+                        }
+
+                        contextManufacturerAirplane.SaveChanges();
+
+                        // Обновить таблицу
+                        RefreshManufacturer();
+                    }
+                }
+
+                if (dataGrid_Main.SelectedItem is Airplane airplane)
+                {
+                    // Получить выделенного автора
+
+                    // Получить ID выделенного автора
+                    int selectedId = airplane.Id;
+
+                    Window_Change window_change = new Window_Change(airplane);
+
+                    var dictVendorIdBrandTitle =
+                    contextManufacturerAirplane.Manufacturers.Select(m => new { Key = m.VendorId, Value = m.BrandTitle }).AsEnumerable().ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+                    window_change.DictionaryVendorIdBrandTitle = dictVendorIdBrandTitle;
+
+                    Airplanes changedAirplane = null;//ожидаем изминенный обьект
+                    window_change.ReturnObject += res => changedAirplane = res as Airplanes;//по событию забираем изминенный объект
+
+                    if (window_change.ShowDialog() == true)
+                    {
+                        if (changedAirplane.Id == -1)//создание новой записи
+                        {
+                            contextManufacturerAirplane.Airplanes.Add(changedAirplane);
+                        }
+                        else
+                        {
+                            Airplanes selectedAirplaneDB = (from t in contextManufacturerAirplane.Airplanes
+                                                           where t.Id == selectedId
+                                                           select t)?.First();
+
+                            selectedAirplaneDB.Id = changedAirplane.Id;
+                            selectedAirplaneDB.Model = changedAirplane.Model;
+                            selectedAirplaneDB.Price = changedAirplane.Price;
+                            selectedAirplaneDB.Speed = changedAirplane.Speed;
+                            selectedAirplaneDB.VendorId = changedAirplane.VendorId;
+                        }
+
+                        contextManufacturerAirplane.SaveChanges();
+
+                        // Обновить таблицу
+                        RefreshAirplane();
+                    }
+                }
+
+                if (dataGrid_Main.SelectedItem is Project project)
+                {
+                    // Получить выделенного автора
+
+                    // Получить ID выделенного автора
+                    int selectedId = project.Id;
+
+                    Window_Change window_change = new Window_Change(project);
+
+                    Projects changedProject = null;//ожидаем изминенный обьект
+                    window_change.ReturnObject += res => changedProject = res as Projects;//по событию забираем изминенный объект
+
+                    if (window_change.ShowDialog() == true)
+                    {
+                        if (changedProject.Id == -1)//создание новой записи
+                        {
+                            contextProjectsEmployees.Projects.Add(changedProject);
+                        }
+                        else
+                        {
+                            Projects selectedProjectDB = (from t in contextProjectsEmployees.Projects
+                                                         where t.Id == selectedId
+                                                         select t)?.First();
+
+                            selectedProjectDB.Id = changedProject.Id;
+                            selectedProjectDB.Title = changedProject.Title;
+                            selectedProjectDB.StartDate = changedProject.StartDate;
+                            selectedProjectDB.EndDate = changedProject.EndDate;
+                            selectedProjectDB.Description = changedProject.Description;
+                        }
+
+                        contextProjectsEmployees.SaveChanges();
+
+                        // Обновить таблицу
+                        RefreshProjects();
+                    }
+                }
+
+                if (dataGrid_Main.SelectedItem is Employee employee)
+                {
+                    // Получить выделенного автора
+
+                    // Получить ID выделенного автора
+                    int selectedId = employee.Id;
+
+                    Window_Change window_change = new Window_Change(employee);
+
+                    Employees changedEmployee = null;//ожидаем изминенный обьект
+                    window_change.ReturnObject += res => changedEmployee = res as Employees;//по событию забираем изминенный объект
+
+                    if (window_change.ShowDialog() == true)
+                    {
+                        if (changedEmployee.Id == -1)//создание новой записи
+                        {
+                            contextProjectsEmployees.Employees.Add(changedEmployee);
+                        }
+                        else
+                        {
+                            Employees selectedEmployeeDB = (from t in contextProjectsEmployees.Employees
+                                                           where t.Id == selectedId
+                                                           select t)?.First();
+
+                            selectedEmployeeDB.Id = changedEmployee.Id;
+                            selectedEmployeeDB.FirstName = changedEmployee.FirstName;
+                            selectedEmployeeDB.LastName = changedEmployee.LastName;
+                            selectedEmployeeDB.Age = changedEmployee.Age;
+                            selectedEmployeeDB.Address = changedEmployee.Address;
+                            selectedEmployeeDB.FotoPath = changedEmployee.FotoPath;
+                        }
+
+                        contextProjectsEmployees.SaveChanges();
+
+                        // Обновить таблицу
+                        RefreshEmployees();
+                    }
+                }
+
+            }
         }
     }
 }

@@ -38,10 +38,10 @@
                         </DataGrid.RowDetailsTemplate>
                         
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="VendorId" Binding="{Binding Path=VendorId}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="BrandTitle" Binding="{Binding Path=BrandTitle, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
-                            <DataGridTextColumn Header="Address" Binding="{Binding Path=Address, UpdateSourceTrigger=PropertyChanged}" Width="150" />
-                            <DataGridTextColumn Header="Phone" Binding="{Binding Path=Phone, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                            <DataGridTextColumn IsReadOnly="True" Header="VendorId" Binding="{Binding Path=VendorId}" />
+                            <DataGridTextColumn IsReadOnly="True" Header="BrandTitle" Binding="{Binding Path=BrandTitle, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Address" Binding="{Binding Path=Address, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Phone" Binding="{Binding Path=Phone, UpdateSourceTrigger=PropertyChanged}" Width="150" />
 
                             <!--<DataGridComboBoxColumn x:Name="StateColumn" Header="Штат" SelectedItemBinding="{Binding Path=State, UpdateSourceTrigger=PropertyChanged}">
                             </DataGridComboBoxColumn>
@@ -92,10 +92,10 @@
                         </DataGrid.RowDetailsTemplate>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Model" Binding="{Binding Path=Model, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
-                            <DataGridTextColumn Header="Price" Binding="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}" Width="150" />
-                            <DataGridTextColumn Header="Speed" Binding="{Binding Path=Speed, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Id" Binding="{Binding Path=Id}" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Model" Binding="{Binding Path=Model, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Speed" Binding="{Binding Path=Speed, UpdateSourceTrigger=PropertyChanged}" Width="150" />
                             <!--<DataGridTextColumn Header="VendorId" Binding="{Binding Path=VendorId, UpdateSourceTrigger=PropertyChanged}" Width="150" />-->
 
                             <DataGridTemplateColumn Header="Vendor">
@@ -106,7 +106,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Path=VendorId, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                                        <TextBox IsReadOnly="True" Text="{Binding Path=VendorId, UpdateSourceTrigger=PropertyChanged}" Width="150" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
