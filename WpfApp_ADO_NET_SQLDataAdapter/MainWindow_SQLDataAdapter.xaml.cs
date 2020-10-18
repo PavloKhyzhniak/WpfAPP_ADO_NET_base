@@ -1205,7 +1205,7 @@ GO
 
                     if (window_change.ShowDialog() == true)
                     {
-                        DataTable current_table = dsProjectsEmployees.Tables["Manufacturer"];
+                        DataTable current_table = dsManufacturerAirplane.Tables["Manufacturers"];
 
                         if (changedManufacturer.VendorId == -1)//создание новой записи
                         {
@@ -1235,7 +1235,7 @@ GO
                         }
 
                         // синхронизация данных с сервером
-                        adapterManufacturer.Update(dsManufacturerAirplane, "Manufacturer");
+                        adapterManufacturer.Update(dsManufacturerAirplane, "Manufacturers");
 
                         current_table.AcceptChanges();
 
@@ -1268,7 +1268,7 @@ GO
 
                     if (window_change.ShowDialog() == true)
                     {
-                        DataTable current_table = dsProjectsEmployees.Tables["Projects"];
+                        DataTable current_table = dsManufacturerAirplane.Tables["Airplanes"];
 
                         if (changedAirplane.Id == -1)//создание новой записи
                         {
@@ -1302,7 +1302,7 @@ GO
                         }
 
                         // синхронизация данных с сервером
-                        adapterAirplane.Update(dsManufacturerAirplane, "Airplane");
+                        adapterAirplane.Update(dsManufacturerAirplane, "Airplanes");
 
                         current_table.AcceptChanges();
 
@@ -1340,7 +1340,7 @@ GO
                         else
                         {
                             Project selectedProjectDB = (from p in dsProjectsEmployees.Tables["Projects"].AsEnumerable()
-                                                         where (int)p["ProjectId"] == selectedId
+                                                         where (int)p["Id"] == selectedId
                                                          select new Project
                                                          {
                                                              Id = (int)(p["Id"]),

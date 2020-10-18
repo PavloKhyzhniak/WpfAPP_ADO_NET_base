@@ -270,7 +270,7 @@ namespace WpfApp_ADO_NET_SQLDataReader.Classes_SqlDataReader
                     sqlCommand.CommandText =
                         "SELECT p.Id,p.Title" +
                         " FROM Projects p" +
-                        " WHERE p.Id = (" +
+                        " WHERE p.Id IN (" +
                         "    SELECT pe.ProjectId" +
                         "    FROM ProjectEmployees pe GROUP BY pe.ProjectId" +
                         "    HAVING count(pe.ProjectId) =" +

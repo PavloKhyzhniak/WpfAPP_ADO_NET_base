@@ -180,7 +180,7 @@ namespace WpfApp_ADO_NET_SQLDataReader.Classes_SqlDataReader
                     sqlCommand.Parameters.Add(paramVendorId);
 
                     SqlParameter paramId = new SqlParameter("@Id", SqlDbType.Int);
-                    paramId.Value = airplane.VendorId;
+                    paramId.Value = airplane.Id;
                     sqlCommand.Parameters.Add(paramId);
 
                     sqlCommand.ExecuteNonQuery();

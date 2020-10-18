@@ -2497,10 +2497,9 @@ namespace WpfApp_ADO_NET_SQLDataAdapter_TypedDataSet.DataSet_ManufacturerAirplan
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Airplanes] WHERE (([Id] = @Original_Id) AND ([Model] = @Origin" +
-                "al_Model) AND ([Price] = @Original_Price) AND ([Speed] = @Original_Speed) AND ((" +
-                "@IsNull_VendorId = 1 AND [VendorId] IS NULL) OR ([VendorId] = @Original_VendorId" +
-                ")))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [Airplanes] WHERE (([Id] = @Original_Id) AND ([Model] = @Original_Mod" +
+                "el) AND ([Price] = @Original_Price) AND ([Speed] = @Original_Speed) AND ((@IsNul" +
+                "l_VendorId = 1 AND [VendorId] IS NULL) OR ([VendorId] = @Original_VendorId)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Model", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Model", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -2510,9 +2509,9 @@ namespace WpfApp_ADO_NET_SQLDataAdapter_TypedDataSet.DataSet_ManufacturerAirplan
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_VendorId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VendorId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Airplanes] ([Model], [Price], [Speed], [VendorId]) VALUES (@Mo" +
-                "del, @Price, @Speed, @VendorId);\r\nSELECT Id, Model, Price, Speed, VendorId FROM " +
-                "Airplanes WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Airplanes] ([Model], [Price], [Speed], [VendorId]) VALUES (@Model, @" +
+                "Price, @Speed, @VendorId);\r\nSELECT Id, Model, Price, Speed, VendorId FROM Airpla" +
+                "nes WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Model", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Model", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Price", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -2520,7 +2519,7 @@ namespace WpfApp_ADO_NET_SQLDataAdapter_TypedDataSet.DataSet_ManufacturerAirplan
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VendorId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VendorId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Airplanes] SET [Model] = @Model, [Price] = @Price, [Speed] = @Speed, [VendorId] = @VendorId WHERE (([Id] = @Original_Id) AND ([Model] = @Original_Model) AND ([Price] = @Original_Price) AND ([Speed] = @Original_Speed) AND ((@IsNull_VendorId = 1 AND [VendorId] IS NULL) OR ([VendorId] = @Original_VendorId)));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Airplanes] SET [Model] = @Model, [Price] = @Price, [Speed] = @Speed, [VendorId] = @VendorId WHERE (([Id] = @Original_Id) AND ([Model] = @Original_Model) AND ([Price] = @Original_Price) AND ([Speed] = @Original_Speed) AND ((@IsNull_VendorId = 1 AND [VendorId] IS NULL) OR ([VendorId] = @Original_VendorId)));
 SELECT Id, Model, Price, Speed, VendorId FROM Airplanes WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Model", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Model", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -2549,7 +2548,7 @@ SELECT Id, Model, Price, Speed, VendorId FROM Airplanes WHERE (Id = @Id)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, Model, Price, Speed, VendorId FROM dbo.Airplanes";
+            this._commandCollection[0].CommandText = "SELECT        Id, Model, Price, Speed, VendorId\r\nFROM            Airplanes";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

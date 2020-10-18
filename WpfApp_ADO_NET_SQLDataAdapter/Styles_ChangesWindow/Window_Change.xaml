@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp_ADO_NET_SQLDataAdapter"
         mc:Ignorable="d"
-        Title="Window_Change" WindowStartupLocation="CenterOwner" Closing="Window_Closing" Loaded="Window_Loaded" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" 
+        Title="Window_Change" WindowStartupLocation="CenterOwner" Closing="Window_Closing" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" 
         
         >
     <Window.DataContext>
@@ -14,9 +14,9 @@
 
     <DockPanel Width="400">
          <StackPanel Orientation="Horizontal" Height="40" DockPanel.Dock="Bottom" HorizontalAlignment="Center" >
-            <Button Margin = "5" x:Name="buttonOK" Width="100" Height="30" Content="UPDATE" Click="buttonOK_Click"/>
-            <Button Margin = "5" x:Name="buttonADD" Width="100" Height="30" Content="INSERT" Click="buttonADD_Click"/>
-            <Button Margin = "5" x:Name="buttonCancel" Width="100" Height="30" Content="CANCEL" Click="buttonCancel_Click" />           
+            <Button Margin = "5" x:Name="buttonOK" Width="100" Height="30" Content="UPDATE" Click="buttonUPDATE_Click"/>
+            <Button Margin = "5" x:Name="buttonADD" Width="100" Height="30" Content="INSERT" Click="buttonINSERT_Click"/>
+            <Button Margin = "5" x:Name="buttonCancel" Width="100" Height="30" Content="CANCEL" Click="buttonCANCEL_Click" />           
         </StackPanel>
         <ContentControl x:Name="mainGrid">
 
