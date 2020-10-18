@@ -48,35 +48,29 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             PrepareProjectsEmployees();
         }
 
-        public void PrepareManufactureAirplane()
+        public void FillAirplane()
         {
-            dsManufacturerAirplane = new DataSet();
-
-            // Очистка множества таблиц
-            dsManufacturerAirplane.Clear();
-
             using (adapterManufacturer = new SqlDataAdapter(
                 "select * from Manufacturers"
                , connectionManufacturerAirplane))
             {
                 adapterManufacturer.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
                 // Заполнение таблиц с сервера 
+                adapterManufacturer.FillSchema(dsManufacturerAirplane, SchemaType.Source, "Manufacturers");
                 adapterManufacturer.Fill(dsManufacturerAirplane, "Manufacturers");
             }
-
-            using (adapterAirplane = new SqlDataAdapter(
-                            "select a.*, m.BrandTitle Vendor" +
-                            " from Airplanes a, Manufacturers m" +
-                            " where a.VendorId = m.VendorId"
-                       , connectionManufacturerAirplane))
+        }
+        public void UpdateAirplane()
+        {
+            using (adapterManufacturer = new SqlDataAdapter(
+                "select * from Manufacturers"
+               , connectionManufacturerAirplane))
             {
-                adapterAirplane.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
-                // Заполнение таблиц с сервера 
-                adapterAirplane.Fill(dsManufacturerAirplane, "Airplanes");
+                adapterManufacturer.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
             }
 
             string commandString;
-            SqlCommand command; 
+            SqlCommand command;
             // настройка синхронизации с сервером
             commandString = "insert into Manufacturers(BrandTitle, Address, Phone) values (@BrandTitle, @Address, @Phone)";
             command = new SqlCommand(commandString, connectionManufacturerAirplane);
@@ -97,7 +91,34 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             command.Parameters.Add("@Address", SqlDbType.VarChar, 50, "Address");
             command.Parameters.Add("@Phone", SqlDbType.VarChar, 20, "Phone");
             adapterManufacturer.UpdateCommand = command;
+        }
+        public void FillManufacture()
+        {
+            using (adapterAirplane = new SqlDataAdapter(
+                            "select a.*, m.BrandTitle Vendor" +
+                            " from Airplanes a, Manufacturers m" +
+                            " where a.VendorId = m.VendorId"
+                       , connectionManufacturerAirplane))
+            {
+                adapterAirplane.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
+                // Заполнение таблиц с сервера 
+                adapterAirplane.FillSchema(dsManufacturerAirplane, SchemaType.Source, "Airplanes");
+                adapterAirplane.Fill(dsManufacturerAirplane, "Airplanes");
+            }
+        }
+        public void UpdateManufacture()
+        {
+            using (adapterAirplane = new SqlDataAdapter(
+                                        "select a.*, m.BrandTitle Vendor" +
+                                        " from Airplanes a, Manufacturers m" +
+                                        " where a.VendorId = m.VendorId"
+                                   , connectionManufacturerAirplane))
+            {
+                adapterAirplane.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
+            }
 
+            string commandString;
+            SqlCommand command;
             // настройка синхронизации с сервером
             commandString = "insert into Airplanes(Model, Price, Speed, VendorId) values (@Model, @Price, @Speed, @VendorId)";
             command = new SqlCommand(commandString, connectionManufacturerAirplane);
@@ -120,7 +141,15 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             command.Parameters.Add("@Speed", SqlDbType.Int, 20, "Speed");
             command.Parameters.Add("@VendorId", SqlDbType.Int, 4, "VendorId");
             adapterAirplane.UpdateCommand = command;
+        }
 
+
+        public void PrepareManufactureAirplane()
+        {
+            dsManufacturerAirplane = new DataSet();
+
+            FillManufacture();
+            FillAirplane();
            
             // Поддержка отношений между локальными таблицами
             DataRelation newDSRelationManufacturerAirplane = 
@@ -133,6 +162,14 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
 
         private void ShowDataAdapterCommand(SqlCommandBuilder cmdBuilder)
         {
+            //SqlCommandBuilder cmdBuilder;
+            //cmdBuilder = new SqlCommandBuilder(adapterProjects);
+            //ShowDataAdapterCommand(cmdBuilder);
+            //cmdBuilder = new SqlCommandBuilder(adapterProjectsEmployees);
+            //ShowDataAdapterCommand(cmdBuilder);
+            //cmdBuilder = new SqlCommandBuilder(adapterEmployees);
+            //ShowDataAdapterCommand(cmdBuilder);
+
             Console.WriteLine("Update command Generated by the Command Builder : ");
             Console.WriteLine("==================================================");
             Console.WriteLine(cmdBuilder.GetUpdateCommand().CommandText);
@@ -149,13 +186,8 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             Console.WriteLine("         ");
         }
 
-        public void PrepareProjectsEmployees()
+        public void FillProjects()
         {
-            dsProjectsEmployees = new DataSet();
-
-            // Очистка множества таблиц
-            dsProjectsEmployees.Clear();
-
             using (adapterProjects = new SqlDataAdapter())
             {
                 adapterProjects.SelectCommand = new SqlCommand(
@@ -163,39 +195,23 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
                , connectionProjectsEmployees);
 
                 adapterProjects.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
+                 
                 // Заполнение таблиц с сервера 
+                adapterProjects.FillSchema(dsProjectsEmployees, SchemaType.Source, "Projects");
                 adapterProjects.Fill(dsProjectsEmployees, "Projects");
             }
 
-            using (adapterProjectsEmployees = new SqlDataAdapter())
+        }
+        public void UpdateProjects()
+        {
+            using (adapterProjects = new SqlDataAdapter())
             {
-                adapterProjectsEmployees.SelectCommand = new SqlCommand(
-                "select * from ProjectEmployees"
+                adapterProjects.SelectCommand = new SqlCommand(
+                "select * from Projects"
                , connectionProjectsEmployees);
 
-                adapterProjectsEmployees.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
-                // Заполнение таблиц с сервера 
-                adapterProjectsEmployees.Fill(dsProjectsEmployees, "ProjectEmployees");
+                adapterProjects.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
             }
-
-            using (adapterEmployees = new SqlDataAdapter())
-            {
-                adapterEmployees.SelectCommand = new SqlCommand(
-                "select * from Employees"
-               , connectionProjectsEmployees);
-
-                adapterEmployees.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
-                // Заполнение таблиц с сервера 
-                adapterEmployees.Fill(dsProjectsEmployees, "Employees");
-            }
-                       
-            //SqlCommandBuilder cmdBuilder;
-            //cmdBuilder = new SqlCommandBuilder(adapterProjects);
-            //ShowDataAdapterCommand(cmdBuilder);
-            //cmdBuilder = new SqlCommandBuilder(adapterProjectsEmployees);
-            //ShowDataAdapterCommand(cmdBuilder);
-            //cmdBuilder = new SqlCommandBuilder(adapterEmployees);
-            //ShowDataAdapterCommand(cmdBuilder);
 
             string commandString;
             SqlCommand command;
@@ -221,7 +237,36 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             command.Parameters.Add("@EndDate", SqlDbType.DateTime, 50, "EndDate");
             command.Parameters.Add("@Description", SqlDbType.VarChar, 200, "Description");
             adapterProjects.UpdateCommand = command;
-                        
+        }
+        public void FillProjectsEmployees()
+        {
+            using (adapterProjectsEmployees = new SqlDataAdapter())
+            {
+                adapterProjectsEmployees.SelectCommand = new SqlCommand(
+                "select * from ProjectEmployees"
+               , connectionProjectsEmployees);
+
+                adapterProjectsEmployees.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
+
+                // Заполнение таблиц с сервера 
+                adapterProjectsEmployees.FillSchema(dsProjectsEmployees, SchemaType.Source, "ProjectEmployees");
+                adapterProjectsEmployees.Fill(dsProjectsEmployees, "ProjectEmployees");
+            }
+
+        }
+        public void UpdateProjectsEmployees()
+        {
+            using (adapterProjectsEmployees = new SqlDataAdapter())
+            {
+                adapterProjectsEmployees.SelectCommand = new SqlCommand(
+                "select * from ProjectEmployees"
+               , connectionProjectsEmployees);
+
+                adapterProjectsEmployees.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
+             }
+
+            string commandString;
+            SqlCommand command;
             // настройка синхронизации с сервером
             commandString = "insert into ProjectEmployees(ProjectId, EmployeeId) values (@ProjectId, @EmployeeId)";
             command = new SqlCommand(commandString, connectionProjectsEmployees);
@@ -229,17 +274,47 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             command.Parameters.Add("@EmployeeId", SqlDbType.Int, 4, "EmployeeId");
             adapterProjectsEmployees.InsertCommand = command;
 
-        //    commandString = "delete from ProjectEmployees where VendorId=@VendorId";
-        //    command = new SqlCommand(commandString, connectionProjectsEmployees);
-        //    command.Parameters.Add("@VendorId", SqlDbType.Int, 4, "VendorId");
-        //    adapterProjectsEmployees.DeleteCommand = command;
-        //
-        //    commandString = "update ProjectEmployees set ProjectId=@ProjectId, EmployeeId=@EmployeeId where VendorId=@VendorId";
-        //    command = new SqlCommand(commandString, connectionProjectsEmployees);
-        //    command.Parameters.Add("@ProjectId", SqlDbType.Int, 4, "ProjectId");
-        //    command.Parameters.Add("@EmployeeId", SqlDbType.Int, 4, "EmployeeId");
-        //    adapterProjectsEmployees.UpdateCommand = command;
-                        
+            commandString = "delete from ProjectEmployees where ProjectId=@ProjectId and EmployeeId=@EmployeeId";
+            command = new SqlCommand(commandString, connectionProjectsEmployees);
+            command.Parameters.Add("@ProjectId", SqlDbType.Int, 4, "ProjectId");
+            command.Parameters.Add("@EmployeeId", SqlDbType.Int, 4, "EmployeeId");
+            adapterProjectsEmployees.DeleteCommand = command;
+            
+            //    commandString = "update ProjectEmployees set ProjectId=@ProjectId, EmployeeId=@EmployeeId where VendorId=@VendorId";
+            //    command = new SqlCommand(commandString, connectionProjectsEmployees);
+            //    command.Parameters.Add("@ProjectId", SqlDbType.Int, 4, "ProjectId");
+            //    command.Parameters.Add("@EmployeeId", SqlDbType.Int, 4, "EmployeeId");
+            //    adapterProjectsEmployees.UpdateCommand = command;
+        }
+        public void FillEmployees()
+        {
+            using (adapterEmployees = new SqlDataAdapter())
+            {
+                adapterEmployees.SelectCommand = new SqlCommand(
+                "select * from Employees"
+               , connectionProjectsEmployees);
+
+                adapterEmployees.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
+
+                // Заполнение таблиц с сервера 
+                adapterEmployees.FillSchema(dsProjectsEmployees, SchemaType.Source, "Employees");
+                adapterEmployees.Fill(dsProjectsEmployees, "Employees");
+            }
+
+        }
+        public void UpdateEmployees()
+        {
+            using (adapterEmployees = new SqlDataAdapter())
+            {
+                adapterEmployees.SelectCommand = new SqlCommand(
+                "select * from Employees"
+               , connectionProjectsEmployees);
+
+                adapterEmployees.MissingSchemaAction = MissingSchemaAction.AddWithKey;//with PrimaryKey
+            }
+
+            string commandString;
+            SqlCommand command;
             // настройка синхронизации с сервером
             commandString = "insert into Employees(FirstName, LastName, Age, Address, FotoPath) values (@FirstName, @LastName, @Age, @Address, @FotoPath)";
             command = new SqlCommand(commandString, connectionProjectsEmployees);
@@ -264,6 +339,15 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             command.Parameters.Add("@Address", SqlDbType.VarChar, 50, "Address");
             command.Parameters.Add("@FotoPath", SqlDbType.VarChar, 20, "FotoPath");
             adapterEmployees.UpdateCommand = command;
+        }
+
+        public void PrepareProjectsEmployees()
+        {
+            dsProjectsEmployees = new DataSet();
+
+            FillProjects();
+            FillProjectsEmployees();
+            FillEmployees();            
 
             // Поддержка отношений между локальными таблицами
             DataRelation newDSRelationProjectsToEmployees =
@@ -280,6 +364,8 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
 
         public void RefreshManufacturer()
         {
+            FillManufacture();
+
             var result = dsManufacturerAirplane.Tables["Manufacturers"].AsEnumerable().Select(i => new Manufacturer
             {
                 VendorId = (int)(i["VendorId"]),
@@ -303,6 +389,8 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
 
         public void RefreshAirplane()
         {
+            FillAirplane();
+
             var result = dsManufacturerAirplane.Tables["Airplanes"].AsEnumerable().Select(i => new Airplane
             {
                 Id = (int)(i["Id"]),
@@ -350,8 +438,9 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             current_table.Rows.Add(dr);
 
             // синхронизация данных с сервером
-            adapterManufacturer.Update(dsManufacturerAirplane, "Manufacturers");
+            UpdateManufacture();
 
+            //Подтвердить изминения(закрепить)
             current_table.AcceptChanges();
 
             RefreshManufacturer();
@@ -375,7 +464,7 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
                 findRow.Delete();//delete on server
 
                 // синхронизация данных с сервером
-                adapterManufacturer.Update(dsManufacturerAirplane,"Manufacturers");
+                UpdateManufacture();
 
                 // Обновить таблицу
                 RefreshManufacturer();
@@ -409,8 +498,9 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             current_table.Rows.Add(dr);
 
             // синхронизация данных с сервером
-            adapterAirplane.Update(dsManufacturerAirplane, "Airplanes");
+            UpdateAirplane();
 
+            //Подтвердить изминения(закрепить)
             current_table.AcceptChanges();
 
             RefreshAirplane();
@@ -434,7 +524,7 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
                 findRow.Delete();//delete on server
 
                 // синхронизация данных с сервером
-                adapterAirplane.Update(dsManufacturerAirplane, "Airplanes");
+                UpdateAirplane();
 
                 // Обновить таблицу
                 RefreshAirplane();
@@ -697,6 +787,8 @@ GO
 
         public void RefreshProjects()
         {
+            FillProjects();
+
             var result = dsProjectsEmployees.Tables["Projects"].AsEnumerable().Select(i => new Project
             {
                 Id = (int)(i["Id"]),
@@ -739,6 +831,8 @@ GO
 
         public void RefreshEmployees()
         {
+            FillEmployees();
+
             var result = dsProjectsEmployees.Tables["Employees"].AsEnumerable().Select(i => new Employee
             {
                 Id = (int)(i["Id"]),
@@ -805,8 +899,9 @@ GO
             current_table.Rows.Add(dr);
 
             // синхронизация данных с сервером
-            adapterProjects.Update(dsProjectsEmployees, "Projects");
+            UpdateProjects();
 
+            //Подтвердить изминения(закрепить)
             current_table.AcceptChanges();
 
             RefreshProjects();
@@ -830,7 +925,7 @@ GO
                 findRow.Delete();//delete on server
 
                 // синхронизация данных с сервером
-                adapterProjects.Update(dsProjectsEmployees, "Projects");
+                UpdateProjects();
 
                 // Обновить таблицу
                 RefreshProjects();
@@ -865,8 +960,9 @@ GO
             current_table.Rows.Add(dr);
 
             // синхронизация данных с сервером
-            adapterEmployees.Update(dsProjectsEmployees, "Employees");
+            UpdateEmployees();
 
+            //Подтвердить изминения(закрепить)
             current_table.AcceptChanges();
 
             RefreshEmployees();
@@ -890,7 +986,7 @@ GO
                 findRow.Delete();//delete on server
 
                 // синхронизация данных с сервером
-                adapterEmployees.Update(dsProjectsEmployees, "Employees");
+                UpdateEmployees();
 
                 // Обновить таблицу
                 RefreshEmployees();
@@ -1209,34 +1305,53 @@ GO
 
                         if (changedManufacturer.VendorId == -1)//создание новой записи
                         {
-                            // добавление нового поля
                             DataRow dr = current_table.NewRow();
-                            dr["BrandTitle"] = manufacturer.BrandTitle;
-                            dr["Phone"] = manufacturer.Phone;
-                            dr["Address"] = manufacturer.Address;
+                            dr["BrandTitle"] = changedManufacturer.BrandTitle;
+                            dr["Phone"] = changedManufacturer.Phone;
+                            dr["Address"] = changedManufacturer.Address;
+
+                            // добавление нового поля
                             current_table.Rows.Add(dr);
                         }
                         else
                         {
-                            Manufacturer selectedManufacturerDB = (from m in dsManufacturerAirplane.Tables["Manufacturers"].AsEnumerable()
-                                                                    where (int)(m["VendorId"]) == selectedId
-                                                                   select new Manufacturer
-                                                                   {
-                                                                       VendorId = (int)(m["VendorId"]),
-                                                                       BrandTitle = (string)(m["BrandTitle"]),
-                                                                       Address = (string)(m["Address"]),
-                                                                       Phone = (string)(m["Phone"])
-                                                                   })?.First();
+                            //    Manufacturer selectedManufacturerDB = (from m in dsManufacturerAirplane.Tables["Manufacturers"].AsEnumerable()
+                            //                                            where (int)(m["VendorId"]) == selectedId
+                            //                                           select new Manufacturer
+                            //                                           {
+                            //                                               VendorId = (int)(m["VendorId"]),
+                            //                                               BrandTitle = (string)(m["BrandTitle"]),
+                            //                                               Address = (string)(m["Address"]),
+                            //                                               Phone = (string)(m["Phone"])
+                            //                                           })?.First();
+                            //
+                            //    selectedManufacturerDB.VendorId = changedManufacturer.VendorId;
+                            //    selectedManufacturerDB.BrandTitle = changedManufacturer.BrandTitle;
+                            //    selectedManufacturerDB.Address = changedManufacturer.Address;
+                            //    selectedManufacturerDB.Phone = changedManufacturer.Phone;
 
-                            selectedManufacturerDB.VendorId = changedManufacturer.VendorId;
-                            selectedManufacturerDB.BrandTitle = changedManufacturer.BrandTitle;
-                            selectedManufacturerDB.Address = changedManufacturer.Address;
-                            selectedManufacturerDB.Phone = changedManufacturer.Phone;
+                            DataRow findRow = current_table.Rows.Find(selectedId.ToString());
+                            //  int indexUpdateRow = current_table.Rows.IndexOf(findRow);
+                            //  current_table.Rows[indexUpdateRow].BeginEdit();
+                            //  current_table.Rows[indexUpdateRow]["FirstName"] = changedEmployee.FirstName;
+                            //  current_table.Rows[indexUpdateRow]["LastName"] = changedEmployee.LastName;
+                            //  current_table.Rows[indexUpdateRow]["Age"] = changedEmployee.Age;
+                            //  current_table.Rows[indexUpdateRow]["Address"] = changedEmployee.Address;
+                            //  current_table.Rows[indexUpdateRow]["FotoPath"] = changedEmployee.FotoPath;
+                            //  current_table.Rows[indexUpdateRow].EndEdit();
+
+                            findRow.BeginEdit();
+                            findRow["BrandTitle"] = changedManufacturer.BrandTitle;
+                            findRow["Phone"] = changedManufacturer.Phone;
+                            findRow["Address"] = changedManufacturer.Address;
+                            findRow.EndEdit();
                         }
 
                         // синхронизация данных с сервером
-                        adapterManufacturer.Update(dsManufacturerAirplane, "Manufacturers");
+                        UpdateManufacture();
+                        adapterManufacturer.Update(current_table);
 
+                        //Подтвердить изминения(закрепить)
                         current_table.AcceptChanges();
 
                         // Обновить таблицу
@@ -1273,37 +1388,60 @@ GO
                         if (changedAirplane.Id == -1)//создание новой записи
                         {
                             DataRow dr = current_table.NewRow();
-                            dr["Model"] = airplane.Model;
-                            dr["Price"] = airplane.Price;
-                            dr["Speed"] = airplane.Speed;
-                            dr["VendorId"] = airplane.VendorId;
-                            dr["Vendor"] = "";//must be not NULL
+                            dr["Model"] = changedAirplane.Model;
+                            dr["Price"] = changedAirplane.Price;
+                            dr["Speed"] = changedAirplane.Speed;
+                            dr["VendorId"] = changedAirplane.VendorId;
+                            dr["Vendor"] = dsManufacturerAirplane.Tables["Manufacturers"].AsEnumerable()
+                                .Where(a => (int)a["VendorId"] == changedAirplane.VendorId)
+                                .Select(a => (string)a["BrandTitle"]).SingleOrDefault();
+
+                            // добавление нового поля
                             current_table.Rows.Add(dr);
                         }
                         else
                         {
-                            Airplane selectedAirplaneDB = (from a in dsManufacturerAirplane.Tables["Airplanes"].AsEnumerable()
-                                                            where (int)(a["Id"]) == selectedId
-                                                            select new Airplane
-                                                            {
-                                                                Id = (int)(a["Id"]),
-                                                                Model = (string)(a["Model"]),
-                                                                Price = (double)(a["Price"]),
-                                                                Speed = (int)(a["Speed"]),
-                                                                VendorId = (int)(a["VendorId"]),
-                                                                Vendor = (string)(a["Vendor"])
-                                                            })?.First();
+                            //    Airplane selectedAirplaneDB = (from a in dsManufacturerAirplane.Tables["Airplanes"].AsEnumerable()
+                            //                                    where (int)(a["Id"]) == selectedId
+                            //                                    select new Airplane
+                            //                                    {
+                            //                                        Id = (int)(a["Id"]),
+                            //                                        Model = (string)(a["Model"]),
+                            //                                        Price = (double)(a["Price"]),
+                            //                                        Speed = (int)(a["Speed"]),
+                            //                                        VendorId = (int)(a["VendorId"]),
+                            //                                        Vendor = (string)(a["Vendor"])
+                            //                                    })?.First();
+                            //
+                            //    selectedAirplaneDB.Id = changedAirplane.Id;
+                            //    selectedAirplaneDB.Model = changedAirplane.Model;
+                            //    selectedAirplaneDB.Price = changedAirplane.Price;
+                            //    selectedAirplaneDB.Speed = changedAirplane.Speed;
+                            //    selectedAirplaneDB.VendorId = changedAirplane.VendorId;
 
-                            selectedAirplaneDB.Id = changedAirplane.Id;
-                            selectedAirplaneDB.Model = changedAirplane.Model;
-                            selectedAirplaneDB.Price = changedAirplane.Price;
-                            selectedAirplaneDB.Speed = changedAirplane.Speed;
-                            selectedAirplaneDB.VendorId = changedAirplane.VendorId;
+                            DataRow findRow = current_table.Rows.Find(selectedId.ToString());
+                            //  int indexUpdateRow = current_table.Rows.IndexOf(findRow);
+                            //  current_table.Rows[indexUpdateRow].BeginEdit();
+                            //  current_table.Rows[indexUpdateRow]["FirstName"] = changedEmployee.FirstName;
+                            //  current_table.Rows[indexUpdateRow]["LastName"] = changedEmployee.LastName;
+                            //  current_table.Rows[indexUpdateRow]["Age"] = changedEmployee.Age;
+                            //  current_table.Rows[indexUpdateRow]["Address"] = changedEmployee.Address;
+                            //  current_table.Rows[indexUpdateRow]["FotoPath"] = changedEmployee.FotoPath;
+                            //  current_table.Rows[indexUpdateRow].EndEdit();
+
+                            findRow.BeginEdit();
+                            findRow["Model"] = changedAirplane.Model;
+                            findRow["Price"] = changedAirplane.Price;
+                            findRow["Speed"] = changedAirplane.Speed;
+                            findRow["VendorId"] = changedAirplane.VendorId;
+                            findRow.EndEdit();
                         }
 
                         // синхронизация данных с сервером
-                        adapterAirplane.Update(dsManufacturerAirplane, "Airplanes");
+                        UpdateAirplane();
+                        adapterAirplane.Update(current_table);
 
+                        //Подтвердить изминения(закрепить)
                         current_table.AcceptChanges();
 
                         // Обновить таблицу
@@ -1326,40 +1464,60 @@ GO
                     if (window_change.ShowDialog() == true)
                     {
                         DataTable current_table = dsProjectsEmployees.Tables["Projects"];
-
+                                                
                         if (changedProject.Id == -1)//создание новой записи
                         {
-                            // добавление нового поля
                             DataRow dr = current_table.NewRow();
                             dr["Title"] = changedProject.Title;
                             dr["StartDate"] = changedProject.StartDate;
                             dr["EndDate"] = changedProject.EndDate;
                             dr["Description"] = changedProject.Description;
+
+                            // добавление нового поля
                             current_table.Rows.Add(dr);
                         }
                         else
                         {
-                            Project selectedProjectDB = (from p in dsProjectsEmployees.Tables["Projects"].AsEnumerable()
-                                                         where (int)p["Id"] == selectedId
-                                                         select new Project
-                                                         {
-                                                             Id = (int)(p["Id"]),
-                                                             Title = (string)(p["Title"]),
-                                                             StartDate = (DateTime)(p["StartDate"]),
-                                                             EndDate = (DateTime)(p["EndDate"]),
-                                                             Description = (string)(p["Description"])
-                                                         })?.First();
+                            //    Project selectedProjectDB = (from p in dsProjectsEmployees.Tables["Projects"].AsEnumerable()
+                            //                                 where (int)p["Id"] == selectedId
+                            //                                 select new Project
+                            //                                 {
+                            //                                     Id = (int)(p["Id"]),
+                            //                                     Title = (string)(p["Title"]),
+                            //                                     StartDate = (DateTime)(p["StartDate"]),
+                            //                                     EndDate = (DateTime)(p["EndDate"]),
+                            //                                     Description = (string)(p["Description"])
+                            //                                 })?.First();
+                            //
+                            //    selectedProjectDB.Id = changedProject.Id;
+                            //    selectedProjectDB.Title = changedProject.Title;
+                            //    selectedProjectDB.StartDate = changedProject.StartDate;
+                            //    selectedProjectDB.EndDate = changedProject.EndDate;
+                            //    selectedProjectDB.Description = changedProject.Description;
 
-                            selectedProjectDB.Id = changedProject.Id;
-                            selectedProjectDB.Title = changedProject.Title;
-                            selectedProjectDB.StartDate = changedProject.StartDate;
-                            selectedProjectDB.EndDate = changedProject.EndDate;
-                            selectedProjectDB.Description = changedProject.Description;
+                            DataRow findRow = current_table.Rows.Find(selectedId.ToString());
+                            //  int indexUpdateRow = current_table.Rows.IndexOf(findRow);
+                            //  current_table.Rows[indexUpdateRow].BeginEdit();
+                            //  current_table.Rows[indexUpdateRow]["FirstName"] = changedEmployee.FirstName;
+                            //  current_table.Rows[indexUpdateRow]["LastName"] = changedEmployee.LastName;
+                            //  current_table.Rows[indexUpdateRow]["Age"] = changedEmployee.Age;
+                            //  current_table.Rows[indexUpdateRow]["Address"] = changedEmployee.Address;
+                            //  current_table.Rows[indexUpdateRow]["FotoPath"] = changedEmployee.FotoPath;
+                            //  current_table.Rows[indexUpdateRow].EndEdit();
+
+                            findRow.BeginEdit();
+                            findRow["Title"] = changedProject.Title;
+                            findRow["StartDate"] = changedProject.StartDate;
+                            findRow["EndDate"] = changedProject.EndDate;
+                            findRow["Description"] = changedProject.Description;
+                            findRow.EndEdit();
                         }
 
                         // синхронизация данных с сервером
-                        adapterProjects.Update(dsProjectsEmployees, "Projects");
+                        UpdateProjects();
+                        adapterProjects.Update(current_table);
 
+                        //Подтвердить изминения(закрепить)
                         current_table.AcceptChanges();
 
                         // Обновить таблицу
@@ -1385,40 +1543,61 @@ GO
 
                         if (changedEmployee.Id == -1)//создание новой записи
                         {
-                            // добавление нового поля
                             DataRow dr = current_table.NewRow();
-                            dr["FirstName"] = employee.FirstName;
-                            dr["LastName"] = employee.LastName;
-                            dr["Age"] = employee.Age;
-                            dr["Address"] = employee.Address;
-                            dr["FotoPath"] = employee.FotoPath;
+                            dr["FirstName"] = changedEmployee.FirstName;
+                            dr["LastName"] = changedEmployee.LastName;
+                            dr["Age"] = changedEmployee.Age;
+                            dr["Address"] = changedEmployee.Address;
+                            dr["FotoPath"] = changedEmployee.FotoPath;
+
+                            // добавление нового поля
                             current_table.Rows.Add(dr);
                         }
                         else
                         {
-                            Employee selectedEmployeeDB = (from emp in dsProjectsEmployees.Tables["Employees"].AsEnumerable()
-                                                           where (int)emp["Id"] == selectedId
-                                                           select new Employee
-                                                           {
-                                                               Id = (int)(emp["Id"]),
-                                                               FirstName = (string)(emp["FirstName"]),
-                                                               LastName = (string)(emp["LastName"]),
-                                                               Age = (int)(emp["Age"]),
-                                                               Address = (string)(emp["Address"]),
-                                                               FotoPath = (string)(emp["FotoPath"])
-                                                           })?.First();
+                        //    Employee selectedEmployeeDB = (from emp in dsProjectsEmployees.Tables["Employees"].AsEnumerable()
+                        //                                   where (int)emp["Id"] == selectedId
+                        //                                   select new Employee
+                        //                                   {
+                        //                                       Id = (int)(emp["Id"]),
+                        //                                       FirstName = (string)(emp["FirstName"]),
+                        //                                       LastName = (string)(emp["LastName"]),
+                        //                                       Age = (int)(emp["Age"]),
+                        //                                       Address = (string)(emp["Address"]),
+                        //                                       FotoPath = (string)(emp["FotoPath"])
+                        //                                   })?.First();
+                        //
+                        //    selectedEmployeeDB.Id = changedEmployee.Id;
+                        //    selectedEmployeeDB.FirstName = changedEmployee.FirstName;
+                        //    selectedEmployeeDB.LastName = changedEmployee.LastName;
+                        //    selectedEmployeeDB.Age = changedEmployee.Age;
+                        //    selectedEmployeeDB.Address = changedEmployee.Address;
+                        //    selectedEmployeeDB.FotoPath = changedEmployee.FotoPath;
 
-                            selectedEmployeeDB.Id = changedEmployee.Id;
-                            selectedEmployeeDB.FirstName = changedEmployee.FirstName;
-                            selectedEmployeeDB.LastName = changedEmployee.LastName;
-                            selectedEmployeeDB.Age = changedEmployee.Age;
-                            selectedEmployeeDB.Address = changedEmployee.Address;
-                            selectedEmployeeDB.FotoPath = changedEmployee.FotoPath;
+                            DataRow findRow = current_table.Rows.Find(selectedId.ToString());
+                          //  int indexUpdateRow = current_table.Rows.IndexOf(findRow);
+                          //  current_table.Rows[indexUpdateRow].BeginEdit();
+                          //  current_table.Rows[indexUpdateRow]["FirstName"] = changedEmployee.FirstName;
+                          //  current_table.Rows[indexUpdateRow]["LastName"] = changedEmployee.LastName;
+                          //  current_table.Rows[indexUpdateRow]["Age"] = changedEmployee.Age;
+                          //  current_table.Rows[indexUpdateRow]["Address"] = changedEmployee.Address;
+                          //  current_table.Rows[indexUpdateRow]["FotoPath"] = changedEmployee.FotoPath;
+                          //  current_table.Rows[indexUpdateRow].EndEdit();
+
+                            findRow.BeginEdit();
+                            findRow["FirstName"] = changedEmployee.FirstName;
+                            findRow["LastName"] = changedEmployee.LastName;
+                            findRow["Age"] = changedEmployee.Age;
+                            findRow["Address"] = changedEmployee.Address;
+                            findRow["FotoPath"] = changedEmployee.FotoPath;
+                            findRow.EndEdit();
                         }
 
                         // синхронизация данных с сервером
-                        adapterEmployees.Update(dsProjectsEmployees, "Employees");
+                        UpdateEmployees();
+                        adapterEmployees.Update(current_table);
 
+                        //Подтвердить изминения(закрепить)
                         current_table.AcceptChanges();
 
                         // Обновить таблицу

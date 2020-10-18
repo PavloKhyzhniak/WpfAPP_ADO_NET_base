@@ -45,7 +45,7 @@
                         </DataGrid.RowDetailsTemplate>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn IsReadOnly="True" Header="Id" Binding="{Binding Path=ProjectId}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Id" Binding="{Binding Path=Id}"/>
                             <DataGridTextColumn IsReadOnly="True" Header="Title" Binding="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
 
                             <DataGridTextColumn IsReadOnly="True" Header="Employees" Binding="{Binding Employees,Converter={StaticResource ConverterEmployeesToString}, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
@@ -112,7 +112,7 @@
                         </DataGrid.RowDetailsTemplate>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn IsReadOnly="True" Header="Id" Binding="{Binding Path=EmployeeId}" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Id" Binding="{Binding Path=Id}" />
                             <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName, UpdateSourceTrigger=PropertyChanged}" Width="Auto" />
                             <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged}" Width="150" />
 

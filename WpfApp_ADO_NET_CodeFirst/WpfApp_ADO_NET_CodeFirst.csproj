@@ -76,6 +76,10 @@
       <DependentUpon>202010131934391_SeedProjectsEmployees.cs</DependentUpon>
     </Compile>
     <Compile Include="Styles\RowToIndexConv.cs" />
+    <Compile Include="Styles_ChangesWindow\Window_Change.Airplane.cs" />
+    <Compile Include="Styles_ChangesWindow\Window_Change.Employees.cs" />
+    <Compile Include="Styles_ChangesWindow\Window_Change.Manufacturer.cs" />
+    <Compile Include="Styles_ChangesWindow\Window_Change.Projects.cs" />
     <Compile Include="Styles_ChangesWindow\Window_Change.xaml.cs">
       <DependentUpon>Window_Change.xaml</DependentUpon>
     </Compile>
