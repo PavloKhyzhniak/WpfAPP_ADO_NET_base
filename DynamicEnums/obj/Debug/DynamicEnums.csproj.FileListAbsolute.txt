@@ -1,0 +1,6 @@
+C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\DynamicEnums\bin\Debug\DynamicEnums.dll.config
+C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\DynamicEnums\bin\Debug\DynamicEnums.dll
+C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\DynamicEnums\bin\Debug\DynamicEnums.pdb
+C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\DynamicEnums\obj\Debug\DynamicEnums.csproj.CoreCompileInputs.cache
+C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\DynamicEnums\obj\Debug\DynamicEnums.dll
+C:\Work_Step2019\09_VisualC#_ADO_NET\App_ADO_NET_ch03_06\WpfApp_ADO_NET_Ekzam\DynamicEnums\obj\Debug\DynamicEnums.pdb

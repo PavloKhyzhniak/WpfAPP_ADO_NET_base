@@ -45,7 +45,6 @@ namespace WpfApp_ADO_NET_SQLDataAdapter_TypedDataSet
                = SqlDatabase.CreateSqlConnection_ConfigurationManager("WpfApp_ADO_NET_SQLDataAdapter_TypedDataSet.Properties.Settings.WpfApp_ADO_NET_CodeFirst_Model_ManufacturerAirplaneConnectionString");
             connectionProjectsEmployees
                 = SqlDatabase.CreateSqlConnection_ConfigurationManager("WpfApp_ADO_NET_SQLDataAdapter_TypedDataSet.Properties.Settings.WpfApp_ADO_NET_CodeFirst_Model_ProjectsEmployeesConnectionString");
-
         }   
 
         public void RefreshManufacturer()
@@ -345,35 +344,25 @@ GO
     */
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var current_table = dsTypedManufacturerAirplane.GetAirplaineWithSpeedLess;
-
             try
             {
-                //   dsTypedManufacturerAirplane.GetAirplaineWithSpeedLess.(600);
+                var current_table = dsTypedManufacturerAirplane.GetAirplaineWithSpeedLess;
+
                 using (var adapter = new GetAirplaineWithSpeedLessTableAdapter())
                 { 
                     // Заполнение таблиц с сервера 
                     adapter.Fill(current_table, 600);
                 };
+
+                Window DataGridPresent = new Window_DataGrid(current_table);
+
+                DataGridPresent.Show();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
                 //Logger.Error("Error occured while fetching records from SQL server", ex);
             }
-
-            var result = dsTypedManufacturerAirplane.GetAirplaineWithSpeedLess.AsEnumerable().Select(i => new
-            {
-                Id = (int)(i["Id"]),
-                Model = (string)(i["Model"]),
-                Price = (double)(i["Price"]),
-                Speed = (int)(i["Speed"]),
-                Vendor = (string)(i["BrandTitle"])
-            });
-
-            Window DataGridPresent = new Window_DataGrid(result.ToList());
-
-            DataGridPresent.Show();
         }
 
 
@@ -389,30 +378,25 @@ GO
         */
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            var current_table = dsTypedManufacturerAirplane.GetManufacturerWithAirplaneMore;
-
             try
             {
+                var current_table = dsTypedManufacturerAirplane.GetManufacturerWithAirplaneMore;
+
                 using (var adapter = new GetManufacturerWithAirplaneMoreTableAdapter())
                 {                 
                     // Заполнение таблиц с сервера 
                     adapter.Fill(current_table, 3);
                 };
+
+                Window DataGridPresent = new Window_DataGrid(current_table);
+
+                DataGridPresent.Show();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
                 //Logger.Error("Error occured while fetching records from SQL server", ex);
             }
-
-            var result = current_table.AsEnumerable().Select(i => new
-            {
-                BrandTitle = (string)(i["BrandTitle"])
-            });
-
-            Window DataGridPresent = new Window_DataGrid(result.ToList());
-
-            DataGridPresent.Show();
         }
 
         /*
@@ -427,30 +411,25 @@ GO
          */
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            var current_table = dsTypedManufacturerAirplane.GetManufacturerNameWithLengthLess;
-
             try
             {
+                var current_table = dsTypedManufacturerAirplane.GetManufacturerNameWithLengthLess;
+
                 using (var adapter = new GetManufacturerNameWithLengthLessTableAdapter())
                 {
                     // Заполнение таблиц с сервера 
                     adapter.Fill(current_table, 7);
                 };
+
+                Window DataGridPresent = new Window_DataGrid(current_table);
+
+                DataGridPresent.Show();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
                 //Logger.Error("Error occured while fetching records from SQL server", ex);
             }
-
-            var result = current_table.AsEnumerable().Select(i => new
-            {
-                BrandTitle = (string)(i["BrandTitle"])
-            });
-
-            Window DataGridPresent = new Window_DataGrid(result.ToList());
-
-            DataGridPresent.Show();
         }
 
 
@@ -832,31 +811,25 @@ GO
          */
         private void MenuItem_Click2(object sender, RoutedEventArgs e)
         {
-            var current_table = dsTypedProjectsEmployees.GetProjectWithMaxEmployees;
-
             try
             {
+                var current_table = dsTypedProjectsEmployees.GetProjectWithMaxEmployees;
+
                 using (var adapter = new GetProjectWithMaxEmployeesTableAdapter())
                 {
                     // Заполнение таблиц с сервера 
                     adapter.Fill(current_table);
                 };
+
+                Window DataGridPresent = new Window_DataGrid(current_table);
+
+                DataGridPresent.Show();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
                 //Logger.Error("Error occured while fetching records from SQL server", ex);
             }
-
-            var result = current_table.AsEnumerable().Select(i => new
-            {
-                Id = (int)(i["Id"]),
-                Title = (string)(i["Title"])
-            });
-
-            Window DataGridPresent = new Window_DataGrid(result.ToList());
-
-            DataGridPresent.Show();
         }
 
         /*
@@ -871,31 +844,25 @@ GO
 */
         private void MenuItem_Click_11(object sender, RoutedEventArgs e)
         {
-            var current_table = dsTypedProjectsEmployees.GetEmployeerWithAgeLess;
-
             try
             {
+                var current_table = dsTypedProjectsEmployees.GetEmployeerWithAgeLess;
+
                 using (var adapter = new GetEmployeerWithAgeLessTableAdapter())
                 {
                     // Заполнение таблиц с сервера 
                     adapter.Fill(current_table, 35);
                 };
+
+                Window DataGridPresent = new Window_DataGrid(current_table);
+
+                DataGridPresent.Show();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
                 //Logger.Error("Error occured while fetching records from SQL server", ex);
             }
-
-            var result = current_table.AsEnumerable().Select(i => new
-            {
-                FirstName = (string)(i["FirstName"]),
-                LastName = (string)(i["LastName"])
-            });
-
-            Window DataGridPresent = new Window_DataGrid(result.ToList());
-
-            DataGridPresent.Show();
         }
 
 
@@ -910,32 +877,26 @@ GO
         GO
         */
         private void MenuItem_Click_12(object sender, RoutedEventArgs e)
-        {
-            var current_table = dsTypedProjectsEmployees.GetEmployeerWithLastNameLengthMoreOrEqual;
-
+        {           
             try
             {
+                var current_table = dsTypedProjectsEmployees.GetEmployeerWithLastNameLengthMoreOrEqual;
+
                 using (var adapter = new GetEmployeerWithLastNameLengthMoreOrEqualTableAdapter())
                 {
                     // Заполнение таблиц с сервера 
                     adapter.Fill(current_table, 5);
                 };
+
+                Window DataGridPresent = new Window_DataGrid(current_table);
+
+                DataGridPresent.Show();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
                 //Logger.Error("Error occured while fetching records from SQL server", ex);
             }
-
-            var result = current_table.AsEnumerable().Select(i => new
-            {
-                FirstName = (string)(i["FirstName"]),
-                LastName = (string)(i["LastName"])
-            });
-
-            Window DataGridPresent = new Window_DataGrid(result.ToList());
-
-            DataGridPresent.Show();
         }
 
         private void dataGrid_Main_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -957,37 +918,33 @@ GO
                     if (window_change.ShowDialog() == true)
                     {
                         if (changedManufacturer.VendorId == -1)//создание новой записи
-                        {                            
+                        {
                             dsTypedManufacturerAirplane.Manufacturers.AddManufacturersRow(manufacturer.BrandTitle, manufacturer.Address, manufacturer.Phone);
                         }
                         else
                         {
-                        //    Manufacturer selectedManufacturerDB = (from m in dsTypedManufacturerAirplane.Manufacturers.AsEnumerable()
-                        //                                           where (int)(m["VendorId"]) == selectedId
-                        //                                           select new Manufacturer
-                        //                                           {
-                        //                                               VendorId = (int)(m["VendorId"]),
-                        //                                               BrandTitle = (string)(m["BrandTitle"]),
-                        //                                               Address = (string)(m["Address"]),
-                        //                                               Phone = (string)(m["Phone"])
-                        //                                           })?.First();
-                        //
-                        //    selectedManufacturerDB.VendorId = changedManufacturer.VendorId;
-                        //    selectedManufacturerDB.BrandTitle = changedManufacturer.BrandTitle;
-                        //    selectedManufacturerDB.Address = changedManufacturer.Address;
-                        //    selectedManufacturerDB.Phone = changedManufacturer.Phone;
-                          
-                            DataSet_ManufacturerAirplane.ManufacturersRow row = dsTypedManufacturerAirplane.Manufacturers.NewManufacturersRow();
-                            row["VendorId"] = changedManufacturer.VendorId;
+                            //    Manufacturer selectedManufacturerDB = (from m in dsTypedManufacturerAirplane.Manufacturers.AsEnumerable()
+                            //                                           where (int)(m["VendorId"]) == selectedId
+                            //                                           select new Manufacturer
+                            //                                           {
+                            //                                               VendorId = (int)(m["VendorId"]),
+                            //                                               BrandTitle = (string)(m["BrandTitle"]),
+                            //                                               Address = (string)(m["Address"]),
+                            //                                               Phone = (string)(m["Phone"])
+                            //                                           })?.First();
+                            //
+                            //    selectedManufacturerDB.VendorId = changedManufacturer.VendorId;
+                            //    selectedManufacturerDB.BrandTitle = changedManufacturer.BrandTitle;
+                            //    selectedManufacturerDB.Address = changedManufacturer.Address;
+                            //    selectedManufacturerDB.Phone = changedManufacturer.Phone;
+
+                            var row = dsTypedManufacturerAirplane.Manufacturers.Rows.Find(selectedId.ToString());
+                            row.BeginEdit();
                             row["BrandTitle"] = changedManufacturer.BrandTitle;
                             row["Address"] = changedManufacturer.Address;
                             row["Phone"] = changedManufacturer.Phone;
-
-                            //удалим старую
-                            dsTypedManufacturerAirplane.Manufacturers.Rows.Find(changedManufacturer.VendorId.ToString()).Delete();//delete on server
-                            //загрузим как новую
-                            dsTypedManufacturerAirplane.Manufacturers.AddManufacturersRow(row);}
-
+                            row.EndEdit();
+                        }
                         // синхронизация данных с сервером
                         adapterManufacturer.Update(dsTypedManufacturerAirplane.Manufacturers);
 
@@ -1036,36 +993,31 @@ GO
                         }
                         else
                         {
-                        //    Airplane selectedAirplaneDB = (from a in dsTypedManufacturerAirplane.Airplanes.AsEnumerable()
-                        //                                   where (int)(a["Id"]) == selectedId
-                        //                                   select new Airplane
-                        //                                   {
-                        //                                       Id = (int)(a["Id"]),
-                        //                                       Model = (string)(a["Model"]),
-                        //                                       Price = (double)(a["Price"]),
-                        //                                       Speed = (int)(a["Speed"]),
-                        //                                       VendorId = (int)(a["VendorId"]),
-                        //                                   //    Vendor = (string)(a["Vendor"])
-                        //                                   })?.First();
-                        //
-                        //    selectedAirplaneDB.Id = changedAirplane.Id;
-                        //    selectedAirplaneDB.Model = changedAirplane.Model;
-                        //    selectedAirplaneDB.Price = changedAirplane.Price;
-                        //    selectedAirplaneDB.Speed = changedAirplane.Speed;
-                        //    selectedAirplaneDB.VendorId = changedAirplane.VendorId;
+                            //    Airplane selectedAirplaneDB = (from a in dsTypedManufacturerAirplane.Airplanes.AsEnumerable()
+                            //                                   where (int)(a["Id"]) == selectedId
+                            //                                   select new Airplane
+                            //                                   {
+                            //                                       Id = (int)(a["Id"]),
+                            //                                       Model = (string)(a["Model"]),
+                            //                                       Price = (double)(a["Price"]),
+                            //                                       Speed = (int)(a["Speed"]),
+                            //                                       VendorId = (int)(a["VendorId"]),
+                            //                                   //    Vendor = (string)(a["Vendor"])
+                            //                                   })?.First();
+                            //
+                            //    selectedAirplaneDB.Id = changedAirplane.Id;
+                            //    selectedAirplaneDB.Model = changedAirplane.Model;
+                            //    selectedAirplaneDB.Price = changedAirplane.Price;
+                            //    selectedAirplaneDB.Speed = changedAirplane.Speed;
+                            //    selectedAirplaneDB.VendorId = changedAirplane.VendorId;
 
-                            DataSet_ManufacturerAirplane.AirplanesRow row = dsTypedManufacturerAirplane.Airplanes.NewAirplanesRow();
-                            row["Id"] = changedAirplane.Id;
+                            var row = dsTypedManufacturerAirplane.Airplanes.Rows.Find(selectedId.ToString());
+                            row.BeginEdit();
                             row["Model"] = changedAirplane.Model;
                             row["Price"] = changedAirplane.Price;
                             row["Speed"] = changedAirplane.Speed;
                             row["VendorId"] = changedAirplane.VendorId;
-                            //row["Vendor"] = "";
-
-                            //удалим старую
-                            dsTypedManufacturerAirplane.Airplanes.Rows.Find(changedAirplane.Id.ToString()).Delete();//delete on server
-                            //загрузим как новую
-                            dsTypedManufacturerAirplane.Airplanes.AddAirplanesRow(row);
+                            row.EndEdit();
                         }
 
                         // синхронизация данных с сервером
@@ -1122,17 +1074,13 @@ GO
                             //    selectedProjectDB.EndDate = changedProject.EndDate;
                             //    selectedProjectDB.Description = changedProject.Description;
 
-                            DataSet_ProjectsEmployees.ProjectsRow row = dsTypedProjectsEmployees.Projects.NewProjectsRow();
-                            row["Id"] = changedProject.Id;
+                            var row = dsTypedProjectsEmployees.Projects.Rows.Find(selectedId.ToString());
+                            row.BeginEdit();
                             row["Title"] = changedProject.Title;
                             row["StartDate"] = changedProject.StartDate;
                             row["EndDate"] = changedProject.EndDate;
                             row["Description"] = changedProject.Description;
-
-                            //удалим старую
-                            dsTypedProjectsEmployees.Projects.Rows.Find(changedProject.Id.ToString()).Delete();//delete on server
-                            //загрузим как новую
-                            dsTypedProjectsEmployees.Projects.AddProjectsRow(row);
+                            row.EndEdit();
                         }
 
                         // синхронизация данных с сервером
@@ -1192,18 +1140,14 @@ GO
                             //    selectedEmployeeDB.Address = changedEmployee.Address;
                             //    selectedEmployeeDB.FotoPath = changedEmployee.FotoPath;
 
-                            DataSet_ProjectsEmployees.EmployeesRow row = dsTypedProjectsEmployees.Employees.NewEmployeesRow();
-                            row["Id"] = changedEmployee.Id;
+                            var row = dsTypedProjectsEmployees.Employees.Rows.Find(selectedId.ToString());
+                            row.BeginEdit();
                             row["FirstName"] = changedEmployee.FirstName;
                             row["LastName"] = changedEmployee.LastName;
                             row["Age"] = changedEmployee.Age;
                             row["Address"] = changedEmployee.Address;
                             row["FotoPath"] = changedEmployee.FotoPath;
-
-                            //удалим старую
-                            dsTypedProjectsEmployees.Employees.Rows.Find(changedEmployee.Id.ToString()).Delete();//delete on server
-                                                                                                               //загрузим как новую
-                            dsTypedProjectsEmployees.Employees.AddEmployeesRow(row);
+                            row.EndEdit();
                        }
 
                         // синхронизация данных с сервером

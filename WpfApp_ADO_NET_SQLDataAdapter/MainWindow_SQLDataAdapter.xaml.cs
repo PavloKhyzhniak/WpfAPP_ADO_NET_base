@@ -48,7 +48,7 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             PrepareProjectsEmployees();
         }
 
-        public void FillAirplane()
+        public void FillManufacture()
         {
             using (adapterManufacturer = new SqlDataAdapter(
                 "select * from Manufacturers"
@@ -60,7 +60,7 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
                 adapterManufacturer.Fill(dsManufacturerAirplane, "Manufacturers");
             }
         }
-        public void UpdateAirplane()
+        public void UpdateManufacture()
         {
             using (adapterManufacturer = new SqlDataAdapter(
                 "select * from Manufacturers"
@@ -91,8 +91,10 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             command.Parameters.Add("@Address", SqlDbType.VarChar, 50, "Address");
             command.Parameters.Add("@Phone", SqlDbType.VarChar, 20, "Phone");
             adapterManufacturer.UpdateCommand = command;
+
+            adapterManufacturer.Update(dsManufacturerAirplane, "Manufacturers");
         }
-        public void FillManufacture()
+        public void FillAirplane()
         {
             using (adapterAirplane = new SqlDataAdapter(
                             "select a.*, m.BrandTitle Vendor" +
@@ -106,7 +108,7 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
                 adapterAirplane.Fill(dsManufacturerAirplane, "Airplanes");
             }
         }
-        public void UpdateManufacture()
+        public void UpdateAirplane()
         {
             using (adapterAirplane = new SqlDataAdapter(
                                         "select a.*, m.BrandTitle Vendor" +
@@ -141,6 +143,8 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             command.Parameters.Add("@Speed", SqlDbType.Int, 20, "Speed");
             command.Parameters.Add("@VendorId", SqlDbType.Int, 4, "VendorId");
             adapterAirplane.UpdateCommand = command;
+
+            adapterAirplane.Update(dsManufacturerAirplane, "Airplanes");
         }
 
 
@@ -237,6 +241,8 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             command.Parameters.Add("@EndDate", SqlDbType.DateTime, 50, "EndDate");
             command.Parameters.Add("@Description", SqlDbType.VarChar, 200, "Description");
             adapterProjects.UpdateCommand = command;
+
+            adapterProjects.Update(dsProjectsEmployees, "Projects");
         }
         public void FillProjectsEmployees()
         {
@@ -339,6 +345,8 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
             command.Parameters.Add("@Address", SqlDbType.VarChar, 50, "Address");
             command.Parameters.Add("@FotoPath", SqlDbType.VarChar, 20, "FotoPath");
             adapterEmployees.UpdateCommand = command;
+
+            adapterEmployees.Update(dsProjectsEmployees, "Employees");
         }
 
         public void PrepareProjectsEmployees()
@@ -439,7 +447,7 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
 
             // синхронизация данных с сервером
             UpdateManufacture();
-
+        
             //Подтвердить изминения(закрепить)
             current_table.AcceptChanges();
 
@@ -465,7 +473,7 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
 
                 // синхронизация данных с сервером
                 UpdateManufacture();
-
+           
                 // Обновить таблицу
                 RefreshManufacturer();
             }
@@ -499,7 +507,7 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
 
             // синхронизация данных с сервером
             UpdateAirplane();
-
+        
             //Подтвердить изминения(закрепить)
             current_table.AcceptChanges();
 
@@ -525,7 +533,7 @@ namespace WpfApp_ADO_NET_SQLDataAdapter
 
                 // синхронизация данных с сервером
                 UpdateAirplane();
-
+             
                 // Обновить таблицу
                 RefreshAirplane();
             }
@@ -900,7 +908,7 @@ GO
 
             // синхронизация данных с сервером
             UpdateProjects();
-
+      
             //Подтвердить изминения(закрепить)
             current_table.AcceptChanges();
 
@@ -926,7 +934,7 @@ GO
 
                 // синхронизация данных с сервером
                 UpdateProjects();
-
+          
                 // Обновить таблицу
                 RefreshProjects();
             }
@@ -961,7 +969,7 @@ GO
 
             // синхронизация данных с сервером
             UpdateEmployees();
-
+         
             //Подтвердить изминения(закрепить)
             current_table.AcceptChanges();
 
@@ -987,7 +995,7 @@ GO
 
                 // синхронизация данных с сервером
                 UpdateEmployees();
-
+           
                 // Обновить таблицу
                 RefreshEmployees();
             }
@@ -1349,8 +1357,7 @@ GO
 
                         // синхронизация данных с сервером
                         UpdateManufacture();
-                        adapterManufacturer.Update(current_table);
-
+                
                         //Подтвердить изминения(закрепить)
                         current_table.AcceptChanges();
 
@@ -1439,8 +1446,7 @@ GO
 
                         // синхронизация данных с сервером
                         UpdateAirplane();
-                        adapterAirplane.Update(current_table);
-
+                
                         //Подтвердить изминения(закрепить)
                         current_table.AcceptChanges();
 
@@ -1515,8 +1521,7 @@ GO
 
                         // синхронизация данных с сервером
                         UpdateProjects();
-                        adapterProjects.Update(current_table);
-
+                       
                         //Подтвердить изминения(закрепить)
                         current_table.AcceptChanges();
 
@@ -1595,8 +1600,7 @@ GO
 
                         // синхронизация данных с сервером
                         UpdateEmployees();
-                        adapterEmployees.Update(current_table);
-
+                
                         //Подтвердить изминения(закрепить)
                         current_table.AcceptChanges();
 
